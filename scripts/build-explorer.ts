@@ -1,6 +1,6 @@
 /**
  * Builds src/data/explorer.json: what club players play from each common position, and the opening
- * name of every position (from lichess-org/chess-openings, CC0).
+ * name of every position (from lichess-org/chess-openings, CC0, downloaded on first run).
  *
  *   npm run build-explorer               # needs LICHESS_TOKEN in .env.local
  *   MIN_REACH=0.005 npm run build-explorer
@@ -57,7 +57,12 @@ async function club(fen: string): Promise<ExplorerResult> {
 const names = new Map<string, { eco: string; name: string }>();
 for (const f of ['a', 'b', 'c', 'd', 'e']) {
   const file = join(CACHE_DIR, 'openings', `${f}.tsv`);
-  if (!existsSync(file)) throw new Error(`Missing ${file}: download it from github.com/lichess-org/chess-openings`);
+  if (!existsSync(file)) {
+    const res = await fetch(`https://raw.githubusercontent.com/lichess-org/chess-openings/master/${f}.tsv`);
+    if (!res.ok) throw new Error(`Couldn't download ${f}.tsv from lichess-org/chess-openings: ${res.status}`);
+    mkdirSync(join(CACHE_DIR, 'openings'), { recursive: true });
+    writeFileSync(file, await res.text());
+  }
   for (const row of readFileSync(file, 'utf8').split('\n').slice(1)) {
     const [eco, name, pgn] = row.split('\t');
     if (!pgn) continue;
