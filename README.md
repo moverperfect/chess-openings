@@ -57,3 +57,19 @@ Results are cached in `scripts/.cache`, so re-runs only analyse new positions. T
 npm run probe -- "e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5" 22   # Stockfish top 4 lines at depth 22
 npm run club -- "e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5"       # what club players and masters play here
 ```
+
+## Deploying
+
+The app is static files served by a Cloudflare Worker ([`wrangler.jsonc`](wrangler.jsonc)) at https://chess.moverperfect.com.
+
+```bash
+npm run deploy   # builds, then wrangler deploy (needs `wrangler login`)
+```
+
+Forking? Change or delete the `routes` entry in `wrangler.jsonc` to use your own domain or `<name>.<account>.workers.dev`.
+
+## Credits
+
+- Board: [chessground](https://github.com/lichess-org/chessground) (GPL-3.0-or-later). Move rules: [chess.js](https://github.com/jhlywa/chess.js) (BSD-2-Clause).
+- Opening names: [lichess-org/chess-openings](https://github.com/lichess-org/chess-openings) (CC0).
+- Club move statistics: the [Lichess opening explorer](https://lichess.org/analysis#explorer), built from the Lichess game database (CC0).

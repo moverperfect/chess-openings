@@ -12,7 +12,8 @@
     "verify": "tsx scripts/verify.ts",
     "probe": "tsx scripts/probe.ts",
     "club": "tsx scripts/club.ts",
-    "build-explorer": "tsx scripts/build-explorer.ts"
+    "build-explorer": "tsx scripts/build-explorer.ts",
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
     "chess.js": "^1.4.0",
@@ -28,6 +29,7 @@
     "tsx": "^4.23.15",
     "typescript": "5.9",
     "vite": "^8.3.0",
-    "vitest": "^5.0.1"
+    "vitest": "^5.0.1",
+    "wrangler": "^4.158.0"
   }
 }

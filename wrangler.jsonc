@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "chess-openings",
+  "compatibility_date": "2026-11-01",
+  // Static assets only: the app runs entirely in the browser.
+  "assets": {
+    "directory": "./dist"
+  },
+  // Forking? Change this to your own domain, or delete it to deploy to <name>.<account>.workers.dev.
+  "routes": [{ "pattern": "chess.moverperfect.com", "custom_domain": true }]
+}

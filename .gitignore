@@ -3,3 +3,4 @@ dist
 *.tsbuildinfo
 .env.local
 scripts/.cache
+.wrangler
