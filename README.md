@@ -73,3 +73,7 @@ Forking? Change or delete the `routes` entry in `wrangler.jsonc` to use your own
 - Board: [chessground](https://github.com/lichess-org/chessground) (GPL-3.0-or-later). Move rules: [chess.js](https://github.com/jhlywa/chess.js) (BSD-2-Clause).
 - Opening names: [lichess-org/chess-openings](https://github.com/lichess-org/chess-openings) (CC0).
 - Club move statistics: the [Lichess opening explorer](https://lichess.org/analysis#explorer), built from the Lichess game database (CC0).
+
+## Licence
+
+[GPL-3.0-or-later](LICENSE), matching chessground, which is bundled into the app.
