@@ -4,3 +4,4 @@ dist
 .env.local
 scripts/.cache
 .wrangler
+docs/strategy-claims.md

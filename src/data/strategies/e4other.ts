@@ -20,10 +20,10 @@ export const STRATEGIES_E4OTHER: Record<string, Strategy> = {
   "Sicilian Defense: Bowdler Attack": {
     idea: "2.Bc4 points the bishop at f7, but it is easily blunted by …e6 and …d5, so this is an offbeat, slightly toothless sideline.",
     white: "Develop quietly with Nc3, d3 and Nf3 in an Italian-style setup and hope the bishop on c4 (or b3 after …d5) eventually pays off.",
-    black: "…e6 and …d5 gain time on the bishop and take the centre. Then develop normally with …Nc6, …Nf6 and …Be7.",
+    black: "…e6 and …d5 hit the bishop and take the centre. If White already has Nc3 in, prepare …d5 with …Nf6 and …a6 first. Then develop normally with …Nc6, …Nf6 and …Be7.",
   },
   "Sicilian Defense: Chekhover Variation": {
-    idea: "4.Qxd4 recaptures with the queen. With …d6 already played, Black can't hit it at once with a knight, so White gets quick development and often castles long.",
+    idea: "4.Qxd4 recaptures with the queen. Black gains a tempo with …Nc6, but White gets quick development and often castles long.",
     white: "After …Nc6, pin with Bb5 and swap on c6, then Nc3, Bg5 and 0-0-0 with the rooks aimed at d6. White gives up the bishop pair for a lead in development.",
     black: "Gain time on the queen with …Nc6. After Bb5 …Bd7 and Bxc6 Bxc6 you have the bishop pair; continue …Nf6, …e6, …Be7 and keep d6 well covered.",
   },
@@ -40,7 +40,7 @@ export const STRATEGIES_E4OTHER: Record<string, Strategy> = {
   "Sicilian Defense: Delayed Alapin Variation, with d6": {
     idea: "3.c3 after 2…d6 prepares d4 with a pawn recapture. Black's …d6 means …d5 now costs an extra move, so Black usually hits e4 with the knight instead.",
     white: "Play d4, or defend e4 first with Be2 or Bd3. Trap: after 3…Nf6 4.Be2, 4…Nxe4?? loses the knight to 5.Qa4+, which forks the king and knight.",
-    black: "3…Nf6 at once attacks e4, so White must defend it before playing d4. Then …Nc6, …Bg4 and …g6 or …e6 put pressure on d4.",
+    black: "3…Nf6 at once attacks e4. If White plays d4 anyway, take the pawn with …Nxe4. Otherwise …Nc6, …Bg4 and …g6 or …e6 put pressure on d4.",
   },
   "Sicilian Defense: Delayed Alapin Variation, with e6": {
     idea: "3.c3 after 2…e6 aims for d4 with a pawn recapture. Because Black has played …e6, …d5 is natural and leads to French or isolated-pawn positions.",
@@ -98,7 +98,7 @@ export const STRATEGIES_E4OTHER: Record<string, Strategy> = {
     black: "3…Bd7 trades bishops and gives a solid game with …Nc6, …Nf6 and …g6 or …e6. 3…Nd7 keeps the bishops for a sharper position.",
   },
   "Sicilian Defense: Nyezhmetdinov-Rossolimo Attack": {
-    idea: "3.Bb5 pins the c6 knight and threatens Bxc6, doubling Black's pawns. White avoids the Open Sicilian and plays a slower game.",
+    idea: "3.Bb5 eyes the c6 knight and can take it to double Black's pawns. White avoids the Open Sicilian and plays a slower game.",
     white: "0-0, Re1 and c3 for d4, or Bxc6 followed by d3, h3 and Nc3, playing against the doubled c-pawns and keeping the position closed.",
     black: "Accept Bxc6 for the bishop pair. Either …g6, …Bg7 and …Nf6, or …e6 and …Nge7 to recapture on c6 with a knight. …d6 and …e5 give a solid dark-square set-up.",
   },
@@ -142,7 +142,7 @@ export const STRATEGIES_E4OTHER: Record<string, Strategy> = {
   "French Defense: Advance Variation": {
     idea: "3.e5 locks the centre and gains kingside space. The fight is over the d4 pawn, the base of White's chain.",
     white: "c3 and Nf3 to hold d4, then Bd3 or Be2 and kingside play. Black's …Qb6 hits b2 and d4, so keep them covered.",
-    black: "…c5, …Nc6, …Qb6 and …Nge7–f5 pile up on d4; …f6 later attacks e5. Trap: after Bd3 and …cxd4 cxd4, taking …Nxd4 Nxd4 Qxd4?? loses the queen to Bb5+.",
+    black: "…c5, …Nc6, …Qb6 and …Nge7–f5 pile up on d4; …f6 later attacks e5. Trap: after Bd3 and …cxd4 cxd4, …Nxd4?? Nxd4 Qxd4 loses the queen to Bb5+, so …Nxd4 just drops a piece.",
   },
   "French Defense: Exchange Variation": {
     idea: "3.exd5 exd5 gives a symmetrical structure with an open e-file. The c8 bishop is freed, so Black's usual French problem disappears.",
@@ -151,7 +151,7 @@ export const STRATEGIES_E4OTHER: Record<string, Strategy> = {
   },
   "French Defense: Franco-Sicilian Defense": {
     idea: "After 1.e4 c5 2.d4, 2…e6 declines to take on d4 at once and keeps French-style …d5 ideas, avoiding a Smith-Morra Gambit.",
-    white: "3.Nf3 cxd4 4.Nxd4 gives an Open Sicilian. 3.d5 grabs space and gives a reversed Benoni after …exd5 exd5.",
+    white: "3.Nf3 cxd4 4.Nxd4 gives an Open Sicilian. 3.d5 grabs space and gives a Benoni structure after …exd5 exd5.",
     black: "Answer Nf3 with …cxd4 for a normal Open Sicilian, or play …d5 for French-type positions. Against 3.d5, …exd5 exd5 and …d6 with …Nf6 and …g6.",
   },
   "French Defense: King's Indian Attack": {
@@ -209,7 +209,7 @@ export const STRATEGIES_E4OTHER: Record<string, Strategy> = {
   "Caro-Kann Defense: Accelerated Panov Attack": {
     idea: "2.c4 hits d5 before Black plays …d5, aiming for open positions where White's pieces are more active.",
     white: "After 2…d5 3.exd5 cxd5 4.cxd5, Black wins the pawn back. Develop quickly with Nc3, Nf3 and d4, often reaching Panov-type isolated d-pawn positions.",
-    black: "2…d5 3.exd5 cxd5 4.cxd5 Nf6 regains the pawn. 2…e5 is a good alternative: it fixes White's d-pawn and grabs the dark squares around d4.",
+    black: "2…d5 3.exd5 cxd5 4.cxd5 Nf6 regains the pawn. 2…e5 is a playable alternative: it fixes White's d-pawn and grabs the dark squares around d4.",
   },
   "Caro-Kann Defense: Advance Variation": {
     idea: "3.e5 gains space and shuts the f6 square to Black's knight. Black gets the bishop out to f5 before …e6, then hits d4 with …c5.",
@@ -224,7 +224,7 @@ export const STRATEGIES_E4OTHER: Record<string, Strategy> = {
   "Caro-Kann Defense: Endgame Offer": {
     idea: "2.Nf3 d5 3.d3 is a quiet King's Indian Attack set-up. If Black plays …dxe4 dxe4, the queens can come off and White's king is stuck in the centre.",
     white: "g3, Bg2, Nbd2 and 0-0 in King's Indian Attack style. White accepts that …dxe4 and a queen trade leads to a level endgame.",
-    black: "…dxe4 dxe4 Qxd1+ Kxd1 gives an easy endgame because White can no longer castle. Or keep queens on with …Bg4, …e6 and …Nf6.",
+    black: "…dxe4 dxe4 Qxd1+ Kxd1 gives a safe, level endgame; White can no longer castle, but with queens off that matters little. Or keep queens on with …Bg4, …e6 and …Nf6.",
   },
   "Caro-Kann Defense: Exchange Variation": {
     idea: "3.exd5 cxd5 gives a symmetrical structure. Without c4 (the Panov), White aims for a quiet game with c3 and Bd3.",
@@ -233,7 +233,7 @@ export const STRATEGIES_E4OTHER: Record<string, Strategy> = {
   },
   "Caro-Kann Defense: Hillbilly Attack": {
     idea: "2.Bc4 aims at f7, but runs straight into …d5. It is an offbeat line that relies on tricks.",
-    white: "After …d5, either exchange on d5 or retreat the bishop to b3 and look for quick development and tricks against f7, sometimes with Qh5.",
+    white: "After …d5, exchange with 3.exd5 cxd5, then retreat the bishop or check on b5 and develop quickly. Retreating 3.Bb3 at once lets …dxe4 give Black the better game.",
     black: "2…d5 gains time on the bishop and takes the centre. Develop normally and don't panic about f7; …e6 and …Nf6 cover it.",
   },
   "Caro-Kann Defense: Maróczy Variation": {
@@ -269,7 +269,7 @@ export const STRATEGIES_E4OTHER: Record<string, Strategy> = {
     black: "…Nf6, then …a6 (to stop Nb5) or …c6, then …Bg4 or …Bf5, …e6 and castle short. The queen on d6 covers c7 and e5.",
   },
   "Scandinavian Defense: Main Line": {
-    idea: "3…Qa5 puts the queen on a5, pinning the c3 knight and keeping it out of harm's way. Black aims for a Caro-Kann-like set-up with …c6, …Bf5 and …e6.",
+    idea: "3…Qa5 puts the queen on a5, out of harm's way and ready to pin the c3 knight once White plays d4. Black aims for a Caro-Kann-like set-up with …c6, …Bf5 and …e6.",
     white: "d4, Nf3, Bc4 and Bd2, threatening Nd5 with a discovered attack on the queen. Castle and use the lead in development.",
     black: "…Nf6, …c6 (giving the queen the c7 retreat), …Bf5 or …Bg4, …e6 and …Nbd7. Watch Bd2 with Nd5 or b4 tricks against the queen on a5.",
   },
@@ -317,17 +317,17 @@ export const STRATEGIES_E4OTHER: Record<string, Strategy> = {
   },
   "Rat Defense: Small Center Defense": {
     idea: "1…e6 and 2…d6 set up a 'small centre' with pawns on d6 and e6, keeping …e5 or …c5 for later.",
-    white: "Use the extra space: c4, Nc3, Nf3 and Be2, castle, and keep Black cramped.",
+    white: "Use the extra space: Nf3, Nc3 and Bd3 (c4 is also playable), castle, and keep Black cramped.",
     black: "…Nf6, …Be7 and …0-0, then break with …e5 or …c5. Patience is needed; Black is solid but has less space.",
   },
   "Nimzowitsch Defense": {
     idea: "1…Nc6 develops at once and puts pressure on d4. Black follows with …d5 or …e5, since the knight blocks the c-pawn.",
-    white: "Build a centre with d4 and develop with Nc3 and Nf3. Against …d5, e5 or Nc3; against …e5, Nf3 can transpose to normal 1.e4 e5 openings.",
+    white: "Build a centre with d4 and develop with Nc3 and Nf3. Against …d5, e5 or Nc3. Against …e5, 3.d5 or 3.dxe5 is stronger than 3.Nf3, which only transposes to a level Scotch.",
     black: "Challenge the centre with …d5 or …e5 right away and develop quickly. Without a c-pawn break, these two moves are Black's main ways to fight.",
   },
   "Nimzowitsch Defense: Kennedy Variation": {
     idea: "After 1.e4 e5 2.d4 (or 1.e4 Nc6 2.d4 e5), Black defends e5 with …Nc6 instead of taking on d4. White can take on e5, push d5, or transpose to the Scotch.",
-    white: "3.dxe5 Nxe5 4.f4 or Nf3 gains time on the knight; 3.d5 Nce7 gains space; 3.Nf3 exd4 4.Nxd4 is a Scotch.",
+    white: "3.dxe5 Nxe5 4.f4 or Nf3 gains time on the knight; 3.d5 Nce7 gains space. 3.Nf3 exd4 4.Nxd4 is only a level Scotch.",
     black: "After dxe5 Nxe5, keep the knight active (it can drop to g6) and develop with …Bc5 and …Nf6. After d5 …Nce7, play …Ng6, …Bc5 and …d6.",
   },
 };

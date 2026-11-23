@@ -198,10 +198,10 @@ export const blackRepertoire: Repertoire = {
     },
     {
       id: 'b-rub-nxe5',
-      name: 'Rubinstein: punishing 5.Nxe5?',
+      name: 'Rubinstein: punishing 5.Nxe5?!',
       group: '4.Bb5 — Rubinstein (4…Nd4)',
       story:
-        'White grabs e5. You hit the knight and e4 with …Qe7, take the b5 bishop, and after f4 you win e4 back with check. White\'s king is stuck and you are clearly better.',
+        'White grabs e5. You hit the knight and e4 with …Qe7, take the b5 bishop, and after f4 you win e4 back with check. White\'s king is stuck and you have the better game.',
       moves: [
         'e4', 'e5', 'Nf3', 'Nc6', 'Nc3', 'Nf6', 'Bb5', 'Nd4',
         {
@@ -251,11 +251,11 @@ export const blackRepertoire: Repertoire = {
         },
       ],
       plan:
-        'After 10.Kg1 White\'s king is safe-ish but the h1 rook is buried. Bring everything in with …Qc6, …Be7, …O-O and …Re8. The old books say Black is winning; Stockfish says clearly better (about −0.5), which is still a great result from the opening.',
+        'After 10.Kg1 White\'s king is safe-ish but the h1 rook is buried. Bring everything in with …Qc6, …Be7, …O-O and …Re8. The old books say Black is winning; Stockfish says slightly better (about −0.4), which is still a good result from the opening.',
     },
     {
       id: 'b-rub-nxe5-qe2',
-      name: 'Rubinstein: 5.Nxe5? … 9.Qe2',
+      name: 'Rubinstein: 5.Nxe5?! … 9.Qe2',
       group: '4.Bb5 — Rubinstein (4…Nd4)',
       story: 'Same trap, but White blocks the check with the queen. Trade queens and guard c7 with your king: you have the bishop pair in a better ending.',
       moves: [
@@ -282,7 +282,7 @@ export const blackRepertoire: Repertoire = {
     },
     {
       id: 'b-rub-nxe5-nf3',
-      name: 'Rubinstein: 5.Nxe5? Qe7 6.Nf3',
+      name: 'Rubinstein: 5.Nxe5?! Qe7 6.Nf3',
       group: '4.Bb5 — Rubinstein (4…Nd4)',
       story: 'White retreats the knight instead of f4. Take the bishop, grab e4 with check, trade queens and jump to d5: you have the bishop pair.',
       moves: [
