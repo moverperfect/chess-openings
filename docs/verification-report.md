@@ -1,6 +1,6 @@
 # Repertoire verification report
 
-Generated 2026-09-24 by `npm run verify`. Stockfish 19 at depth 22; Lichess masters database; Lichess games rated 1600–2200 (blitz, rapid, classical), shown as "club".
+Generated 2026-11-23 by `npm run verify`. Stockfish 19 at depth 22; Lichess masters database; Lichess games rated 1600–2200 (blitz, rapid, classical), shown as "club".
 
 Evaluations are from White's point of view (+ is good for White). "Loss" is how much worse the book move is than Stockfish's top choice, in pawns. Under 0.30 is normal opening noise.
 
@@ -920,7 +920,7 @@ Evaluations are from White's point of view (+ is good for White). "Loss" is how 
 | 8.e5 | +0.01 | e5 +0.01 |  | 198 (91%) | 1283 (74%, scores 60%) |  |
 | **8…Ne8** | +0.00 | Ne8 +0.00 | 0.00 | 183 (92%) | 704 (55%, scores 46%) |  |
 
-### Rubinstein: punishing 5.Nxe5?
+### Rubinstein: punishing 5.Nxe5?!
 
 `1.e4 e5 2.Nf3 Nc6 3.Nc3 Nf6 4.Bb5 Nd4 5.Nxe5 Qe7 6.f4 Nxb5 7.Nxb5 d6 8.Nf3 Qxe4+ 9.Kf2 Ng4+`
 
@@ -939,7 +939,7 @@ Evaluations are from White's point of view (+ is good for White). "Loss" is how 
 | 9.Kf2 | -0.38 | Kf2 -0.38 |  | 30 (97%) | 1137 (26%, scores 49%) |  |
 | **9…Ng4+** | -0.35 | Ng4+ -0.35 | 0.00 | 22 (73%) | 726 (64%, scores 54%) |  |
 
-### Rubinstein: 5.Nxe5? … 9.Qe2
+### Rubinstein: 5.Nxe5?! … 9.Qe2
 
 `1.e4 e5 2.Nf3 Nc6 3.Nc3 Nf6 4.Bb5 Nd4 5.Nxe5 Qe7 6.f4 Nxb5 7.Nxb5 d6 8.Nf3 Qxe4+ 9.Qe2 Qxe2+ 10.Kxe2 Kd7`
 
@@ -952,7 +952,7 @@ Evaluations are from White's point of view (+ is good for White). "Loss" is how 
 | 10.Kxe2 | -0.57 | Kxe2 -0.57 |  | 1 (100%) | 2992 (100%, scores 34%) |  |
 | **10…Kd7** | -0.55 | Kd7 -0.55 | 0.00 | 0 (0%) | 781 (26%, scores 76%) |  |
 
-### Rubinstein: 5.Nxe5? Qe7 6.Nf3
+### Rubinstein: 5.Nxe5?! Qe7 6.Nf3
 
 `1.e4 e5 2.Nf3 Nc6 3.Nc3 Nf6 4.Bb5 Nd4 5.Nxe5 Qe7 6.Nf3 Nxb5 7.Nxb5 Qxe4+ 8.Qe2 Qxe2+ 9.Kxe2 Nd5`
 
@@ -1198,3 +1198,914 @@ Evaluations are from White's point of view (+ is good for White). "Loss" is how 
 - After `1.e4 e5 2.Nf3 Nc6`: Bc4 (42% of club games)
 - After `1.e4 e5 2.Nf3 Nc6`: Bb5 (26% of club games)
 - After `1.e4 e5 2.Nf3 Nc6`: d4 (19% of club games)
+
+## Strategy notes
+
+Concrete claims in the opening strategy notes (`src/data/strategies/*.claims.ts`), checked at depth 22. Bands in pawns: level 0.00–0.30, slightly better 0.30–0.60, clearly better 0.60–1.50, winning 1.50 and up, with 0.15 slack at each edge. Moves: "sound" within 0.30 of best, "playable" within 0.60 of best, "dubious" more than 0.30 worse, "a mistake" more than 0.70 worse, "a blunder" more than 2.00 worse.
+
+**902 of 902 claims hold.**
+
+| Opening | Claim | Position | Expected | Stockfish | |
+|---|---|---|---|---|---|
+| King's Pawn Game (black) | "1…e5 claims an equal share of the centre" | `e4` | e5 is sound | e5 +0.25, within 0.00 of best | ✅ |
+| King's Pawn Game (black) | "1…c5, 1…e6 and 1…c6 are the main ways to avoid symmetry" | `e4` | c5 is sound | c5 +0.29, within 0.06 of best | ✅ |
+| King's Pawn Game (black) | "1…c5, 1…e6 and 1…c6 are the main ways to avoid symmetry" | `e4` | e6 is sound | e6 +0.44, within 0.21 of best | ✅ |
+| King's Pawn Game (black) | "1…c5, 1…e6 and 1…c6 are the main ways to avoid symmetry" | `e4` | c6 is sound | c6 +0.34, within 0.11 of best | ✅ |
+| King's Knight Opening (black) | "2…Nc6 is the natural defence of e5" | `e4 e5 Nf3` | Nc6 is sound | Nc6 +0.25, within 0.00 of best | ✅ |
+| King's Knight Opening: Normal Variation (black) | "…Nf6 against Nc3 and Bc4" | `e4 e5 Nf3 Nc6 Nc3` | Nf6 is sound | Nf6 +0.04, within 0.00 of best | ✅ |
+| King's Knight Opening: Normal Variation (black) | "…Nf6 against Nc3 and Bc4" | `e4 e5 Nf3 Nc6 Bc4` | Nf6 is sound | Nf6 +0.19, within 0.00 of best | ✅ |
+| King's Knight Opening: Normal Variation (black) | "…Nf6 or …a6 against Bb5" | `e4 e5 Nf3 Nc6 Bb5` | Nf6 is sound | Nf6 +0.14, within 0.00 of best | ✅ |
+| King's Knight Opening: Normal Variation (black) | "…Nf6 or …a6 against Bb5" | `e4 e5 Nf3 Nc6 Bb5` | a6 is sound | a6 +0.21, within 0.05 of best | ✅ |
+| King's Knight Opening: Normal Variation (black) | "…exd4 against d4" | `e4 e5 Nf3 Nc6 d4` | exd4 is sound | exd4 +0.08, within 0.00 of best | ✅ |
+| Petrov's Defense (white) | "3.Nxe5 is the main line" | `e4 e5 Nf3 Nf6` | Nxe5 is sound | Nxe5 +0.21, within 0.00 of best | ✅ |
+| Petrov's Defense (white) | "after 3…d6 the knight retreats and play is level" | `e4 e5 Nf3 Nf6 Nxe5 d6 Nf3` | level | +0.26 (Nxe4 d4 Be7 Bd3) | ✅ |
+| Petrov's Defense (black) | "Against 3.Nxe5 play 3…d6 first" | `e4 e5 Nf3 Nf6 Nxe5` | d6 is sound | d6 +0.29, within 0.00 of best | ✅ |
+| Petrov's Defense (black) | "4.Qe2 forces …Qe7" | `e4 e5 Nf3 Nf6 Nxe5 Nxe4` | Qe2 is sound | Qe2 +0.54, within 0.00 of best | ✅ |
+| Petrov's Defense (black) | "4.Qe2 forces …Qe7" | `e4 e5 Nf3 Nf6 Nxe5 Nxe4 Qe2` | Qe7 is sound | Qe7 +0.60, within 0.00 of best | ✅ |
+| Petrov's Defense (black) | "White keeps a small edge" | `e4 e5 Nf3 Nf6 Nxe5 Nxe4 Qe2 Qe7 Qxe4 d6` | White slightly better | +0.65 (d4 dxe5 dxe5 Nc6) | ✅ |
+| Petrov's Defense (black) | "…Nf6?? loses the queen to Nc6+" | `e4 e5 Nf3 Nf6 Nxe5 Nxe4 Qe2` | Nf6 is a blunder | Nf6 loses 7.76 (+8.32; best Qe7 +0.56) | ✅ |
+| Petrov's Defense (black) | "…Nf6?? loses the queen to Nc6+" | `e4 e5 Nf3 Nf6 Nxe5 Nxe4 Qe2 Nf6 Nc6+` | White winning | +8.26 (Qe7 Nxe7 Bxe7 Qd1) | ✅ |
+| Petrov's Defense: Italian Variation (white) | "If Black takes on e4, Nc3 gives you fast development" | `e4 e5 Nf3 Nf6 Bc4 Nxe4` | Nc3 is sound | Nc3 -0.71, within 0.23 of best | ✅ |
+| Petrov's Defense: Italian Variation (black) | "…Nxe4 is best" | `e4 e5 Nf3 Nf6 Bc4` | Nxe4 is sound | Nxe4 -0.47, within 0.00 of best | ✅ |
+| Petrov's Defense: Italian Variation (black) | "after Nc3 Nxc3 dxc3, hold e5 with …f6" | `e4 e5 Nf3 Nf6 Bc4 Nxe4 Nc3 Nxc3 dxc3` | f6 is sound | f6 -0.67, within 0.00 of best | ✅ |
+| Petrov's Defense: Italian Variation (black) | "3…Nc6, a Two Knights, is a quieter, level alternative" | `e4 e5 Nf3 Nf6 Bc4 Nc6` | level | +0.24 (d3 Bc5 O-O O-O) | ✅ |
+| Petrov's Defense: Modern Attack (white) | "After 3…Nxe4, Bd3" | `e4 e5 Nf3 Nf6 d4 Nxe4` | Bd3 is sound | Bd3 +0.27, within 0.00 of best | ✅ |
+| Petrov's Defense: Modern Attack (white) | "undermine the e4 knight with c4" | `e4 e5 Nf3 Nf6 d4 Nxe4 Bd3 d5 Nxe5 Bd6 O-O O-O` | c4 is sound | c4 +0.30, within 0.00 of best | ✅ |
+| Petrov's Defense: Modern Attack (white) | "After 3…exd4, e5 kicks the knight and Qxd4 regains the pawn" | `e4 e5 Nf3 Nf6 d4 exd4` | e5 is sound | e5 +0.50, within 0.00 of best | ✅ |
+| Petrov's Defense: Modern Attack (black) | "3…Nxe4 4.Bd3 d5 5.Nxe5 is the main line" | `e4 e5 Nf3 Nf6 d4` | Nxe4 is sound | Nxe4 +0.21, within 0.00 of best | ✅ |
+| Petrov's Defense: Modern Attack (black) | "3…Nxe4 4.Bd3 d5 5.Nxe5 is the main line" | `e4 e5 Nf3 Nf6 d4 Nxe4 Bd3` | d5 is sound | d5 +0.28, within 0.00 of best | ✅ |
+| Petrov's Defense: Modern Attack (black) | "3…Nxe4 4.Bd3 d5 5.Nxe5 is the main line" | `e4 e5 Nf3 Nf6 d4 Nxe4 Bd3 d5` | Nxe5 is sound | Nxe5 +0.22, within 0.00 of best | ✅ |
+| Petrov's Defense: Three Knights Game (white) | "After …Nc6 play Bb5" | `e4 e5 Nf3 Nf6 Nc3 Nc6` | Bb5 is sound | Bb5 +0.12, within 0.00 of best | ✅ |
+| Petrov's Defense: Three Knights Game (white) | "3.Nxe5 is a little stronger, but Nc3 keeps you on familiar ground" | `e4 e5 Nf3 Nf6` | Nxe5 is sound | Nxe5 +0.21, within 0.00 of best | ✅ |
+| Petrov's Defense: Three Knights Game (white) | "3.Nxe5 is a little stronger, but Nc3 keeps you on familiar ground" | `e4 e5 Nf3 Nf6` | Nc3 is playable | Nc3 loses 0.32 (+0.05; best Nxe5 +0.37) | ✅ |
+| Petrov's Defense: Three Knights Game (black) | "…Nc6 gives a Four Knights" | `e4 e5 Nf3 Nf6 Nc3` | Nc6 is sound | Nc6 +0.07, within 0.00 of best | ✅ |
+| Petrov's Defense: Three Knights Game (black) | "…Bb4 keeps a Petrov flavour" | `e4 e5 Nf3 Nf6 Nc3` | Bb4 is playable | Bb4 +0.34, within 0.30 of best | ✅ |
+| Philidor Defense (white) | "Hit the centre with d4" | `e4 e5 Nf3 d6` | d4 is sound | d4 +0.53, within 0.00 of best | ✅ |
+| Philidor Defense (black) | "give up the centre with …exd4" | `e4 e5 Nf3 d6 d4` | exd4 is sound | exd4 +0.52, within 0.00 of best | ✅ |
+| Philidor Defense (black) | "hold e5 with …Nf6" | `e4 e5 Nf3 d6 d4` | Nf6 is playable | Nf6 loses 0.33 (+0.86; best exd4 +0.53) | ✅ |
+| Elephant Gambit (idea) | "It is a dubious gambit" | `e4 e5 Nf3` | d5 is dubious | d5 loses 0.69 (+0.94; best Nc6 +0.25) | ✅ |
+| Elephant Gambit (white) | "3.exd5 is cleanest" | `e4 e5 Nf3 d5` | exd5 is sound | exd5 +1.20, within 0.00 of best | ✅ |
+| Elephant Gambit (white) | "against …e4, Qe2 pins the pawn" | `e4 e5 Nf3 d5 exd5 e4` | Qe2 is sound | Qe2 +1.20, within 0.00 of best | ✅ |
+| Elephant Gambit (white) | "against …Bd6, d4 hits e5" | `e4 e5 Nf3 d5 exd5 Bd6` | d4 is sound | d4 +1.34, within 0.00 of best | ✅ |
+| Elephant Gambit (white) | "3.Nxe5 is also playable" | `e4 e5 Nf3 d5` | Nxe5 is playable | Nxe5 loses 0.42 (+0.70; best exd5 +1.12) | ✅ |
+| Elephant Gambit (black) | "Objectively 2…Nc6 is better" | `e4 e5 Nf3` | Nc6 is sound | Nc6 +0.25, within 0.00 of best | ✅ |
+| King's Pawn Game: Busch-Gass Gambit (idea) | "It is unsound." | `e4 e5 Nf3` | Bc5 is a mistake | Bc5 loses 1.71 (+1.96; best Nc6 +0.25) | ✅ |
+| King's Pawn Game: Busch-Gass Gambit (white) | "Take it: 3.Nxe5" | `e4 e5 Nf3 Bc5` | Nxe5 is sound | Nxe5 +2.05, within 0.00 of best | ✅ |
+| King's Pawn Game: Busch-Gass Gambit (black) | "After 3.Nxe5 you are a pawn down and White is much better" | `e4 e5 Nf3 Bc5 Nxe5` | White winning | +2.18 (d6 Nf3 Bb6 d4) | ✅ |
+| King's Pawn Game: Busch-Gass Gambit (black) | "Don't lash out with …Qh4?" | `e4 e5 Nf3 Bc5 Nxe5` | Qh4 is a mistake | Qh4 loses 2.18 (+4.36; best d6 +2.18) | ✅ |
+| King's Pawn Game: Busch-Gass Gambit (black) | "d4 hits the bishop" | `e4 e5 Nf3 Bc5 Nxe5 Qh4` | d4 is sound | d4 +4.13, within 0.00 of best | ✅ |
+| King's Pawn Game: Busch-Gass Gambit (black) | "Develop with …Nc6 or …d6" | `e4 e5 Nf3 Bc5 Nxe5` | Nc6 is playable | Nc6 +2.11, within 0.00 of best | ✅ |
+| King's Pawn Game: Busch-Gass Gambit (black) | "Develop with …Nc6 or …d6" | `e4 e5 Nf3 Bc5 Nxe5` | d6 is playable | d6 +2.37, within 0.00 of best | ✅ |
+| King's Pawn Game: Busch-Gass Gambit (black) | "2…Nc6 is the sound move" | `e4 e5 Nf3` | Nc6 is sound | Nc6 +0.25, within 0.00 of best | ✅ |
+| King's Pawn Game: Maróczy Defense (white) | "dxe5 dxe5 Qxd8+ Kxd8 trades queens" | `e4 e5 d4 d6` | dxe5 is playable | dxe5 loses 0.35 (+0.34; best Nf3 +0.69) | ✅ |
+| King's Pawn Game: Maróczy Defense (white) | "Or play Nf3 and Nc3" | `e4 e5 d4 d6` | Nf3 is sound | Nf3 +0.64, within 0.00 of best | ✅ |
+| King's Pawn Game: Maróczy Defense (black) | "After the queen trade the king is safe enough" | `e4 e5 d4 d6 dxe5 dxe5 Qxd8+ Kxd8` | level | +0.31 (Nc3 Nf6 Bc4 Ke8) | ✅ |
+| King's Pawn Game: Maróczy Defense (black) | "Or answer Nf3 with …Nf6" | `e4 e5 d4 d6 Nf3` | Nf6 is playable | Nf6 loses 0.33 (+0.86; best exd4 +0.53) | ✅ |
+| Center Game (black) | "Take: 2…exd4." | `e4 e5 d4` | exd4 is sound | exd4 +0.01, within 0.00 of best | ✅ |
+| Center Game (black) | "develop with tempo on White's queen (…Nc6)" | `e4 e5 d4 exd4 Qxd4` | Nc6 is sound | Nc6 -0.03, within 0.00 of best | ✅ |
+| Center Game Accepted (idea) | "Black gains a tempo with …Nc6" | `e4 e5 d4 exd4 Qxd4` | Nc6 is sound | Nc6 -0.03, within 0.00 of best | ✅ |
+| Center Game Accepted (white) | "Retreat to e3 after …Nc6" | `e4 e5 d4 exd4 Qxd4 Nc6` | Qe3 is sound | Qe3 +0.00, within 0.00 of best | ✅ |
+| Bishop's Opening (black) | "2…Nf6 hits e4 and is the most testing reply" | `e4 e5 Bc4` | Nf6 is sound | Nf6 +0.00, within 0.00 of best | ✅ |
+| Bishop's Opening: Berlin Defense (white) | "3.d3 is solid" | `e4 e5 Bc4 Nf6` | d3 is sound | d3 +0.02, within 0.06 of best | ✅ |
+| Bishop's Opening: Berlin Defense (black) | "Against 3.d3, …c6 and …d5 build a strong centre" | `e4 e5 Bc4 Nf6 d3` | c6 is sound | c6 +0.01, within 0.00 of best | ✅ |
+| Bishop's Opening: Berlin Defense (black) | "Against 3.d4, take on d4" | `e4 e5 Bc4 Nf6 d4` | exd4 is sound | exd4 -0.18, within 0.00 of best | ✅ |
+| Bishop's Opening: Boi Variation (black) | "Against an early Qh5, …Qe7 covers both e5 and f7" | `e4 e5 Bc4 Bc5 Qh5` | Qe7 is sound | Qe7 -0.15, within 0.00 of best | ✅ |
+| Bishop's Opening: Philidor Counterattack (white) | "3.d4 is the sharp answer" | `e4 e5 Bc4 c6` | d4 is sound | d4 +0.13, within 0.19 of best | ✅ |
+| Bishop's Opening: Philidor Counterattack (white) | "after …d5 exd5 cxd5 Bb5+, Black can be left with an isolated d-pawn" | `e4 e5 Bc4 c6 d4 d5 exd5 cxd5` | Bb5+ is sound | Bb5+ +0.24, within 0.00 of best | ✅ |
+| Bishop's Opening: Philidor Counterattack (white) | "Nf3 and d4 is also good" | `e4 e5 Bc4 c6` | Nf3 is sound | Nf3 +0.14, within 0.18 of best | ✅ |
+| Bishop's Opening: Philidor Counterattack (black) | "Play …d5 as soon as possible" | `e4 e5 Bc4 c6 d4` | d5 is sound | d5 +0.15, within 0.00 of best | ✅ |
+| Bishop's Opening: Philidor Counterattack (black) | "…Nf6 first lets White win e5 or take over the centre" | `e4 e5 Bc4 c6 d4` | Nf6 is dubious | Nf6 loses 0.67 (+0.82; best d5 +0.15) | ✅ |
+| Bishop's Opening: Philidor Counterattack (black) | "…Nf6 first lets White win e5 or take over the centre" | `e4 e5 Bc4 c6 Nf3` | Nf6 is a mistake | Nf6 loses 1.19 (+1.38; best d5 +0.19) | ✅ |
+| Bishop's Opening: Philidor Counterattack (black) | "Play …d5 as soon as possible" | `e4 e5 Bc4 c6 Nf3` | d5 is sound | d5 +0.24, within 0.00 of best | ✅ |
+| Vienna Game (black) | "…Nf6 and …d5 is the key freeing plan" | `e4 e5 Nc3` | Nf6 is sound | Nf6 +0.06, within 0.00 of best | ✅ |
+| Vienna Game (black) | "Against f4, …d5 hits e4 at once" | `e4 e5 Nc3 Nf6 f4` | d5 is sound | d5 -0.11, within 0.00 of best | ✅ |
+| Vienna Game: Anderssen Defense (white) | "Nf3 is natural" | `e4 e5 Nc3 Bc5` | Nf3 is sound | Nf3 +0.30, within 0.00 of best | ✅ |
+| Vienna Game: Anderssen Defense (white) | "the fork trick Nxe5 and d4 works" | `e4 e5 Nc3 Bc5 Nf3 Nc6` | Nxe5 is sound | Nxe5 +0.62, within 0.00 of best | ✅ |
+| Vienna Game: Anderssen Defense (white) | "the fork trick Nxe5 and d4 works" | `e4 e5 Nc3 Bc5 Nf3 Nc6 Nxe5 Nxe5` | d4 is sound | d4 +0.69, within 0.00 of best | ✅ |
+| Vienna Game: Anderssen Defense (white) | "Bc4 is the sharper choice" | `e4 e5 Nc3 Bc5` | Bc4 is sound | Bc4 +0.08, within 0.21 of best | ✅ |
+| Vienna Game: Anderssen Defense (black) | "if White plays Nf3, cover e5 with …d6 before …Nc6" | `e4 e5 Nc3 Bc5 Nf3` | d6 is sound | d6 +0.28, within 0.00 of best | ✅ |
+| Vienna Game: Anderssen Defense (black) | "Don't allow the fork trick" | `e4 e5 Nc3 Bc5 Nf3` | Nc6 is dubious | Nc6 loses 0.38 (+0.61; best d6 +0.23) | ✅ |
+| Vienna Game: Falkbeer Variation (black) | "Against 3.f4, …d5! is the antidote" | `e4 e5 Nc3 Nf6 f4` | d5 is sound | d5 -0.11, within 0.00 of best | ✅ |
+| Vienna Game: Falkbeer Variation (black) | "Against 3.Bc4, …Nc6 is solid" | `e4 e5 Nc3 Nf6 Bc4` | Nc6 is sound | Nc6 -0.01, within 0.00 of best | ✅ |
+| King's Gambit (white) | "Nf3 stops …Qh4+" | `e4 e5 f4 exf4` | Nf3 is sound | Nf3 -0.62, within 0.01 of best | ✅ |
+| King's Gambit (black) | "Accepting with …exf4 is objectively best" | `e4 e5 f4` | exf4 is sound | exf4 -0.50, within 0.00 of best | ✅ |
+| King's Gambit (black) | "Declining with …Bc5 or …d5 gives a level game" | `e4 e5 f4 Bc5` | level | +0.15 (Nf3 d6 c3 f5) | ✅ |
+| King's Gambit (black) | "Declining with …Bc5 or …d5 gives a level game" | `e4 e5 f4 d5` | level | -0.16 (Nf3 exf4 exd5 Nf6) | ✅ |
+| King's Gambit Accepted (white) | "Nf3 (or Bc4)" | `e4 e5 f4 exf4` | Nf3 is sound | Nf3 -0.62, within 0.01 of best | ✅ |
+| King's Gambit Accepted (white) | "Nf3 (or Bc4)" | `e4 e5 f4 exf4` | Bc4 is sound | Bc4 -0.61, within 0.00 of best | ✅ |
+| King's Gambit Accepted (black) | "hold f4 with …g5" | `e4 e5 f4 exf4 Nf3` | g5 is sound | g5 -0.35, within 0.20 of best | ✅ |
+| King's Gambit Accepted (black) | "give it back with …d5 or …Nf6" | `e4 e5 f4 exf4 Nf3` | Nf6 is sound | Nf6 -0.27, within 0.28 of best | ✅ |
+| King's Gambit Accepted (black) | "3…d5 is a solid, simpler choice" | `e4 e5 f4 exf4 Nf3` | d5 is playable | d5 loses 0.44 (-0.11; best d6 -0.55) | ✅ |
+| King's Gambit Declined (black) | "Develop with …Bc5 (stopping White castling), …d5, …Nf6 or …Nc6" | `e4 e5 f4 Bc5` | level | +0.15 (Nf3 d6 c3 f5) | ✅ |
+| King's Gambit Declined (black) | "Develop with …Bc5 (stopping White castling), …d5, …Nf6 or …Nc6" | `e4 e5 f4 d5` | level | -0.16 (Nf3 exf4 exd5 Nf6) | ✅ |
+| King's Gambit Declined (black) | "Develop with …Bc5 (stopping White castling), …d5, …Nf6 or …Nc6" | `e4 e5 f4 Nf6` | level | -0.24 (fxe5 Nxe4 Nf3 Ng5) | ✅ |
+| King's Gambit Declined (black) | "Develop with …Bc5 (stopping White castling), …d5, …Nf6 or …Nc6" | `e4 e5 f4 Nc6` | level | +0.13 (Nf3 d5 exd5 Qxd5) | ✅ |
+| King's Gambit Declined: Classical Variation (idea) | "3.fxe5?? Qh4+" | `e4 e5 f4 Bc5` | fxe5 is a blunder | fxe5 loses 7.29 (-7.14; best Nf3 +0.15) | ✅ |
+| King's Gambit Declined: Classical Variation (idea) | "3.fxe5?? Qh4+ and …Qxe4+ forks king and rook" | `e4 e5 f4 Bc5 fxe5 Qh4+ g3 Qxe4+` | Black winning | -6.99 (Qe2 Qxh1 d4 Qxg1) | ✅ |
+| King's Gambit Declined: Classical Variation (white) | "Play Nf3 first" | `e4 e5 f4 Bc5` | Nf3 is sound | Nf3 -0.22, within 0.00 of best | ✅ |
+| King's Gambit Declined: Falkbeer Countergambit (idea) | "3…exf4 is the modern choice" | `e4 e5 f4 d5 exd5` | exf4 is sound | exf4 -0.20, within 0.00 of best | ✅ |
+| King's Gambit Declined: Falkbeer Countergambit (idea) | "the old push …e4?!, to cramp White, is less accurate" | `e4 e5 f4 d5 exd5` | e4 is dubious | e4 loses 0.57 (+0.00; best exf4 -0.57) | ✅ |
+| King's Gambit Declined: Falkbeer Countergambit (black) | "3…exf4 is simplest: develop with …Nf6" | `e4 e5 f4 d5 exd5 exf4 Nf3` | Nf6 is sound | Nf6 -0.17, within 0.00 of best | ✅ |
+| King's Gambit Declined: Falkbeer Countergambit (white) | "After 3.exd5 e4, d3 breaks up the e4 wedge" | `e4 e5 f4 d5 exd5 e4` | d3 is sound | d3 +0.00, within 0.00 of best | ✅ |
+| King's Gambit Declined: Petrov's Defense (white) | "3.fxe5 Nxe4 4.Nf3 is the main line" | `e4 e5 f4 Nf6` | fxe5 is sound | fxe5 -0.28, within 0.00 of best | ✅ |
+| King's Gambit Declined: Petrov's Defense (white) | "3.fxe5 Nxe4 4.Nf3 is the main line" | `e4 e5 f4 Nf6 fxe5 Nxe4` | Nf3 is sound | Nf3 -0.26, within 0.00 of best | ✅ |
+| King's Gambit Declined: Queen's Knight Defense (black) | "If White plays an early fxe5, don't recapture" | `e4 e5 f4 Nc6 fxe5` | Nxe5 is a mistake | Nxe5 loses 8.09 (+0.46; best Qh4+ -7.63) | ✅ |
+| King's Gambit Declined: Queen's Knight Defense (black) | "…Qh4+ and …Qxe4+ win the h1 rook" | `e4 e5 f4 Nc6 fxe5` | Qh4+ is sound | Qh4+ -7.97, within 0.00 of best | ✅ |
+| King's Gambit Declined: Queen's Knight Defense (black) | "…Qh4+ and …Qxe4+ win the h1 rook" | `e4 e5 f4 Nc6 fxe5 Qh4+ g3 Qxe4+` | Black winning | -7.94 (Qe2 Qxh1 Nf3 d5) | ✅ |
+| Scotch Game (white) | "Against 4…Nf6, Nxc6 bxc6 e5 (the Mieses) is the main line" | `e4 e5 Nf3 Nc6 d4 exd4 Nxd4 Nf6` | Nxc6 is sound | Nxc6 -0.35, within 0.00 of best | ✅ |
+| Scotch Game (white) | "Against 4…Nf6, Nxc6 bxc6 e5 (the Mieses) is the main line" | `e4 e5 Nf3 Nc6 d4 exd4 Nxd4 Nf6 Nxc6 bxc6` | e5 is sound | e5 -0.38, within 0.14 of best | ✅ |
+| Scotch Game (black) | "Hit the d4 knight with …Bc5 or e4 with …Nf6" | `e4 e5 Nf3 Nc6 d4 exd4 Nxd4` | Bc5 is sound | Bc5 -0.15, within 0.11 of best | ✅ |
+| Scotch Game (black) | "Hit the d4 knight with …Bc5 or e4 with …Nf6" | `e4 e5 Nf3 Nc6 d4 exd4 Nxd4` | Nf6 is sound | Nf6 -0.23, within 0.00 of best | ✅ |
+| Scotch Game: Göring Gambit (white) | "After …dxc3 Nxc3" | `e4 e5 Nf3 Nc6 d4 exd4 c3 dxc3` | Nxc3 is sound | Nxc3 -0.49, within 0.00 of best | ✅ |
+| Scotch Game: Göring Gambit (black) | "4…d5 is the safe way to decline" | `e4 e5 Nf3 Nc6 d4 exd4 c3` | d5 is sound | d5 -0.36, within 0.04 of best | ✅ |
+| Scotch Game: Göring Gambit (black) | "after exd5 Qxd5 cxd4, develop with …Bg4 or …Bb4+" | `e4 e5 Nf3 Nc6 d4 exd4 c3 d5 exd5 Qxd5 cxd4` | Bg4 is sound | Bg4 -0.37, within 0.00 of best | ✅ |
+| Scotch Game: Göring Gambit (black) | "after exd5 Qxd5 cxd4, develop with …Bg4 or …Bb4+" | `e4 e5 Nf3 Nc6 d4 exd4 c3 d5 exd5 Qxd5 cxd4` | Bb4+ is sound | Bb4+ -0.38, within 0.04 of best | ✅ |
+| Scotch Game: Göring Gambit (black) | "Accepting is playable" | `e4 e5 Nf3 Nc6 d4 exd4 c3` | dxc3 is sound | dxc3 -0.46, within 0.00 of best | ✅ |
+| Scotch Game: Scotch Gambit (white) | "Against …Nf6, e5 or O-O" | `e4 e5 Nf3 Nc6 d4 exd4 Bc4 Nf6` | e5 is sound | e5 -0.26, within 0.00 of best | ✅ |
+| Scotch Game: Scotch Gambit (white) | "Against …Nf6, e5 or O-O" | `e4 e5 Nf3 Nc6 d4 exd4 Bc4 Nf6` | O-O is sound | O-O -0.39, within 0.03 of best | ✅ |
+| Scotch Game: Scotch Gambit (white) | "Against …Bc5, c3 or O-O" | `e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5` | c3 is sound | c3 -0.20, within 0.00 of best | ✅ |
+| Scotch Game: Scotch Gambit (white) | "Against …Bc5, c3 or O-O" | `e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5` | O-O is sound | O-O -0.38, within 0.14 of best | ✅ |
+| Scotch Game: Scotch Gambit (black) | "…Nf6 is principled" | `e4 e5 Nf3 Nc6 d4 exd4 Bc4` | Nf6 is sound | Nf6 -0.18, within 0.00 of best | ✅ |
+| Scotch Game: Scotch Gambit (black) | "meet e5 with …d5" | `e4 e5 Nf3 Nc6 d4 exd4 Bc4 Nf6 e5` | d5 is sound | d5 -0.22, within 0.00 of best | ✅ |
+| Scotch Game: Scotch Gambit (black) | "…Bc5 is also fine" | `e4 e5 Nf3 Nc6 d4 exd4 Bc4` | Bc5 is sound | Bc5 -0.11, within 0.22 of best | ✅ |
+| Ponziani Opening (white) | "Against …Nf6, d4 keeps the initiative" | `e4 e5 Nf3 Nc6 c3 Nf6` | d4 is sound | d4 -0.20, within 0.00 of best | ✅ |
+| Ponziani Opening (white) | "against …d5, Qa4 pins the c6 knight" | `e4 e5 Nf3 Nc6 c3 d5` | Qa4 is sound | Qa4 -0.44, within 0.00 of best | ✅ |
+| Ponziani Opening (black) | "Strike at once: …Nf6 hits e4" | `e4 e5 Nf3 Nc6 c3` | Nf6 is sound | Nf6 -0.24, within 0.16 of best | ✅ |
+| Ponziani Opening (black) | "…d5 opens the centre before White is ready" | `e4 e5 Nf3 Nc6 c3` | d5 is sound | d5 -0.31, within 0.00 of best | ✅ |
+| Ponziani Opening: Neumann Gambit (black) | "Take the pawn with …Nxe4" | `e4 e5 Nf3 Nc6 Bc4 Nf6 c3` | Nxe4 is sound | Nxe4 -1.15, within 0.00 of best | ✅ |
+| Ponziani Opening: Neumann Gambit (black) | "then …d5 keeps the knight in the centre and hits the c4 bishop" | `e4 e5 Nf3 Nc6 Bc4 Nf6 c3 Nxe4 d4` | d5 is sound | d5 -1.99, within 0.00 of best | ✅ |
+| Italian Game (black) | "3…Bc5 (Giuoco Piano) mirrors White; 3…Nf6 (Two Knights) counterattacks e4. Both are sound" | `e4 e5 Nf3 Nc6 Bc4` | Bc5 is sound | Bc5 -0.12, within 0.00 of best | ✅ |
+| Italian Game (black) | "3…Bc5 (Giuoco Piano) mirrors White; 3…Nf6 (Two Knights) counterattacks e4. Both are sound" | `e4 e5 Nf3 Nc6 Bc4` | Nf6 is sound | Nf6 +0.19, within 0.00 of best | ✅ |
+| Italian Game: Anti-Fried Liver Defense (white) | "Use the extra time: d4 to open the centre, or c3 and d4" | `e4 e5 Nf3 Nc6 Bc4 h6` | d4 is sound | d4 +0.20, within 0.00 of best | ✅ |
+| Italian Game: Anti-Fried Liver Defense (white) | "Use the extra time: d4 to open the centre, or c3 and d4" | `e4 e5 Nf3 Nc6 Bc4 h6` | c3 is sound | c3 +0.00, within 0.28 of best | ✅ |
+| Italian Game: Blackburne-Kostić Gambit (idea) | "4.Nxe5? Qg5!" | `e4 e5 Nf3 Nc6 Bc4 Nd4` | Nxe5 is a mistake | Nxe5 loses 1.75 (-0.77; best Nxd4 +0.98) | ✅ |
+| Italian Game: Blackburne-Kostić Gambit (idea) | "4.Nxe5? Qg5!" | `e4 e5 Nf3 Nc6 Bc4 Nd4 Nxe5` | Qg5 is sound | Qg5 -0.88, within 0.00 of best | ✅ |
+| Italian Game: Blackburne-Kostić Gambit (idea) | "5.Nxf7? Qxg2" | `e4 e5 Nf3 Nc6 Bc4 Nd4 Nxe5 Qg5` | Nxf7 is a mistake | Nxf7 loses 8.38 (-9.12; best O-O -0.74) | ✅ |
+| Italian Game: Blackburne-Kostić Gambit (idea) | "6.Rf1 Qxe4+ 7.Be2 Nf3 is mate" | `e4 e5 Nf3 Nc6 Bc4 Nd4 Nxe5 Qg5 Nxf7 Qxg2 Rf1 Qxe4+` | Black winning | -9.62 (Qe2 Nxe2 Bxe2 Kxf7) | ✅ |
+| Italian Game: Blackburne-Kostić Gambit (idea) | "Objectively it just wastes time" | `e4 e5 Nf3 Nc6 Bc4` | Nd4 is dubious | Nd4 loses 0.91 (+1.08; best Nf6 +0.17) | ✅ |
+| Italian Game: Blackburne-Kostić Gambit (white) | "Don't take e5" | `e4 e5 Nf3 Nc6 Bc4 Nd4` | Nxe5 is dubious | Nxe5 loses 1.75 (-0.77; best Nxd4 +0.98) | ✅ |
+| Italian Game: Blackburne-Kostić Gambit (white) | "4.Nxd4 exd4 and O-O leaves you clearly better" | `e4 e5 Nf3 Nc6 Bc4 Nd4` | Nxd4 is sound | Nxd4 +0.99, within 0.00 of best | ✅ |
+| Italian Game: Blackburne-Kostić Gambit (white) | "4.c3 is weaker" | `e4 e5 Nf3 Nc6 Bc4 Nd4` | c3 is dubious | c3 loses 0.85 (+0.13; best Nxd4 +0.98) | ✅ |
+| Italian Game: Blackburne-Kostić Gambit (white) | "4.Nxd4 exd4 and O-O leaves you clearly better" | `e4 e5 Nf3 Nc6 Bc4 Nd4 Nxd4 exd4 O-O` | White clearly better | +0.94 (c6 Re1 d6 c3) | ✅ |
+| Italian Game: Classical Variation (white) | "Play d4" | `e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6` | d4 is sound | d4 -0.19, within 0.07 of best | ✅ |
+| Italian Game: Classical Variation (white) | "after …exd4, cxd4 with a full centre" | `e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d4 exd4` | cxd4 is sound | cxd4 -0.41, within 0.29 of best | ✅ |
+| Italian Game: Classical Variation (black) | "Hit back with …Nf6 against e4" | `e4 e5 Nf3 Nc6 Bc4 Bc5 c3` | Nf6 is sound | Nf6 -0.08, within 0.00 of best | ✅ |
+| Italian Game: Classical Variation (black) | "If d4 exd4 cxd4, …Bb4+ moves the bishop with check" | `e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d4 exd4 cxd4` | Bb4+ is sound | Bb4+ -0.25, within 0.00 of best | ✅ |
+| Italian Game: Evans Gambit (white) | "After …Bxb4, play c3 and d4" | `e4 e5 Nf3 Nc6 Bc4 Bc5 b4 Bxb4` | c3 is sound | c3 -0.43, within 0.00 of best | ✅ |
+| Italian Game: Evans Gambit (white) | "After …Bxb4, play c3 and d4" | `e4 e5 Nf3 Nc6 Bc4 Bc5 b4 Bxb4 c3 Ba5` | d4 is sound | d4 -0.47, within 0.00 of best | ✅ |
+| Italian Game: Evans Gambit (black) | "Accept and give a pawn back" | `e4 e5 Nf3 Nc6 Bc4 Bc5 b4` | Bxb4 is sound | Bxb4 -0.27, within 0.00 of best | ✅ |
+| Italian Game: Evans Gambit (black) | "decline with …Bb6" | `e4 e5 Nf3 Nc6 Bc4 Bc5 b4` | Bb6 is playable | Bb6 loses 0.41 (+0.03; best Bxb4 -0.38) | ✅ |
+| Italian Game: Giuoco Pianissimo, Canal Variation (black) | "…h6 asks the bishop" | `e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 d3 d6 Bg5` | h6 is sound | h6 -0.13, within 0.00 of best | ✅ |
+| Italian Game: Giuoco Pianissimo, Canal Variation (black) | "Don't play …g5 unless you can castle queenside" | `e4 e5 Nf3 Nc6 Bc4 Bc5 Nc3 Nf6 d3 d6 Bg5 h6 Bh4` | g5 is sound | g5 -0.30, within 0.00 of best | ✅ |
+| Italian Game: Giuoco Pianissimo, Canal Variation (black) | "Don't play …g5 unless you can castle queenside" | `e4 e5 Nf3 Nc6 Bc4 Bc5 Nc3 Nf6 d3 d6 Bg5 h6 Bh4 O-O Qd2` | g5 is a mistake | g5 loses 5.95 (+5.95; best Bb4 +0.00) | ✅ |
+| Italian Game: Hungarian Defense (white) | "Take the centre with d4" | `e4 e5 Nf3 Nc6 Bc4 Be7` | d4 is sound | d4 +0.14, within 0.00 of best | ✅ |
+| Italian Game: Hungarian Defense (white) | "against …exd4 recapture and develop" | `e4 e5 Nf3 Nc6 Bc4 Be7 d4 exd4` | Nxd4 is sound | Nxd4 +0.16, within 0.00 of best | ✅ |
+| Italian Game: Hungarian Defense (white) | "against …d6, d5 gains space" | `e4 e5 Nf3 Nc6 Bc4 Be7 d4 d6` | d5 is sound | d5 +0.40, within 0.00 of best | ✅ |
+| Italian Game: Paris Defense (white) | "Take the centre with c3 and d4 (or d4 at once)" | `e4 e5 Nf3 Nc6 Bc4 d6` | c3 is sound | c3 +0.12, within 0.05 of best | ✅ |
+| Italian Game: Paris Defense (white) | "Take the centre with c3 and d4 (or d4 at once)" | `e4 e5 Nf3 Nc6 Bc4 d6` | d4 is sound | d4 +0.15, within 0.00 of best | ✅ |
+| Italian Game: Paris Defense (white) | "Once Black plays …Nf6, Ng5 against f7 becomes a real threat" | `e4 e5 Nf3 Nc6 Bc4 d6 c3 Nf6` | Ng5 is sound | Ng5 +0.68, within 0.00 of best | ✅ |
+| Italian Game: Rosentreter Gambit (white) | "After …exd4, play c3 or O-O" | `e4 e5 Nf3 Nc6 Bc4 Bc5 d4 exd4` | c3 is sound | c3 -0.20, within 0.00 of best | ✅ |
+| Italian Game: Rosentreter Gambit (white) | "After …exd4, play c3 or O-O" | `e4 e5 Nf3 Nc6 Bc4 Bc5 d4 exd4` | O-O is sound | O-O -0.38, within 0.14 of best | ✅ |
+| Italian Game: Rosentreter Gambit (black) | "…Nxd4, …exd4 and …Bxd4 are all playable" | `e4 e5 Nf3 Nc6 Bc4 Bc5 d4` | Nxd4 is playable | Nxd4 -0.18, within 0.00 of best | ✅ |
+| Italian Game: Rosentreter Gambit (black) | "…Nxd4, …exd4 and …Bxd4 are all playable" | `e4 e5 Nf3 Nc6 Bc4 Bc5 d4` | exd4 is playable | exd4 loses 0.34 (+0.00; best Nxd4 -0.34) | ✅ |
+| Italian Game: Rosentreter Gambit (black) | "…Nxd4, …exd4 and …Bxd4 are all playable" | `e4 e5 Nf3 Nc6 Bc4 Bc5 d4` | Bxd4 is playable | Bxd4 loses 0.35 (+0.01; best Nxd4 -0.34) | ✅ |
+| Italian Game: Rousseau Gambit (idea) | "3…f5 is a dubious counter-gambit" | `e4 e5 Nf3 Nc6 Bc4` | f5 is dubious | f5 loses 1.21 (+1.38; best Nf6 +0.17) | ✅ |
+| Italian Game: Rousseau Gambit (white) | "4.d4 hits e5" | `e4 e5 Nf3 Nc6 Bc4 f5` | d4 is sound | d4 +1.54, within 0.00 of best | ✅ |
+| Italian Game: Rousseau Gambit (black) | "Take with …exd4" | `e4 e5 Nf3 Nc6 Bc4 f5 d4` | exd4 is sound | exd4 +1.50, within 0.00 of best | ✅ |
+| Italian Game: Rousseau Gambit (black) | "…fxe4 is also playable" | `e4 e5 Nf3 Nc6 Bc4 f5 d4` | fxe4 is playable | fxe4 loses 0.47 (+1.89; best exd4 +1.42) | ✅ |
+| Italian Game: Rousseau Gambit (black) | "It is objectively bad" | `e4 e5 Nf3 Nc6 Bc4` | f5 is a mistake | f5 loses 1.21 (+1.38; best Nf6 +0.17) | ✅ |
+| Italian Game: Rousseau Gambit (black) | "3…Nf6 or 3…Bc5 are sound" | `e4 e5 Nf3 Nc6 Bc4` | Nf6 is sound | Nf6 +0.19, within 0.00 of best | ✅ |
+| Italian Game: Rousseau Gambit (black) | "3…Nf6 or 3…Bc5 are sound" | `e4 e5 Nf3 Nc6 Bc4` | Bc5 is sound | Bc5 -0.12, within 0.00 of best | ✅ |
+| Italian Game: Two Knights Defense (black) | "Against Ng5, …d5 and …Na5" | `e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5` | d5 is sound | d5 +0.08, within 0.00 of best | ✅ |
+| Italian Game: Two Knights Defense (black) | "Against Ng5, …d5 and …Na5" | `e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 d5 exd5` | Na5 is sound | Na5 +0.14, within 0.00 of best | ✅ |
+| Italian Game: Two Knights Defense (black) | "Against d4, take" | `e4 e5 Nf3 Nc6 Bc4 Nf6 d4` | exd4 is sound | exd4 -0.01, within 0.00 of best | ✅ |
+| Italian Game: Two Knights Defense, Knight Attack (idea) | "Black must block with …d5" | `e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5` | d5 is sound | d5 +0.08, within 0.00 of best | ✅ |
+| Italian Game: Two Knights Defense, Knight Attack (white) | "if …Na5 play Bb5+" | `e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 d5 exd5 Na5` | Bb5+ is sound | Bb5+ +0.11, within 0.00 of best | ✅ |
+| Italian Game: Two Knights Defense, Knight Attack (white) | "after …c6 dxc6 bxc6, Be2" | `e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 d5 exd5 Na5 Bb5+ c6 dxc6 bxc6` | Be2 is sound | Be2 +0.00, within 0.07 of best | ✅ |
+| Italian Game: Two Knights Defense, Knight Attack (white) | "Against 5…Nxd5? the Fried Liver (Nxf7) or d4 is dangerous for Black" | `e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 d5 exd5` | Nxd5 is a mistake | Nxd5 loses 0.81 (+0.89; best Na5 +0.08) | ✅ |
+| Italian Game: Two Knights Defense, Knight Attack (white) | "Against 5…Nxd5? the Fried Liver (Nxf7) or d4 is dangerous for Black" | `e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 d5 exd5 Nxd5` | Nxf7 is sound | Nxf7 +0.80, within 0.00 of best | ✅ |
+| Italian Game: Two Knights Defense, Knight Attack (white) | "Against 5…Nxd5? the Fried Liver (Nxf7) or d4 is dangerous for Black" | `e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 d5 exd5 Nxd5` | d4 is sound | d4 +0.77, within 0.09 of best | ✅ |
+| Italian Game: Two Knights Defense, Knight Attack (black) | "4…d5 5.exd5 Na5! hits the bishop" | `e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 d5 exd5` | Na5 is sound | Na5 +0.14, within 0.00 of best | ✅ |
+| Italian Game: Two Knights Defense, Knight Attack (black) | "Never 5…Nxd5?" | `e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 d5 exd5` | Nxd5 is a mistake | Nxd5 loses 0.81 (+0.89; best Na5 +0.08) | ✅ |
+| Italian Game: Two Knights Defense, Open Variation (white) | "5.e5 kicks the knight, or 5.O-O gambits" | `e4 e5 Nf3 Nc6 Bc4 Nf6 d4 exd4` | e5 is sound | e5 -0.26, within 0.00 of best | ✅ |
+| Italian Game: Two Knights Defense, Open Variation (white) | "5.e5 kicks the knight, or 5.O-O gambits" | `e4 e5 Nf3 Nc6 Bc4 Nf6 d4 exd4` | O-O is sound | O-O -0.39, within 0.03 of best | ✅ |
+| Italian Game: Two Knights Defense, Open Variation (white) | "5.O-O gambits and Re1 hits e4 along the e-file" | `e4 e5 Nf3 Nc6 Bc4 Nf6 d4 exd4 O-O Nxe4` | Re1 is sound | Re1 -0.02, within 0.00 of best | ✅ |
+| Italian Game: Two Knights Defense, Open Variation (black) | "Take 4…exd4." | `e4 e5 Nf3 Nc6 Bc4 Nf6 d4` | exd4 is sound | exd4 -0.01, within 0.00 of best | ✅ |
+| Italian Game: Two Knights Defense, Open Variation (black) | "Meet 5.e5 with 5…d5" | `e4 e5 Nf3 Nc6 Bc4 Nf6 d4 exd4 e5` | d5 is sound | d5 -0.22, within 0.00 of best | ✅ |
+| Italian Game: Two Knights Defense, Open Variation (black) | "5.O-O with 5…Nxe4 6.Re1 d5" | `e4 e5 Nf3 Nc6 Bc4 Nf6 d4 exd4 O-O` | Nxe4 is sound | Nxe4 -0.09, within 0.00 of best | ✅ |
+| Italian Game: Two Knights Defense, Open Variation (black) | "5.O-O with 5…Nxe4 6.Re1 d5" | `e4 e5 Nf3 Nc6 Bc4 Nf6 d4 exd4 O-O Nxe4 Re1` | d5 is sound | d5 -0.06, within 0.00 of best | ✅ |
+| Ruy Lopez (black) | "3…a6 asks the bishop, 3…Nf6 counterattacks e4" | `e4 e5 Nf3 Nc6 Bb5` | a6 is sound | a6 +0.21, within 0.05 of best | ✅ |
+| Ruy Lopez (black) | "3…a6 asks the bishop, 3…Nf6 counterattacks e4" | `e4 e5 Nf3 Nc6 Bb5` | Nf6 is sound | Nf6 +0.14, within 0.00 of best | ✅ |
+| Ruy Lopez: Berlin Defense (white) | "4.O-O Nxe4 5.d4" | `e4 e5 Nf3 Nc6 Bb5 Nf6` | O-O is sound | O-O +0.13, within 0.00 of best | ✅ |
+| Ruy Lopez: Berlin Defense (white) | "4.O-O Nxe4 5.d4" | `e4 e5 Nf3 Nc6 Bb5 Nf6 O-O Nxe4` | d4 is sound | d4 +0.20, within 0.00 of best | ✅ |
+| Ruy Lopez: Berlin Defense (white) | "4.d3 keeps queens on" | `e4 e5 Nf3 Nc6 Bb5 Nf6` | d3 is sound | d3 +0.11, within 0.09 of best | ✅ |
+| Ruy Lopez: Berlin Defense (black) | "4…Nxe4 is the main line" | `e4 e5 Nf3 Nc6 Bb5 Nf6 O-O` | Nxe4 is sound | Nxe4 +0.11, within 0.00 of best | ✅ |
+| Ruy Lopez: Berlin Defense (black) | "Against 4.d3, …Bc5 and …d6 are solid" | `e4 e5 Nf3 Nc6 Bb5 Nf6 d3` | Bc5 is sound | Bc5 +0.07, within 0.00 of best | ✅ |
+| Ruy Lopez: Bird Variation (white) | "4.Nxd4 exd4 5.O-O" | `e4 e5 Nf3 Nc6 Bb5 Nd4` | Nxd4 is sound | Nxd4 +0.54, within 0.00 of best | ✅ |
+| Ruy Lopez: Bird Variation (white) | "4.Nxd4 exd4 5.O-O" | `e4 e5 Nf3 Nc6 Bb5 Nd4 Nxd4 exd4` | O-O is sound | O-O +0.54, within 0.00 of best | ✅ |
+| Ruy Lopez: Bird Variation (black) | "…c6 kicks the bishop" | `e4 e5 Nf3 Nc6 Bb5 Nd4 Nxd4 exd4 O-O` | c6 is sound | c6 +0.59, within 0.06 of best | ✅ |
+| Ruy Lopez: Classical Variation (white) | "c3 and d4 gain time on the c5 bishop; you can castle first" | `e4 e5 Nf3 Nc6 Bb5 Bc5` | c3 is sound | c3 +0.33, within 0.00 of best | ✅ |
+| Ruy Lopez: Classical Variation (white) | "c3 and d4 gain time on the c5 bishop; you can castle first" | `e4 e5 Nf3 Nc6 Bb5 Bc5` | O-O is sound | O-O +0.29, within 0.12 of best | ✅ |
+| Ruy Lopez: Classical Variation (white) | "If Black plays …Nd4, Nxd4 Bxd4 and c3 kick the bishop" | `e4 e5 Nf3 Nc6 Bb5 Bc5 O-O Nd4` | Nxd4 is sound | Nxd4 +0.24, within 0.00 of best | ✅ |
+| Ruy Lopez: Classical Variation (white) | "If Black plays …Nd4, Nxd4 Bxd4 and c3 kick the bishop" | `e4 e5 Nf3 Nc6 Bb5 Bc5 O-O Nd4 Nxd4 Bxd4` | c3 is sound | c3 +0.32, within 0.00 of best | ✅ |
+| Ruy Lopez: Cozio Defense (white) | "c3 and d4, or O-O and d4, or Nc3 and d4" | `e4 e5 Nf3 Nc6 Bb5 Nge7` | c3 is playable | c3 loses 0.31 (+0.21; best Nc3 +0.52) | ✅ |
+| Ruy Lopez: Cozio Defense (white) | "c3 and d4, or O-O and d4, or Nc3 and d4" | `e4 e5 Nf3 Nc6 Bb5 Nge7` | O-O is sound | O-O +0.39, within 0.13 of best | ✅ |
+| Ruy Lopez: Cozio Defense (white) | "c3 and d4, or O-O and d4, or Nc3 and d4" | `e4 e5 Nf3 Nc6 Bb5 Nge7` | Nc3 is sound | Nc3 +0.57, within 0.00 of best | ✅ |
+| Ruy Lopez: Morphy Defense (white) | "Ba4, O-O, Re1, c3, h3 and d4: the Closed Spanish" | `e4 e5 Nf3 Nc6 Bb5 a6` | Ba4 is sound | Ba4 +0.28, within 0.00 of best | ✅ |
+| Ruy Lopez: Morphy Defense (white) | "4.Bxc6 (the Exchange) gives a simpler endgame-style game" | `e4 e5 Nf3 Nc6 Bb5 a6` | Bxc6 is sound | Bxc6 +0.12, within 0.13 of best | ✅ |
+| Ruy Lopez: Morphy Defense (black) | "…Nf6, …Be7, …b5, …d6 and …O-O" | `e4 e5 Nf3 Nc6 Bb5 a6 Ba4` | Nf6 is sound | Nf6 +0.29, within 0.00 of best | ✅ |
+| Ruy Lopez: Morphy Defense, Tarrasch Variation (black) | "…b5 (Bb3) gains space" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 a6 Ba4` | b5 is sound | b5 +0.06, within 0.04 of best | ✅ |
+| Ruy Lopez: Morphy Defense, Tarrasch Variation (black) | "then …Bc5 or …Be7" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 a6 Ba4 b5 Bb3` | Bc5 is sound | Bc5 +0.07, within 0.00 of best | ✅ |
+| Ruy Lopez: Morphy Defense, Tarrasch Variation (black) | "then …Bc5 or …Be7" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 a6 Ba4 b5 Bb3` | Be7 is sound | Be7 +0.21, within 0.16 of best | ✅ |
+| Ruy Lopez: Schliemann Defense (white) | "4.Nc3 is the main answer" | `e4 e5 Nf3 Nc6 Bb5 f5` | Nc3 is sound | Nc3 +0.46, within 0.16 of best | ✅ |
+| Ruy Lopez: Schliemann Defense (white) | "meeting …fxe4 with Nxe4" | `e4 e5 Nf3 Nc6 Bb5 f5 Nc3 fxe4` | Nxe4 is sound | Nxe4 +0.50, within 0.00 of best | ✅ |
+| Ruy Lopez: Schliemann Defense (white) | "4.d3 gives a quieter game" | `e4 e5 Nf3 Nc6 Bb5 f5` | d3 is sound | d3 +0.60, within 0.00 of best | ✅ |
+| Ruy Lopez: Schliemann Defense (black) | "…fxe4, …Nf6 and …d5 to grab the centre" | `e4 e5 Nf3 Nc6 Bb5 f5 Nc3` | fxe4 is sound | fxe4 +0.64, within 0.00 of best | ✅ |
+| Ruy Lopez: Schliemann Defense (black) | "…fxe4, …Nf6 and …d5 to grab the centre" | `e4 e5 Nf3 Nc6 Bb5 f5 Nc3 fxe4 Nxe4` | Nf6 is sound | Nf6 +0.48, within 0.00 of best | ✅ |
+| Ruy Lopez: Steinitz Defense (white) | "d4 at once" | `e4 e5 Nf3 Nc6 Bb5 d6` | d4 is sound | d4 +0.60, within 0.00 of best | ✅ |
+| Ruy Lopez: Steinitz Defense (black) | "…Bd7 to unpin" | `e4 e5 Nf3 Nc6 Bb5 d6 d4` | Bd7 is sound | Bd7 +0.82, within 0.25 of best | ✅ |
+| Ruy Lopez: Steinitz Defense, Nimzowitsch Attack (white) | "After …Bxc6, Qd3 backs up d4 and e4" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 d6 Bb5 Bd7 Bxc6 Bxc6` | Qd3 is sound | Qd3 +0.98, within 0.17 of best | ✅ |
+| Three Knights Opening (white) | "Against …Bc5, the fork trick Nxe5 and d4" | `e4 e5 Nf3 Nc6 Nc3 Bc5` | Nxe5 is sound | Nxe5 +0.62, within 0.00 of best | ✅ |
+| Three Knights Opening (white) | "Against …Bc5, the fork trick Nxe5 and d4" | `e4 e5 Nf3 Nc6 Nc3 Bc5 Nxe5 Nxe5` | d4 is sound | d4 +0.69, within 0.00 of best | ✅ |
+| Three Knights Opening (black) | "…Nf6 is simplest" | `e4 e5 Nf3 Nc6 Nc3` | Nf6 is sound | Nf6 +0.04, within 0.00 of best | ✅ |
+| Three Knights Opening (black) | "…Bb4 avoids it and is playable" | `e4 e5 Nf3 Nc6 Nc3` | Bb4 is playable | Bb4 loses 0.40 (+0.53; best Nf6 +0.13) | ✅ |
+| Three Knights Opening (black) | "…g6 is dubious" | `e4 e5 Nf3 Nc6 Nc3` | g6 is dubious | g6 loses 0.88 (+1.01; best Nf6 +0.13) | ✅ |
+| Three Knights Opening (black) | "Don't play …Bc5 without …d6: the fork trick works" | `e4 e5 Nf3 Nc6 Nc3` | Bc5 is dubious | Bc5 loses 0.50 (+0.63; best Nf6 +0.13) | ✅ |
+| Four Knights Game (black) | "…Nd4 against Bb5" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5` | Nd4 is sound | Nd4 +0.10, within 0.00 of best | ✅ |
+| Four Knights Game (black) | "…exd4 against d4" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4` | exd4 is sound | exd4 +0.03, within 0.00 of best | ✅ |
+| Four Knights Game (black) | "the …Nxe4 fork trick against Bc4" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bc4` | Nxe4 is sound | Nxe4 -0.18, within 0.00 of best | ✅ |
+| Four Knights Game (black) | "…d5 against slow moves" | `e4 e5 Nf3 Nc6 Nc3 Nf6 g3` | d5 is sound | d5 +0.03, within 0.22 of best | ✅ |
+| Four Knights Game (black) | "…d5 against slow moves" | `e4 e5 Nf3 Nc6 Nc3 Nf6 a3` | d5 is sound | d5 -0.11, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation (black) | "4…Nd4 (Rubinstein) is the most testing" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5` | Nd4 is sound | Nd4 +0.10, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation (black) | "Don't try 4…Nxe4" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5` | Nxe4 is dubious | Nxe4 loses 5.62 (+5.64; best Nd4 +0.02) | ✅ |
+| Four Knights Game: Spanish Variation (white) | "Doubled c-pawns after …Bxc3 bxc3 are fine" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bb4 O-O O-O d3 Bxc3` | bxc3 is sound | bxc3 +0.27, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation (white) | "Doubled c-pawns after …Bxc3 bxc3 are fine" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bb4 O-O O-O d3 Bxc3 bxc3` | level | +0.28 (d6 Bg5 h6 Bh4) | ✅ |
+| Four Knights Game: Spanish Variation, Classical Variation (idea) | "it allows the fork trick: Nxe5, and d4 forks bishop and knight" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bc5` | Nxe5 is sound | Nxe5 +0.30, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Classical Variation (idea) | "it allows the fork trick: Nxe5, and d4 forks bishop and knight" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bc5 Nxe5 Nxe5` | d4 is sound | d4 +0.14, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Classical Variation (white) | "Castle, then Nxe5" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bc5` | O-O is sound | O-O +0.19, within 0.01 of best | ✅ |
+| Four Knights Game: Spanish Variation, Classical Variation (white) | "Castle, then Nxe5" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bc5 O-O O-O` | Nxe5 is sound | Nxe5 +0.22, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Classical Variation (white) | "after …Nxe5 d4" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bc5 O-O O-O Nxe5 Nxe5` | d4 is sound | d4 +0.13, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Classical Variation (white) | "chase with f4, e5 and d5" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bc5 O-O O-O Nxe5 Nxe5 d4 Bd6` | f4 is sound | f4 +0.33, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Classical Variation (white) | "chase with f4, e5 and d5" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bc5 O-O O-O Nxe5 Nxe5 d4 Bd6 f4 Nc6` | e5 is sound | e5 +0.27, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Classical Variation (white) | "chase with f4, e5 and d5" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bc5 O-O O-O Nxe5 Nxe5 d4 Bd6 f4 Nc6 e5 Be7` | d5 is sound | d5 +0.08, within 0.20 of best | ✅ |
+| Four Knights Game: Spanish Variation, Classical Variation (white) | "though best play stays level" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bc5 O-O O-O Nxe5 Nxe5 d4 Bd6 f4 Nc6 e5 Be7 d5` | level | -0.02 (Bc5+ Kh1 Nxd5 Qxd5) | ✅ |
+| Four Knights Game: Spanish Variation, Classical Variation (white) | "If Black plays …d6, hit the centre with d4" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bc5 O-O d6` | d4 is sound | d4 +0.67, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Classical Variation (black) | "play 5…d6 to stop it" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bc5 O-O` | d6 is playable | d6 loses 0.47 (+0.59; best O-O +0.12) | ✅ |
+| Four Knights Game: Spanish Variation, Classical Variation (black) | "though d4 then gains time" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bc5 O-O d6` | d4 is sound | d4 +0.67, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Classical Variation (black) | "6…Nd4 (the Marshall Variation) gives a pawn instead" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bc5 O-O O-O Nxe5` | Nd4 is playable | Nd4 +0.44, within 0.30 of best | ✅ |
+| Four Knights Game: Spanish Variation, Bardeleben Variation (white) | "Win the f6 knight back" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bc5 O-O O-O Nxe5 Nxe5 d4 Bd6 f4 Nc6 e5 Bb4` | exf6 is sound | exf6 +0.45, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Bardeleben Variation (black) | "After exf6 Qxf6" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bc5 O-O O-O Nxe5 Nxe5 d4 Bd6 f4 Nc6 e5 Bb4 exf6` | Qxf6 is sound | Qxf6 +0.30, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Rubinstein Variation, Marshall Variation (white) | "Drop the bishop to c4, not a4" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bc5 O-O O-O Nxe5 Nd4` | Bc4 is sound | Bc4 +0.53, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Rubinstein Variation, Marshall Variation (white) | "Drop the bishop to c4, not a4" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bc5 O-O O-O Nxe5 Nd4` | Ba4 is a mistake | Ba4 loses 2.02 (-1.45; best Bc4 +0.57) | ✅ |
+| Four Knights Game: Spanish Variation, Rubinstein Variation, Marshall Variation (white) | "against …d6 and …Bg4, Be2 breaks the pin" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bc5 O-O O-O Nxe5 Nd4 Bc4 d6 Nf3 Bg4` | Be2 is sound | Be2 +0.61, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Rubinstein Variation, Marshall Variation (white) | "Bring the e5 knight back to f3" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bc5 O-O O-O Nxe5 Nd4 Bc4 d6` | Nf3 is sound | Nf3 +0.55, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Rubinstein Variation, Marshall Variation (black) | "…d6 to open lines" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bc5 O-O O-O Nxe5 Nd4 Ba4` | d6 is sound | d6 -1.77, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Double Spanish (white) | "Against an early …d6, Nd5! hits the b4 bishop" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bb4 O-O d6` | Nd5 is sound | Nd5 +1.62, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Double Spanish (black) | "5…d6? 6.Nd5! wins material" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bb4 O-O` | d6 is a mistake | d6 loses 1.50 (+1.52; best O-O +0.02) | ✅ |
+| Four Knights Game: Spanish Variation, Double Spanish (black) | "5…d6? 6.Nd5! wins material" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bb4 O-O d6 Nd5` | White winning | +1.70 (Ba5 d4 a6 dxe5) | ✅ |
+| Four Knights Game: Spanish Variation, Nimzowitsch Variation (white) | "After …dxc6, d3 and Bg5" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bb4 O-O O-O Bxc6 dxc6` | d3 is sound | d3 +0.00, within 0.10 of best | ✅ |
+| Four Knights Game: Spanish Variation, Nimzowitsch Variation (black) | "Recapture …dxc6" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bb4 O-O O-O Bxc6` | dxc6 is sound | dxc6 +0.06, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Symmetrical Variation (white) | "Bg5 pins" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bb4 O-O O-O d3 d6` | Bg5 is sound | Bg5 +0.05, within 0.10 of best | ✅ |
+| Four Knights Game: Spanish Variation, Symmetrical Variation (white) | "Nd5 hits the pinned knight" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bb4 O-O O-O d3 d6 Bg5 Be6` | Nd5 is sound | Nd5 +0.84, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Symmetrical Variation (white) | "bxc3 gives you the bishop pair and d4" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bb4 O-O O-O d3 d6 Bg5 Bxc3` | bxc3 is sound | bxc3 +0.18, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Symmetrical Variation (black) | "…Bxc3 and …Qe7 (the Metger Unpin), or …Ne7 to reroute toward g6" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bb4 O-O O-O d3 d6 Bg5` | Bxc3 is sound | Bxc3 +0.16, within 0.16 of best | ✅ |
+| Four Knights Game: Spanish Variation, Symmetrical Variation (black) | "…Bxc3 and …Qe7 (the Metger Unpin), or …Ne7 to reroute toward g6" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bb4 O-O O-O d3 d6 Bg5` | Ne7 is sound | Ne7 +0.07, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Symmetrical Variation (black) | "Avoid …Be6?!, which lets Nd5 add to the pressure" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bb4 O-O O-O d3 d6 Bg5` | Be6 is dubious | Be6 loses 0.82 (+0.82; best Ne7 +0.00) | ✅ |
+| Four Knights Game: Spanish Variation, Symmetrical Variation, Metger Unpin (white) | "Re1, d4, and Bc1 when …Ne6 hits g5" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bb4 O-O O-O d3 d6 Bg5 Bxc3 bxc3 Qe7` | Re1 is sound | Re1 +0.03, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Symmetrical Variation, Metger Unpin (white) | "Re1, d4, and Bc1 when …Ne6 hits g5" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bb4 O-O O-O d3 d6 Bg5 Bxc3 bxc3 Qe7 Re1 Nd8 d4 Ne6` | Bc1 is sound | Bc1 +0.42, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Symmetrical Variation, Tarrasch Variation (white) | "Nd5 hits the b4 bishop and the pinned f6 knight" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bb4 O-O O-O d3 d6 Bg5 Be6` | Nd5 is sound | Nd5 +0.84, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Ranken Variation (white) | "After …dxc6 Nxe5 Nxe4 Nxe4 Qd4, castle" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 a6 Bxc6 dxc6 Nxe5 Nxe4 Nxe4 Qd4` | O-O is sound | O-O +0.41, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Ranken Variation (white) | "Against 6…Qd4, Nf3 keeps the extra pawn" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 a6 Bxc6 dxc6 Nxe5 Qd4` | Nf3 is sound | Nf3 +2.14, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Ranken Variation (black) | "Recapture …dxc6" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 a6 Bxc6` | dxc6 is sound | dxc6 +0.35, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Ranken Variation (black) | "after Nxe5 play …Nxe4!" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 a6 Bxc6 dxc6 Nxe5` | Nxe4 is sound | Nxe4 +0.32, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Ranken Variation (black) | "then …Qd4 to win the material back" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 a6 Bxc6 dxc6 Nxe5 Nxe4 Nxe4` | Qd4 is sound | Qd4 +0.25, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Ranken Variation (black) | "…bxc6 or 6…Qd4 leave you a pawn down" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 a6 Bxc6` | bxc6 is dubious | bxc6 loses 1.10 (+1.47; best dxc6 +0.37) | ✅ |
+| Four Knights Game: Spanish Variation, Ranken Variation (black) | "…bxc6 or 6…Qd4 leave you a pawn down" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 a6 Bxc6 dxc6 Nxe5` | Qd4 is dubious | Qd4 loses 1.85 (+2.05; best Nxe4 +0.20) | ✅ |
+| Four Knights Game: Spanish Variation, Rubinstein Variation (white) | "Avoid 5.Nxe5?! Qe7!, which gives Black the better game" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Nd4 Nxe5 Qe7` | Black slightly better | -0.33 (Nf3 Nxb5 Nxb5 Qxe4+) | ✅ |
+| Four Knights Game: Spanish Variation, Rubinstein Variation (white) | "Avoid 5.Nxe5?! Qe7!" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Nd4` | Nxe5 is dubious | Nxe5 loses 0.38 (-0.32; best Nxd4 +0.06) | ✅ |
+| Four Knights Game: Spanish Variation, Rubinstein Variation (idea) | "The most testing reply to 4.Bb5" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5` | Nd4 is sound | Nd4 +0.10, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Rubinstein Variation (white) | "5.Nxd4 is safe" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Nd4` | Nxd4 is sound | Nxd4 +0.06, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Rubinstein Variation (white) | "5.Nxd4 is safe and leads to a level ending" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Nd4 Nxd4 exd4 e5 dxc3 exf6 Qxf6 dxc3 Qe5+ Qe2 Qxe2+ Kxe2` | level | +0.02 (c6 Bd3 d5 Be3) | ✅ |
+| Four Knights Game: Spanish Variation, Rubinstein Variation (white) | "5.Ba4, 5.Bc4 and 5.O-O are alternatives" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Nd4` | Ba4 is playable | Ba4 -0.22, within 0.28 of best | ✅ |
+| Four Knights Game: Spanish Variation, Rubinstein Variation (white) | "5.Ba4, 5.Bc4 and 5.O-O are alternatives" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Nd4` | Bc4 is playable | Bc4 +0.00, within 0.06 of best | ✅ |
+| Four Knights Game: Spanish Variation, Rubinstein Variation (white) | "5.Ba4, 5.Bc4 and 5.O-O are alternatives" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Nd4` | O-O is playable | O-O +0.00, within 0.06 of best | ✅ |
+| Four Knights Game: Spanish Variation, Rubinstein Variation (black) | "Against 5.Nxe5?! play …Qe7" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Nd4 Nxe5` | Qe7 is sound | Qe7 -0.37, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Rubinstein Variation (black) | "Against 5.Ba4, …Bc5 and castle" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Nd4 Ba4` | Bc5 is sound | Bc5 +0.00, within 0.25 of best | ✅ |
+| Four Knights Game: Spanish Variation, Rubinstein Variation (black) | "against 5.O-O, …Nxb5 for the bishop pair" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Nd4 O-O` | Nxb5 is sound | Nxb5 +0.02, within 0.02 of best | ✅ |
+| Four Knights Game: Spanish Variation, Rubinstein Variation Accepted (idea) | "a burst of captures leads to a level, queenless position" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Nd4 Nxd4 exd4 e5 dxc3 exf6 Qxf6 dxc3 Qe5+ Qe2 Qxe2+ Kxe2` | level | +0.02 (c6 Bd3 d5 Be3) | ✅ |
+| Four Knights Game: Spanish Variation, Rubinstein Variation Accepted (white) | "Trade queens and recapture with the king" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Nd4 Nxd4 exd4 e5 dxc3 exf6 Qxf6 dxc3 Qe5+ Qe2 Qxe2+` | Kxe2 is sound | Kxe2 +0.07, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Rubinstein Variation Accepted (black) | "Trade queens and play …c6" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Nd4 Nxd4 exd4 e5 dxc3 exf6 Qxf6 dxc3 Qe5+ Qe2` | Qxe2+ is sound | Qxe2+ +0.10, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Rubinstein Variation Accepted (black) | "Don't play 7…cxd2+?" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Nd4 Nxd4 exd4 e5 dxc3 exf6` | cxd2+ is a mistake | cxd2+ loses 2.35 (+2.40; best Qxf6 +0.05) | ✅ |
+| Four Knights Game: Spanish Variation, Rubinstein Variation, Henneberger Variation (white) | "After …Nxb5 Nxb5 c6, Nc3" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Nd4 O-O Nxb5 Nxb5 c6` | Nc3 is sound | Nc3 +0.10, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Rubinstein Variation, Henneberger Variation (black) | "Take the bishop with …Nxb5" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Nd4 O-O` | Nxb5 is sound | Nxb5 +0.02, within 0.02 of best | ✅ |
+| Four Knights Game: Spanish Variation, Rubinstein Variation, Henneberger Variation (black) | "kick the knight with …c6" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Nd4 O-O Nxb5 Nxb5` | c6 is sound | c6 +0.06, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Rubinstein Variation, Marshall Gambit (white) | "Keep the pawn with Nd3 (guarding f2)" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Nd4 Ba4 Bc5 Nxe5 O-O` | Nd3 is sound | Nd3 -0.03, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Rubinstein Variation, Marshall Gambit (white) | "e5 to kick the f6 knight" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Nd4 Ba4 Bc5 Nxe5 O-O Nd3 Bb6` | e5 is sound | e5 +0.00, within 0.00 of best | ✅ |
+| Four Knights Game: Spanish Variation, Rubinstein Variation, Marshall Gambit (black) | "…Bb6, then …d6 to open lines" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Nd4 Ba4 Bc5 Nxe5 O-O Nd3` | Bb6 is sound | Bb6 -0.04, within 0.00 of best | ✅ |
+| Four Knights Game: Scotch Variation (white) | "After …exd4 Nxd4, swap on c6" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 exd4` | Nxd4 is sound | Nxd4 +0.14, within 0.00 of best | ✅ |
+| Four Knights Game: Scotch Variation (white) | "After …exd4 Nxd4, swap on c6" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 exd4 Nxd4 Bb4` | Nxc6 is sound | Nxc6 +0.17, within 0.00 of best | ✅ |
+| Four Knights Game: Scotch Variation (white) | "then Bd3" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 exd4 Nxd4 Bb4 Nxc6 bxc6` | Bd3 is sound | Bd3 +0.13, within 0.00 of best | ✅ |
+| Four Knights Game: Scotch Variation (black) | "4…exd4 is normal" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4` | exd4 is sound | exd4 +0.03, within 0.00 of best | ✅ |
+| Four Knights Game: Scotch Variation (black) | "pin with …Bb4" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 exd4 Nxd4` | Bb4 is sound | Bb4 +0.15, within 0.00 of best | ✅ |
+| Four Knights Game: Scotch Variation (black) | "recapture …bxc6" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 exd4 Nxd4 Bb4 Nxc6` | bxc6 is sound | bxc6 +0.13, within 0.00 of best | ✅ |
+| Four Knights Game: Scotch Variation (black) | "strike with …d5" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 exd4 Nxd4 Bb4 Nxc6 bxc6 Bd3` | d5 is sound | d5 +0.12, within 0.00 of best | ✅ |
+| Four Knights Game: Scotch Variation Accepted (white) | "5.Nxd4, then Nxc6 against …Bb4 or …Bc5" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 exd4` | Nxd4 is sound | Nxd4 +0.14, within 0.00 of best | ✅ |
+| Four Knights Game: Scotch Variation Accepted (white) | "5.Nxd4, then Nxc6 against …Bb4 or …Bc5" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 exd4 Nxd4 Bb4` | Nxc6 is sound | Nxc6 +0.17, within 0.00 of best | ✅ |
+| Four Knights Game: Scotch Variation Accepted (white) | "5.Nxd4, then Nxc6 against …Bb4 or …Bc5" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 exd4 Nxd4 Bc5` | Nxc6 is sound | Nxc6 +0.20, within 0.20 of best | ✅ |
+| Four Knights Game: Scotch Variation Accepted (white) | "If Black swaps on d4, Qxd4 is strong" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 exd4 Nxd4 Nxd4` | Qxd4 is sound | Qxd4 +1.39, within 0.00 of best | ✅ |
+| Four Knights Game: Scotch Variation Accepted (black) | "5…Bb4 is the main line" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 exd4 Nxd4` | Bb4 is sound | Bb4 +0.15, within 0.00 of best | ✅ |
+| Four Knights Game: Scotch Variation Accepted (black) | "…bxc6 and …d5 give you a solid c6–d5 centre" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 exd4 Nxd4 Bb4 Nxc6` | bxc6 is sound | bxc6 +0.13, within 0.00 of best | ✅ |
+| Four Knights Game: Scotch Variation Accepted (black) | "you must play …d6" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 exd4 Nxd4 Nxd4 Qxd4` | d6 is sound | d6 +1.39, within 0.00 of best | ✅ |
+| Four Knights Game: Scotch Variation Accepted (black) | "5…Nxd4?" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 exd4 Nxd4` | Nxd4 is a mistake | Nxd4 loses 1.12 (+1.16; best Bb4 +0.04) | ✅ |
+| Four Knights Game: Scotch Variation Accepted (black) | "6.Qxd4 leaves White clearly better" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 exd4 Nxd4 Nxd4 Qxd4` | White clearly better | +1.15 (d6 Bf4 Be7 f3) | ✅ |
+| Four Knights Game: Scotch Variation Accepted (black) | "or e5 is crushing" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 exd4 Nxd4 Nxd4 Qxd4 Be7` | e5 is sound | e5 +5.49, within 0.00 of best | ✅ |
+| Four Knights Game: Scotch Variation Accepted (black) | "or e5 is crushing" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 exd4 Nxd4 Nxd4 Qxd4 Be7 e5` | White winning | +5.90 (d5 exf6 Bxf6 Qd1) | ✅ |
+| Four Knights Game: Scotch Variation Accepted, Main Line (white) | "Castle, then Bg5 and Qf3 after …cxd5 and …c6" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 exd4 Nxd4 Bb4 Nxc6 bxc6 Bd3 d5 exd5 O-O O-O cxd5` | Bg5 is sound | Bg5 +0.00, within 0.00 of best | ✅ |
+| Four Knights Game: Scotch Variation Accepted, Main Line (white) | "Castle, then Bg5 and Qf3 after …cxd5 and …c6" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 exd4 Nxd4 Bb4 Nxc6 bxc6 Bd3 d5 exd5 O-O O-O cxd5 Bg5 c6` | Qf3 is sound | Qf3 +0.03, within 0.00 of best | ✅ |
+| Four Knights Game: Scotch Variation Accepted, Main Line (white) | "Castle, then Bg5 and Qf3 after …cxd5 and …c6" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 exd4 Nxd4 Bb4 Nxc6 bxc6 Bd3 d5 exd5 O-O` | O-O is sound | O-O +0.06, within 0.00 of best | ✅ |
+| Four Knights Game: Scotch Variation Accepted, Main Line (white) | "9.dxc6 is greedy: after …Re8+" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 exd4 Nxd4 Bb4 Nxc6 bxc6 Bd3 d5 exd5 O-O dxc6` | Re8+ is sound | Re8+ -0.03, within 0.00 of best | ✅ |
+| Four Knights Game: Scotch Variation Accepted, Main Line (white) | "9.dxc6 is greedy: after …Re8+ your king is stuck in the centre and Black is fine" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 exd4 Nxd4 Bb4 Nxc6 bxc6 Bd3 d5 exd5 O-O dxc6` | level | +0.00 (Re8+ Kf1 Qd6 h3) | ✅ |
+| Four Knights Game: Scotch Variation Accepted, Main Line (black) | "Recapture …cxd5" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 exd4 Nxd4 Bb4 Nxc6 bxc6 Bd3 d5 exd5 O-O O-O` | cxd5 is sound | cxd5 +0.10, within 0.00 of best | ✅ |
+| Four Knights Game: Scotch Variation, Belgrade Gambit (white) | "Against …Nxe4, Qe2 leads to sharp tactics" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 exd4 Nd5 Nxe4` | Qe2 is sound | Qe2 -0.16, within 0.10 of best | ✅ |
+| Four Knights Game: Scotch Variation, Belgrade Gambit (black) | "Stay calm: …Be7 and castle" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 exd4 Nd5` | Be7 is sound | Be7 -0.16, within 0.04 of best | ✅ |
+| Four Knights Game: Scotch Variation, Belgrade Gambit (black) | "5…Nxe4 is playable but wild" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 exd4 Nd5` | Nxe4 is sound | Nxe4 -0.11, within 0.09 of best | ✅ |
+| Four Knights Game: Scotch Variation, Krause Gambit (white) | "Take with 5.Nxe5." | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 Bb4` | Nxe5 is sound | Nxe5 +0.36, within 0.00 of best | ✅ |
+| Four Knights Game: Scotch Variation, Krause Gambit (white) | "If …Nxe4? Qg4 hits g7 and the knight" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 Bb4 Nxe5` | Nxe4 is a mistake | Nxe4 loses 0.86 (+1.22; best Bxc3+ +0.36) | ✅ |
+| Four Knights Game: Scotch Variation, Krause Gambit (white) | "If …Nxe4? Qg4 hits g7 and the knight" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 Bb4 Nxe5 Nxe4` | Qg4 is sound | Qg4 +1.18, within 0.00 of best | ✅ |
+| Four Knights Game: Scotch Variation, Krause Gambit (white) | "if …Nxe5? dxe5 and Qg4 again" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 Bb4 Nxe5` | Nxe5 is a mistake | Nxe5 loses 2.74 (+3.10; best Bxc3+ +0.36) | ✅ |
+| Four Knights Game: Scotch Variation, Krause Gambit (white) | "if …Nxe5? dxe5 and Qg4 again" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 Bb4 Nxe5 Nxe5` | dxe5 is sound | dxe5 +3.15, within 0.00 of best | ✅ |
+| Four Knights Game: Scotch Variation, Krause Gambit (white) | "if …Nxe5? dxe5 and Qg4 again" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 Bb4 Nxe5 Nxe5 dxe5 Nxe4` | Qg4 is sound | Qg4 +3.31, within 0.00 of best | ✅ |
+| Four Knights Game: Scotch Variation, Krause Gambit (white) | "Against …Qe7, Qd3 holds e4" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 Bb4 Nxe5 Qe7` | Qd3 is sound | Qd3 +0.42, within 0.00 of best | ✅ |
+| Four Knights Game: Scotch Variation, Krause Gambit (black) | "5…Qe7 (the Leonhardt) is best" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 Bb4 Nxe5` | Qe7 is sound | Qe7 +0.52, within 0.16 of best | ✅ |
+| Four Knights Game: Scotch Variation, Krause Gambit (black) | "5…Nxe4? and 5…Nxe5? both run into Qg4 tactics" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 Bb4 Nxe5` | Nxe4 is a mistake | Nxe4 loses 0.86 (+1.22; best Bxc3+ +0.36) | ✅ |
+| Four Knights Game: Scotch Variation, Krause Gambit (black) | "5…Nxe4? and 5…Nxe5? both run into Qg4 tactics" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 Bb4 Nxe5` | Nxe5 is a mistake | Nxe5 loses 2.74 (+3.10; best Bxc3+ +0.36) | ✅ |
+| Four Knights Game: Scotch Variation, Krause Gambit, Leonhardt Defense (white) | "6.Qd3 Bxc3+ 7.Qxc3 Nxe4 8.Qe3" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 Bb4 Nxe5 Qe7` | Qd3 is sound | Qd3 +0.42, within 0.00 of best | ✅ |
+| Four Knights Game: Scotch Variation, Krause Gambit, Leonhardt Defense (white) | "6.Qd3 Bxc3+ 7.Qxc3 Nxe4 8.Qe3" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 Bb4 Nxe5 Qe7 Qd3 Bxc3+` | Qxc3 is sound | Qxc3 +0.48, within 0.00 of best | ✅ |
+| Four Knights Game: Scotch Variation, Krause Gambit, Leonhardt Defense (white) | "6.Qd3 Bxc3+ 7.Qxc3 Nxe4 8.Qe3" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 Bb4 Nxe5 Qe7 Qd3 Bxc3+ Qxc3 Nxe4` | Qe3 is sound | Qe3 +0.36, within 0.00 of best | ✅ |
+| Four Knights Game: Scotch Variation, Krause Gambit, Leonhardt Defense (black) | "…Bxc3+ and …Nxe4 regain the pawn" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 Bb4 Nxe5 Qe7 Qd3` | Bxc3+ is sound | Bxc3+ +0.42, within 0.00 of best | ✅ |
+| Four Knights Game: Scotch Variation, Krause Gambit, Leonhardt Defense (black) | "…Bxc3+ and …Nxe4 regain the pawn" | `e4 e5 Nf3 Nc6 Nc3 Nf6 d4 Bb4 Nxe5 Qe7 Qd3 Bxc3+ Qxc3` | Nxe4 is sound | Nxe4 +0.29, within 0.00 of best | ✅ |
+| Four Knights Game: Italian Variation (white) | "Against the fork trick play 6.Bd3" | `e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Nxe4 Nxe4 d5` | Bd3 is sound | Bd3 -0.09, within 0.00 of best | ✅ |
+| Four Knights Game: Italian Variation (white) | "never 6.Bxd5?" | `e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Nxe4 Nxe4 d5` | Bxd5 is a mistake | Bxd5 loses 1.36 (-1.47; best Bd3 -0.11) | ✅ |
+| Four Knights Game: Italian Variation (white) | "Against …Bc5, …Bb4 or …Be7, the quiet setup: d3" | `e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5` | d3 is sound | d3 +0.23, within 0.00 of best | ✅ |
+| Four Knights Game: Italian Variation (white) | "Against …Bc5, …Bb4 or …Be7, the quiet setup: d3" | `e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bb4` | d3 is playable | d3 loses 0.37 (+0.17; best Nd5 +0.54) | ✅ |
+| Four Knights Game: Italian Variation (white) | "Against …Bc5, …Bb4 or …Be7, the quiet setup: d3" | `e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Be7` | d3 is sound | d3 +0.29, within 0.14 of best | ✅ |
+| Four Knights Game: Italian Variation (black) | "4…Nxe4! 5.Nxe4 d5 forks bishop and knight" | `e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3` | Nxe4 is sound | Nxe4 -0.18, within 0.00 of best | ✅ |
+| Four Knights Game: Italian Variation (black) | "4…Nxe4! 5.Nxe4 d5 forks bishop and knight" | `e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Nxe4 Nxe4` | d5 is sound | d5 -0.06, within 0.00 of best | ✅ |
+| Four Knights Game: Italian Variation (black) | "wins the piece back with full equality" | `e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Nxe4 Nxe4 d5 Bd3 dxe4 Bxe4` | level | -0.14 (Bd6 d4 exd4 O-O) | ✅ |
+| Four Knights Game: Italian Variation (black) | "Against 6.Bxd5? take with the queen" | `e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Nxe4 Nxe4 d5 Bxd5` | Qxd5 is sound | Qxd5 -1.54, within 0.00 of best | ✅ |
+| Four Knights Game: Italian Variation, Noa Gambit (white) | "objectively Black is much better" | `e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Nxe4 Bxf7+ Kxf7 Nxe4` | Black winning | -1.83 (d5 Ng3 e4 Ng1) | ✅ |
+| Four Knights Game: Italian Variation, Noa Gambit (black) | "Take with the king" | `e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Nxe4 Bxf7+` | Kxf7 is sound | Kxf7 -1.71, within 0.00 of best | ✅ |
+| Four Knights Game: Italian Variation, Noa Gambit (black) | "then …d5 builds a big centre" | `e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Nxe4 Bxf7+ Kxf7 Nxe4` | d5 is sound | d5 -1.62, within 0.00 of best | ✅ |
+| Four Knights Game: Glek System (black) | "Strike with …d5 at once" | `e4 e5 Nf3 Nc6 Nc3 Nf6 g3` | d5 is sound | d5 +0.03, within 0.22 of best | ✅ |
+| Four Knights Game: Glek System (black) | "swap on c3" | `e4 e5 Nf3 Nc6 Nc3 Nf6 g3 d5 exd5 Nxd5 Bg2` | Nxc3 is sound | Nxc3 +0.08, within 0.00 of best | ✅ |
+| Four Knights Game: Glek System (black) | "then …Bd6 to guard e5" | `e4 e5 Nf3 Nc6 Nc3 Nf6 g3 d5 exd5 Nxd5 Bg2 Nxc3 bxc3` | Bd6 is sound | Bd6 +0.10, within 0.10 of best | ✅ |
+| Four Knights Game: Gunsberg Variation (white) | "Against …Bc5, the fork trick works: Nxe5, and d4 forks bishop and knight" | `e4 e5 Nf3 Nc6 Nc3 Nf6 a3 Bc5` | Nxe5 is sound | Nxe5 +0.63, within 0.00 of best | ✅ |
+| Four Knights Game: Gunsberg Variation (white) | "Against …Bc5, the fork trick works: Nxe5, and d4 forks bishop and knight" | `e4 e5 Nf3 Nc6 Nc3 Nf6 a3 Bc5 Nxe5 Nxe5` | d4 is sound | d4 +0.51, within 0.00 of best | ✅ |
+| Four Knights Game: Gunsberg Variation (black) | "hit the centre with …d5" | `e4 e5 Nf3 Nc6 Nc3 Nf6 a3` | d5 is sound | d5 -0.11, within 0.00 of best | ✅ |
+| Four Knights Game: Gunsberg Variation (black) | "Avoid …Bc5 unless you have prepared …d6" | `e4 e5 Nf3 Nc6 Nc3 Nf6 a3` | Bc5 is dubious | Bc5 loses 0.55 (+0.42; best d5 -0.13) | ✅ |
+| Four Knights Game: Halloween Gambit (idea) | "It is unsound." | `e4 e5 Nf3 Nc6 Nc3 Nf6` | Nxe5 is a mistake | Nxe5 loses 2.02 (-1.90; best d4 +0.12) | ✅ |
+| Four Knights Game: Halloween Gambit (white) | "d4, e5 (and often d5 and f4) drive the knights back" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Nxe5 Nxe5` | d4 is sound | d4 -2.11, within 0.00 of best | ✅ |
+| Four Knights Game: Halloween Gambit (black) | "Take, retreat to g6 and g8" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Nxe5` | Nxe5 is sound | Nxe5 -2.62, within 0.00 of best | ✅ |
+| Four Knights Game: Halloween Gambit (black) | "Take, retreat to g6 and g8" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Nxe5 Nxe5 d4` | Ng6 is sound | Ng6 -2.74, within 0.00 of best | ✅ |
+| Four Knights Game: Halloween Gambit (black) | "Take, retreat to g6 and g8" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Nxe5 Nxe5 d4 Ng6 e5` | Ng8 is sound | Ng8 -2.78, within 0.00 of best | ✅ |
+| Four Knights Game: Halloween Gambit (black) | "a piece for two pawns still wins" | `e4 e5 Nf3 Nc6 Nc3 Nf6 Nxe5 Nxe5 d4 Ng6 e5 Ng8 Bc4 d5 Bxd5` | Black winning | -1.80 (N8e7 Be4 c5 d5) | ✅ |
+| King's Gambit Declined: Queen's Knight Defense (white) | "Don't play an early fxe5" | `e4 e5 f4 Nc6` | fxe5 is a blunder | fxe5 loses 7.99 (-7.86; best Nf3 +0.13) | ✅ |
+| Sicilian Defense (white) | "Either open up with Nf3 and d4" | `e4 c5` | Nf3 is sound | Nf3 +0.31, within 0.00 of best | ✅ |
+| Sicilian Defense (white) | "an anti-Sicilian such as 2.c3" | `e4 c5` | c3 is sound | c3 +0.10, within 0.24 of best | ✅ |
+| Sicilian Defense (white) | "2.Nc3" | `e4 c5` | Nc3 is sound | Nc3 +0.26, within 0.08 of best | ✅ |
+| Sicilian Defense (white) | "or 3.Bb5" | `e4 c5 Nf3 Nc6` | Bb5 is sound | Bb5 +0.32, within 0.00 of best | ✅ |
+| Sicilian Defense: Accelerated Dragon (white) | "The critical try is c4 (the Maróczy Bind)" | `e4 c5 Nf3 Nc6 d4 cxd4 Nxd4 g6` | c4 is sound | c4 +0.42, within 0.00 of best | ✅ |
+| Sicilian Defense: Accelerated Dragon (white) | "Otherwise Nc3, Be3 and Bc4, but then Black gets …d5 in one go." | `e4 c5 Nf3 Nc6 d4 cxd4 Nxd4 g6 Nc3 Bg7 Be3 Nf6 Bc4 O-O Bb3` | d5 is sound | d5 +0.21, within 0.00 of best | ✅ |
+| Sicilian Defense: Accelerated Dragon (black) | "Against the Maróczy Bind, play …d6" | `e4 c5 Nf3 Nc6 d4 cxd4 Nxd4 g6 c4 Nf6 Nc3` | d6 is sound | d6 +0.34, within 0.00 of best | ✅ |
+| Sicilian Defense: Accelerated Dragon (black) | "swap knights with …Nxd4" | `e4 c5 Nf3 Nc6 d4 cxd4 Nxd4 g6 c4 Nf6 Nc3 d6 Be2` | Nxd4 is sound | Nxd4 +0.45, within 0.00 of best | ✅ |
+| Sicilian Defense: Alapin Variation (white) | "Play d4 and meet …cxd4 with cxd4" | `e4 c5 c3 e6 d4 cxd4` | cxd4 is sound | cxd4 +0.49, within 0.00 of best | ✅ |
+| Sicilian Defense: Alapin Variation (black) | "2…d5 (recapturing with the queen)" | `e4 c5 c3` | d5 is sound | d5 +0.15, within 0.05 of best | ✅ |
+| Sicilian Defense: Alapin Variation (black) | "2…d5 (recapturing with the queen)" | `e4 c5 c3 d5 exd5` | Qxd5 is sound | Qxd5 +0.15, within 0.00 of best | ✅ |
+| Sicilian Defense: Alapin Variation (black) | "2…Nf6 (3.e5 Nd5)" | `e4 c5 c3` | Nf6 is sound | Nf6 +0.15, within 0.00 of best | ✅ |
+| Sicilian Defense: Alapin Variation (black) | "2…Nf6 (3.e5 Nd5)" | `e4 c5 c3 Nf6 e5` | Nd5 is sound | Nd5 +0.13, within 0.00 of best | ✅ |
+| Sicilian Defense: Bowdler Attack (idea) | "this is an offbeat, slightly toothless sideline" | `e4 c5 Bc4` | level | -0.01 (e6 Nf3 a6 d4) | ✅ |
+| Sicilian Defense: Bowdler Attack (black) | "…e6 and …d5 hit the bishop and take the centre" | `e4 c5 Bc4` | e6 is sound | e6 -0.05, within 0.00 of best | ✅ |
+| Sicilian Defense: Bowdler Attack (black) | "…e6 and …d5 hit the bishop and take the centre" | `e4 c5 Bc4 e6 Nf3` | d5 is sound | d5 +0.07, within 0.11 of best | ✅ |
+| Sicilian Defense: Chekhover Variation (black) | "Gain time on the queen with …Nc6" | `e4 c5 Nf3 d6 d4 cxd4 Qxd4` | Nc6 is sound | Nc6 +0.15, within 0.06 of best | ✅ |
+| Sicilian Defense: Chekhover Variation (white) | "After …Nc6, pin with Bb5" | `e4 c5 Nf3 d6 d4 cxd4 Qxd4 Nc6` | Bb5 is sound | Bb5 +0.12, within 0.00 of best | ✅ |
+| Sicilian Defense: Chekhover Variation (black) | "After Bb5 …Bd7" | `e4 c5 Nf3 d6 d4 cxd4 Qxd4 Nc6 Bb5` | Bd7 is sound | Bd7 +0.19, within 0.14 of best | ✅ |
+| Sicilian Defense: Chekhover Variation (white) | "swap on c6" | `e4 c5 Nf3 d6 d4 cxd4 Qxd4 Nc6 Bb5 Bd7` | Bxc6 is sound | Bxc6 +0.13, within 0.06 of best | ✅ |
+| Sicilian Defense: Closed (black) | "Develop flexibly with …Nc6" | `e4 c5 Nc3` | Nc6 is sound | Nc6 +0.21, within 0.00 of best | ✅ |
+| Sicilian Defense: Closed (black) | "or …e6 and …d5 to hit the centre" | `e4 c5 Nc3` | e6 is sound | e6 +0.36, within 0.14 of best | ✅ |
+| Sicilian Defense: Delayed Alapin Variation, with d6 (idea) | "Black usually hits e4 with the knight instead" | `e4 c5 Nf3 d6 c3` | Nf6 is sound | Nf6 -0.03, within 0.00 of best | ✅ |
+| Sicilian Defense: Delayed Alapin Variation, with d6 (black) | "If White plays d4 anyway, take the pawn with …Nxe4" | `e4 c5 Nf3 d6 c3 Nf6 d4` | Nxe4 is sound | Nxe4 -0.13, within 0.00 of best | ✅ |
+| Sicilian Defense: Delayed Alapin Variation, with d6 (white) | "defend e4 first with Be2 or Bd3" | `e4 c5 Nf3 d6 c3 Nf6` | Be2 is sound | Be2 +0.03, within 0.00 of best | ✅ |
+| Sicilian Defense: Delayed Alapin Variation, with d6 (white) | "defend e4 first with Be2 or Bd3" | `e4 c5 Nf3 d6 c3 Nf6` | Bd3 is sound | Bd3 -0.07, within 0.03 of best | ✅ |
+| Sicilian Defense: Delayed Alapin Variation, with d6 (white) | "4…Nxe4?? loses the knight to 5.Qa4+" | `e4 c5 Nf3 d6 c3 Nf6 Be2` | Nxe4 is a blunder | Nxe4 loses 5.43 (+5.49; best g6 +0.06) | ✅ |
+| Sicilian Defense: Delayed Alapin Variation, with d6 (white) | "4…Nxe4?? loses the knight to 5.Qa4+" | `e4 c5 Nf3 d6 c3 Nf6 Be2 Nxe4 Qa4+` | White winning | +5.44 (Nc6 Qxe4 e5 Bc4) | ✅ |
+| Sicilian Defense: Delayed Alapin Variation, with e6 (black) | "3…d5 or 3…Nf6 (4.e5 Nd5) challenge the centre at once" | `e4 c5 Nf3 e6 c3` | d5 is sound | d5 +0.26, within 0.00 of best | ✅ |
+| Sicilian Defense: Delayed Alapin Variation, with e6 (black) | "3…d5 or 3…Nf6 (4.e5 Nd5) challenge the centre at once" | `e4 c5 Nf3 e6 c3` | Nf6 is sound | Nf6 +0.30, within 0.00 of best | ✅ |
+| Sicilian Defense: Delayed Alapin Variation, with e6 (black) | "3…Nf6 (4.e5 Nd5)" | `e4 c5 Nf3 e6 c3 Nf6 e5` | Nd5 is sound | Nd5 +0.40, within 0.00 of best | ✅ |
+| Sicilian Defense: Delayed Alapin Variation, with e6 (white) | "If Black plays …d5, either push e5" | `e4 c5 Nf3 e6 c3 d5` | e5 is sound | e5 +0.22, within 0.06 of best | ✅ |
+| Sicilian Defense: Delayed Alapin Variation, with e6 (white) | "or allow exd5 positions" | `e4 c5 Nf3 e6 c3 d5` | exd5 is sound | exd5 +0.26, within 0.00 of best | ✅ |
+| Sicilian Defense: Dragon Variation, Accelerated Dragon (white) | "Either 5.c4 (Maróczy Bind)" | `e4 c5 Nf3 d6 d4 cxd4 Nxd4 g6` | c4 is sound | c4 +0.50, within 0.19 of best | ✅ |
+| Sicilian Defense: Dragon Variation, Accelerated Dragon (white) | "or Nc3, Be3, f3, Qd2 and 0-0-0" | `e4 c5 Nf3 d6 d4 cxd4 Nxd4 g6` | Nc3 is sound | Nc3 +0.60, within 0.00 of best | ✅ |
+| Sicilian Defense: Dragon Variation, Accelerated Dragon (black) | "Against the Bind, trade knights with …Nxd4" | `e4 c5 Nf3 d6 d4 cxd4 Nxd4 g6 c4 Nf6 Nc3 Nc6 Be2` | Nxd4 is sound | Nxd4 +0.45, within 0.00 of best | ✅ |
+| Sicilian Defense: French Variation (white) | "Usually 3.d4 for an Open Sicilian" | `e4 c5 Nf3 e6` | d4 is sound | d4 +0.47, within 0.00 of best | ✅ |
+| Sicilian Defense: French Variation (white) | "Quieter options are 3.c3" | `e4 c5 Nf3 e6` | c3 is sound | c3 +0.27, within 0.27 of best | ✅ |
+| Sicilian Defense: French Variation (white) | "a King's Indian Attack set-up with d3, g3 and Bg2" | `e4 c5 Nf3 e6` | d3 is playable | d3 loses 0.45 (+0.09; best d4 +0.54) | ✅ |
+| Sicilian Defense: Hyperaccelerated Dragon (white) | "3.c3 followed by d4" | `e4 c5 Nf3 g6` | c3 is sound | c3 +0.37, within 0.00 of best | ✅ |
+| Sicilian Defense: Hyperaccelerated Dragon (white) | "After 3.d4 cxd4 4.Qxd4 the queen attacks the rook on h8, gaining time." | `e4 c5 Nf3 g6 d4 cxd4` | Qxd4 is sound | Qxd4 +0.37, within 0.00 of best | ✅ |
+| Sicilian Defense: Hyperaccelerated Dragon (black) | "After 3.d4 cxd4 4.Qxd4, play …Nf6" | `e4 c5 Nf3 g6 d4 cxd4 Qxd4` | Nf6 is sound | Nf6 +0.38, within 0.00 of best | ✅ |
+| Sicilian Defense: Hyperaccelerated Dragon (black) | "and …Nc6 with gains of time on the queen" | `e4 c5 Nf3 g6 d4 cxd4 Qxd4 Nf6 e5` | Nc6 is sound | Nc6 +0.15, within 0.00 of best | ✅ |
+| Sicilian Defense: Hyperaccelerated Dragon (black) | "Against c3 set-ups, …d5 hits the centre." | `e4 c5 Nf3 g6 c3` | d5 is sound | d5 +0.34, within 0.00 of best | ✅ |
+| Sicilian Defense: Kramnik Variation (black) | "Develop with …Nc6 and …Nf6" | `e4 c5 Nf3 e6 c4` | Nc6 is sound | Nc6 +0.13, within 0.00 of best | ✅ |
+| Sicilian Defense: Löwenthal Variation (white) | "5.Nb5 heads for d6" | `e4 c5 Nf3 Nc6 d4 cxd4 Nxd4 e5` | Nb5 is sound | Nb5 +0.49, within 0.00 of best | ✅ |
+| Sicilian Defense: Löwenthal Variation (black) | "After 5.Nb5, …a6" | `e4 c5 Nf3 Nc6 d4 cxd4 Nxd4 e5 Nb5` | a6 is sound | a6 +0.64, within 0.19 of best | ✅ |
+| Sicilian Defense: Löwenthal Variation (white) | "After …a6, Nd6+ Bxd6 Qxd6 wins the bishop pair" | `e4 c5 Nf3 Nc6 d4 cxd4 Nxd4 e5 Nb5 a6` | Nd6+ is sound | Nd6+ +0.73, within 0.00 of best | ✅ |
+| Sicilian Defense: Löwenthal Variation (black) | "7.Qxd6 Qf6 offers a queen trade" | `e4 c5 Nf3 Nc6 d4 cxd4 Nxd4 e5 Nb5 a6 Nd6+ Bxd6 Qxd6` | Qf6 is sound | Qf6 +0.94, within 0.26 of best | ✅ |
+| Sicilian Defense: McDonnell Attack (black) | "2…d5 is the principled answer" | `e4 c5 f4` | d5 is sound | d5 -0.05, within 0.00 of best | ✅ |
+| Sicilian Defense: McDonnell Attack (black) | "…e6 with …d5, or …Nc6 with …g6, are also good" | `e4 c5 f4` | e6 is sound | e6 +0.01, within 0.00 of best | ✅ |
+| Sicilian Defense: McDonnell Attack (black) | "…e6 with …d5, or …Nc6 with …g6, are also good" | `e4 c5 f4` | Nc6 is sound | Nc6 +0.10, within 0.11 of best | ✅ |
+| Sicilian Defense: Modern Variations, Main Line (idea) | "asks White to defend it, usually with 5.Nc3" | `e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6` | Nc3 is sound | Nc3 +0.29, within 0.00 of best | ✅ |
+| Sicilian Defense: Modern Variations, Main Line (black) | "Choose …a6 (Najdorf)" | `e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3` | a6 is sound | a6 +0.30, within 0.00 of best | ✅ |
+| Sicilian Defense: Modern Variations, Main Line (black) | "…g6 (Dragon)" | `e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3` | g6 is playable | g6 +0.57, within 0.28 of best | ✅ |
+| Sicilian Defense: Modern Variations, Main Line (black) | "…Nc6 (Classical)" | `e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3` | Nc6 is sound | Nc6 +0.40, within 0.11 of best | ✅ |
+| Sicilian Defense: Modern Variations, Main Line (black) | "…e6 (Scheveningen)" | `e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3` | e6 is playable | e6 loses 0.33 (+0.62; best a6 +0.29) | ✅ |
+| Sicilian Defense: Modern Variations, Tartakower (black) | "Taking with …dxc3 is fine if you develop carefully" | `e4 c5 Nf3 d6 d4 cxd4 c3` | dxc3 is sound | dxc3 -0.09, within 0.00 of best | ✅ |
+| Sicilian Defense: Modern Variations, Tartakower (black) | "simpler is …Nf6, hitting e4" | `e4 c5 Nf3 d6 d4 cxd4 c3` | Nf6 is sound | Nf6 -0.06, within 0.16 of best | ✅ |
+| Sicilian Defense: Modern Variations, Tartakower (black) | "Black is comfortable either way." | `e4 c5 Nf3 d6 d4 cxd4 c3` | level | -0.22 (dxc3 Nxc3 Nc6 Bc4) | ✅ |
+| Sicilian Defense: Modern Variations, Tartakower (black) | "Black is comfortable either way." | `e4 c5 Nf3 d6 d4 cxd4 c3 dxc3 Nxc3` | level | -0.11 (Nc6 Bc4 a6 O-O) | ✅ |
+| Sicilian Defense: Modern Variations (white) | "Usually 3.d4 for the Open Sicilian" | `e4 c5 Nf3 d6` | d4 is sound | d4 +0.36, within 0.00 of best | ✅ |
+| Sicilian Defense: Modern Variations (white) | "play 3.Bb5+ (Moscow Variation)" | `e4 c5 Nf3 d6` | Bb5+ is sound | Bb5+ +0.19, within 0.13 of best | ✅ |
+| Sicilian Defense: Modern Variations (white) | "or 3.c3 (Delayed Alapin)" | `e4 c5 Nf3 d6` | c3 is sound | c3 +0.13, within 0.19 of best | ✅ |
+| Sicilian Defense: Modern Variations (black) | "If White recaptures 4.Qxd4, …Nc6" | `e4 c5 Nf3 d6 d4 cxd4 Qxd4` | Nc6 is sound | Nc6 +0.15, within 0.06 of best | ✅ |
+| Sicilian Defense: Modern Variations (black) | "or …a6 with …Nc6 gains time on the queen" | `e4 c5 Nf3 d6 d4 cxd4 Qxd4` | a6 is playable | a6 loses 0.36 (+0.45; best Nf6 +0.09) | ✅ |
+| Sicilian Defense: Moscow Variation (black) | "3…Bd7 trades bishops and gives a solid game" | `e4 c5 Nf3 d6 Bb5+` | Bd7 is sound | Bd7 +0.15, within 0.00 of best | ✅ |
+| Sicilian Defense: Moscow Variation (black) | "3…Nd7 keeps the bishops for a sharper position" | `e4 c5 Nf3 d6 Bb5+` | Nd7 is sound | Nd7 +0.20, within 0.00 of best | ✅ |
+| Sicilian Defense: Moscow Variation (white) | "After 3…Bd7 4.Bxd7+ Qxd7, play c4 and Nc3" | `e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Qxd7` | c4 is sound | c4 +0.29, within 0.00 of best | ✅ |
+| Sicilian Defense: Moscow Variation (white) | "or 0-0, c3 and d4 for a big centre" | `e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Qxd7` | O-O is sound | O-O +0.12, within 0.11 of best | ✅ |
+| Sicilian Defense: Moscow Variation (idea) | "White usually trades the light-squared bishops and gets an easy position" | `e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Qxd7` | White slightly better | +0.23 (c4 Nc6 Nc3 g6) | ✅ |
+| Sicilian Defense: Nyezhmetdinov-Rossolimo Attack (black) | "Either …g6, …Bg7 and …Nf6" | `e4 c5 Nf3 Nc6 Bb5` | g6 is sound | g6 +0.36, within 0.00 of best | ✅ |
+| Sicilian Defense: Nyezhmetdinov-Rossolimo Attack (black) | "or …e6 and …Nge7" | `e4 c5 Nf3 Nc6 Bb5` | e6 is sound | e6 +0.31, within 0.00 of best | ✅ |
+| Sicilian Defense: O'Kelly Variation (white) | "3.c3 or 3.c4, positions where …a6 is a wasted move" | `e4 c5 Nf3 a6` | c3 is sound | c3 +0.35, within 0.26 of best | ✅ |
+| Sicilian Defense: O'Kelly Variation (white) | "3.c3 or 3.c4, positions where …a6 is a wasted move" | `e4 c5 Nf3 a6` | c4 is sound | c4 +0.51, within 0.00 of best | ✅ |
+| Sicilian Defense: O'Kelly Variation (idea) | "If White plays the normal 3.d4, Black follows with …Nf6" | `e4 c5 Nf3 a6 d4 cxd4 Nxd4` | Nf6 is sound | Nf6 +0.24, within 0.00 of best | ✅ |
+| Sicilian Defense: O'Kelly Variation (black) | "After 3.d4 cxd4 4.Nxd4 Nf6 5.Nc3, play …e5 to hit the knight" | `e4 c5 Nf3 a6 d4 cxd4 Nxd4 Nf6 Nc3` | e5 is sound | e5 +0.09, within 0.00 of best | ✅ |
+| Sicilian Defense: O'Kelly Variation (black) | "Against 3.c3, hit e4 with …d5 or …Nf6" | `e4 c5 Nf3 a6 c3` | d5 is sound | d5 +0.36, within 0.00 of best | ✅ |
+| Sicilian Defense: O'Kelly Variation (black) | "Against 3.c3, hit e4 with …d5 or …Nf6" | `e4 c5 Nf3 a6 c3` | Nf6 is sound | Nf6 +0.37, within 0.00 of best | ✅ |
+| Sicilian Defense: O'Kelly Variation (black) | "Against 3.c4, play …e6" | `e4 c5 Nf3 a6 c4` | e6 is sound | e6 +0.65, within 0.23 of best | ✅ |
+| Sicilian Defense: Old Sicilian (white) | "3.d4 for the Open Sicilian" | `e4 c5 Nf3 Nc6` | d4 is sound | d4 +0.23, within 0.04 of best | ✅ |
+| Sicilian Defense: Old Sicilian (white) | "avoid it with 3.Bb5 (Rossolimo)" | `e4 c5 Nf3 Nc6` | Bb5 is sound | Bb5 +0.32, within 0.00 of best | ✅ |
+| Sicilian Defense: Old Sicilian (white) | "3.Nc3 or 3.c3" | `e4 c5 Nf3 Nc6` | Nc3 is sound | Nc3 +0.32, within 0.00 of best | ✅ |
+| Sicilian Defense: Old Sicilian (white) | "3.Nc3 or 3.c3" | `e4 c5 Nf3 Nc6` | c3 is sound | c3 +0.14, within 0.13 of best | ✅ |
+| Sicilian Defense: Old Sicilian (black) | "After 3.d4 cxd4 4.Nxd4, choose …Nf6" | `e4 c5 Nf3 Nc6 d4 cxd4 Nxd4` | Nf6 is sound | Nf6 +0.20, within 0.00 of best | ✅ |
+| Sicilian Defense: Old Sicilian (black) | "…e6 (Taimanov)" | `e4 c5 Nf3 Nc6 d4 cxd4 Nxd4` | e6 is sound | e6 +0.41, within 0.19 of best | ✅ |
+| Sicilian Defense: Old Sicilian (black) | "…g6 (Accelerated Dragon)" | `e4 c5 Nf3 Nc6 d4 cxd4 Nxd4` | g6 is sound | g6 +0.36, within 0.14 of best | ✅ |
+| Sicilian Defense: Old Sicilian (black) | "…g6 (Accelerated Dragon) or …e5" | `e4 c5 Nf3 Nc6 d4 cxd4 Nxd4` | e5 is sound | e5 +0.33, within 0.11 of best | ✅ |
+| Sicilian Defense: Old Sicilian (black) | "…Nf6 (then …e5 or …d6)" | `e4 c5 Nf3 Nc6 d4 cxd4 Nxd4 Nf6 Nc3` | e5 is sound | e5 +0.24, within 0.00 of best | ✅ |
+| Sicilian Defense: Old Sicilian (black) | "…Nf6 (then …e5 or …d6)" | `e4 c5 Nf3 Nc6 d4 cxd4 Nxd4 Nf6 Nc3` | d6 is sound | d6 +0.34, within 0.10 of best | ✅ |
+| Sicilian Defense: Old Sicilian (black) | "Against 3.Bb5, …g6 or …e6 are solid." | `e4 c5 Nf3 Nc6 Bb5` | g6 is sound | g6 +0.36, within 0.00 of best | ✅ |
+| Sicilian Defense: Old Sicilian (black) | "Against 3.Bb5, …g6 or …e6 are solid." | `e4 c5 Nf3 Nc6 Bb5` | e6 is sound | e6 +0.31, within 0.00 of best | ✅ |
+| Sicilian Defense: Open (white) | "c4 (Maróczy Bind) is an option against …g6" | `e4 c5 Nf3 Nc6 d4 cxd4 Nxd4 g6` | c4 is sound | c4 +0.42, within 0.00 of best | ✅ |
+| Sicilian Defense: Open (black) | "Choose …Nf6 (Sveshnikov or Classical)" | `e4 c5 Nf3 Nc6 d4 cxd4 Nxd4` | Nf6 is sound | Nf6 +0.20, within 0.00 of best | ✅ |
+| Sicilian Defense: Open (black) | "…e6 (Taimanov)" | `e4 c5 Nf3 Nc6 d4 cxd4 Nxd4` | e6 is sound | e6 +0.41, within 0.19 of best | ✅ |
+| Sicilian Defense: Open (black) | "…g6 (Accelerated Dragon)" | `e4 c5 Nf3 Nc6 d4 cxd4 Nxd4` | g6 is sound | g6 +0.36, within 0.14 of best | ✅ |
+| Sicilian Defense: Open (black) | "…g6 (Accelerated Dragon) or …e5" | `e4 c5 Nf3 Nc6 d4 cxd4 Nxd4` | e5 is sound | e5 +0.33, within 0.11 of best | ✅ |
+| Sicilian Defense: Prins Variation (black) | "Strike at once with 5…e5, chasing the knight" | `e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 f3` | e5 is sound | e5 +0.05, within 0.00 of best | ✅ |
+| Sicilian Defense: Prins Variation (black) | "with no knight on c3, …d5 becomes possible" | `e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 f3 e5 Nb3` | d5 is sound | d5 +0.02, within 0.00 of best | ✅ |
+| Sicilian Defense: Smith-Morra Gambit (black) | "Accept and develop carefully" | `e4 c5 d4 cxd4 c3` | dxc3 is sound | dxc3 -0.16, within 0.00 of best | ✅ |
+| Sicilian Defense: Smith-Morra Gambit (black) | "Declining with 3…Nf6 or 3…d5" | `e4 c5 d4 cxd4 c3` | Nf6 is playable | Nf6 loses 0.36 (+0.20; best dxc3 -0.16) | ✅ |
+| Sicilian Defense: Smith-Morra Gambit (black) | "Declining with 3…Nf6 or 3…d5" | `e4 c5 d4 cxd4 c3` | d5 is playable | d5 loses 0.39 (+0.23; best dxc3 -0.16) | ✅ |
+| Sicilian Defense: Taimanov Variation (white) | "5.Nc3 with Be3" | `e4 c5 Nf3 Nc6 d4 cxd4 Nxd4 e6` | Nc3 is sound | Nc3 +0.32, within 0.00 of best | ✅ |
+| Sicilian Defense: Taimanov Variation (white) | "or 5.Nb5 d6 6.c4 for a Maróczy bind" | `e4 c5 Nf3 Nc6 d4 cxd4 Nxd4 e6` | Nb5 is sound | Nb5 +0.14, within 0.24 of best | ✅ |
+| Sicilian Defense: Taimanov Variation (white) | "or 5.Nb5 d6 6.c4 for a Maróczy bind" | `e4 c5 Nf3 Nc6 d4 cxd4 Nxd4 e6 Nb5 d6` | c4 is sound | c4 +0.15, within 0.00 of best | ✅ |
+| Sicilian Defense: Taimanov Variation (black) | "…a6, …Qc7 and …Nf6" | `e4 c5 Nf3 Nc6 d4 cxd4 Nxd4 e6 Nc3` | a6 is sound | a6 +0.39, within 0.00 of best | ✅ |
+| French Defense (white) | "Build a centre with d4" | `e4 e6` | d4 is sound | d4 +0.32, within 0.00 of best | ✅ |
+| French Defense: Advance Variation (black) | "…c5, …Nc6, …Qb6" | `e4 e6 d4 d5 e5` | c5 is sound | c5 +0.30, within 0.00 of best | ✅ |
+| French Defense: Advance Variation (white) | "c3 and Nf3 to hold d4" | `e4 e6 d4 d5 e5 c5` | c3 is sound | c3 +0.28, within 0.00 of best | ✅ |
+| French Defense: Advance Variation (black) | "…Nxd4?? Nxd4 Qxd4 loses the queen to Bb5+" | `e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Bd3 cxd4 cxd4 Nxd4 Nxd4` | Qxd4 is a blunder | Qxd4 loses 4.14 (+9.52; best Bc5 +5.38) | ✅ |
+| French Defense: Advance Variation (black) | "…Nxd4?? Nxd4 Qxd4 loses the queen to Bb5+" | `e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Bd3 cxd4 cxd4 Nxd4 Nxd4 Qxd4 Bb5+` | White winning | +9.36 (Bd7 Bxd7+ Kxd7 Qxd4) | ✅ |
+| French Defense: Exchange Variation (black) | "The position is level" | `e4 e6 d4 d5 exd5 exd5` | level | +0.21 (Nf3 Nf6 Bd3 c5) | ✅ |
+| French Defense: Franco-Sicilian Defense (white) | "3.Nf3 cxd4 4.Nxd4 gives an Open Sicilian" | `e4 c5 d4 e6` | Nf3 is sound | Nf3 +0.51, within 0.12 of best | ✅ |
+| French Defense: Franco-Sicilian Defense (white) | "3.d5 grabs space" | `e4 c5 d4 e6` | d5 is sound | d5 +0.64, within 0.00 of best | ✅ |
+| French Defense: Franco-Sicilian Defense (black) | "Answer Nf3 with …cxd4" | `e4 c5 d4 e6 Nf3` | cxd4 is sound | cxd4 +0.50, within 0.00 of best | ✅ |
+| French Defense: Franco-Sicilian Defense (black) | "or play …d5 for French-type positions" | `e4 c5 d4 e6 Nf3` | d5 is playable | d5 loses 0.36 (+0.83; best cxd4 +0.47) | ✅ |
+| French Defense: Franco-Sicilian Defense (black) | "Against 3.d5, …exd5 exd5 and …d6" | `e4 c5 d4 e6 d5` | exd5 is sound | exd5 +0.99, within 0.26 of best | ✅ |
+| French Defense: Franco-Sicilian Defense (black) | "Against 3.d5, …exd5 exd5 and …d6" | `e4 c5 d4 e6 d5 exd5 exd5` | d6 is sound | d6 +0.85, within 0.00 of best | ✅ |
+| French Defense: King's Indian Attack (black) | "…d5, …c5, …Nc6" | `e4 e6 d3` | d5 is sound | d5 -0.02, within 0.00 of best | ✅ |
+| French Defense: Knight Variation (black) | "2…d5 and the normal French plan" | `e4 e6 Nf3` | d5 is sound | d5 +0.23, within 0.00 of best | ✅ |
+| French Defense: Knight Variation (white) | "Answer …d5 with 3.Nc3, 3.e5 or 3.exd5" | `e4 e6 Nf3 d5` | Nc3 is sound | Nc3 +0.05, within 0.11 of best | ✅ |
+| French Defense: Knight Variation (white) | "Answer …d5 with 3.Nc3, 3.e5 or 3.exd5" | `e4 e6 Nf3 d5` | e5 is sound | e5 +0.31, within 0.00 of best | ✅ |
+| French Defense: Knight Variation (white) | "Answer …d5 with 3.Nc3, 3.e5 or 3.exd5" | `e4 e6 Nf3 d5` | exd5 is sound | exd5 +0.30, within 0.00 of best | ✅ |
+| French Defense: Knight Variation (black) | "If White pushes e5 without d4, hit it with …c5" | `e4 e6 Nf3 d5 e5` | c5 is sound | c5 +0.27, within 0.00 of best | ✅ |
+| French Defense: La Bourdonnais Variation (black) | "2…d5, and if 3.e5" | `e4 e6 f4` | d5 is sound | d5 -0.09, within 0.00 of best | ✅ |
+| French Defense: La Bourdonnais Variation (black) | "if 3.e5, then …c5" | `e4 e6 f4 d5 e5` | c5 is sound | c5 -0.04, within 0.22 of best | ✅ |
+| French Defense: Paulsen Variation (black) | "Pin with …Bb4" | `e4 e6 d4 d5 Nc3` | Bb4 is sound | Bb4 +0.68, within 0.20 of best | ✅ |
+| French Defense: Paulsen Variation (black) | "or play …Nf6 to pressure e4" | `e4 e6 d4 d5 Nc3` | Nf6 is sound | Nf6 +0.44, within 0.00 of best | ✅ |
+| French Defense: Paulsen Variation (black) | "…dxe4 gives up the centre for a solid, freer game" | `e4 e6 d4 d5 Nc3` | dxe4 is sound | dxe4 +0.47, within 0.00 of best | ✅ |
+| French Defense: Paulsen Variation (white) | "Against …Bb4, e5 and a3 to win the bishop pair" | `e4 e6 d4 d5 Nc3 Bb4` | e5 is sound | e5 +0.60, within 0.00 of best | ✅ |
+| French Defense: Paulsen Variation (white) | "Against …Bb4, e5 and a3 to win the bishop pair" | `e4 e6 d4 d5 Nc3 Bb4 e5 c5` | a3 is sound | a3 +0.62, within 0.00 of best | ✅ |
+| French Defense: Paulsen Variation (white) | "Against …Nf6, Bg5 or e5" | `e4 e6 d4 d5 Nc3 Nf6` | Bg5 is sound | Bg5 +0.35, within 0.15 of best | ✅ |
+| French Defense: Paulsen Variation (white) | "Against …Nf6, Bg5 or e5" | `e4 e6 d4 d5 Nc3 Nf6` | e5 is sound | e5 +0.40, within 0.00 of best | ✅ |
+| French Defense: Paulsen Variation (white) | "Against …dxe4, Nxe4" | `e4 e6 d4 d5 Nc3 dxe4` | Nxe4 is sound | Nxe4 +0.45, within 0.00 of best | ✅ |
+| French Defense: Queen's Knight (black) | "2…d5 and the normal French plan" | `e4 e6 Nc3` | d5 is sound | d5 +0.44, within 0.00 of best | ✅ |
+| French Defense: Queen's Knight (idea) | "After 2…d5, White can transpose with 3.d4 or play 3.Nf3 (Two Knights)" | `e4 e6 Nc3 d5` | d4 is sound | d4 +0.42, within 0.00 of best | ✅ |
+| French Defense: Queen's Knight (idea) | "After 2…d5, White can transpose with 3.d4 or play 3.Nf3 (Two Knights)" | `e4 e6 Nc3 d5` | Nf3 is playable | Nf3 loses 0.37 (-0.01; best d4 +0.36) | ✅ |
+| French Defense: Queen's Knight (black) | "If White avoids d4, hit e4 with …dxe4 or …Nf6, or grab space with …d4." | `e4 e6 Nc3 d5 Nf3` | dxe4 is playable | dxe4 loses 0.47 (+0.44; best d4 -0.03) | ✅ |
+| French Defense: Queen's Knight (black) | "If White avoids d4, hit e4 with …dxe4 or …Nf6, or grab space with …d4." | `e4 e6 Nc3 d5 Nf3` | Nf6 is sound | Nf6 +0.17, within 0.20 of best | ✅ |
+| French Defense: Queen's Knight (black) | "If White avoids d4, hit e4 with …dxe4 or …Nf6, or grab space with …d4." | `e4 e6 Nc3 d5 Nf3` | d4 is sound | d4 +0.06, within 0.00 of best | ✅ |
+| French Defense: Schlechter Variation (idea) | "It is playable but slightly clumsy" | `e4 e6 d4 d5 Bd3` | level | -0.10 (dxe4 Bxe4 Nf6 Bf3) | ✅ |
+| French Defense: Schlechter Variation (black) | "3…c5 hits d4 at once" | `e4 e6 d4 d5 Bd3` | c5 is sound | c5 +0.16, within 0.26 of best | ✅ |
+| French Defense: Schlechter Variation (black) | "…dxe4 Bxe4 …Nf6 gains time on the bishop" | `e4 e6 d4 d5 Bd3` | dxe4 is sound | dxe4 -0.08, within 0.00 of best | ✅ |
+| French Defense: Schlechter Variation (black) | "…dxe4 Bxe4 …Nf6 gains time on the bishop" | `e4 e6 d4 d5 Bd3 dxe4 Bxe4` | Nf6 is sound | Nf6 -0.07, within 0.00 of best | ✅ |
+| French Defense: Steiner Variation (black) | "2…d5 opens the position" | `e4 e6 c4` | d5 is sound | d5 -0.03, within 0.00 of best | ✅ |
+| French Defense: Steiner Variation (white) | "If …d5 comes, exchange on d5" | `e4 e6 c4 d5` | exd5 is sound | exd5 +0.00, within 0.00 of best | ✅ |
+| French Defense: Tarrasch Variation (black) | "3…c5 opens the centre" | `e4 e6 d4 d5 Nd2` | c5 is sound | c5 +0.22, within 0.00 of best | ✅ |
+| French Defense: Tarrasch Variation (black) | "3…Nf6 4.e5 Nfd7 gives a locked chain" | `e4 e6 d4 d5 Nd2` | Nf6 is sound | Nf6 +0.48, within 0.27 of best | ✅ |
+| French Defense: Tarrasch Variation (black) | "3…Nf6 4.e5 Nfd7 gives a locked chain" | `e4 e6 d4 d5 Nd2 Nf6 e5` | Nfd7 is sound | Nfd7 +0.44, within 0.00 of best | ✅ |
+| French Defense: Tarrasch Variation (black) | "then …c5, …Nc6, …Qb6 and …f6" | `e4 e6 d4 d5 Nd2 Nf6 e5 Nfd7 Bd3` | c5 is sound | c5 +0.42, within 0.00 of best | ✅ |
+| French Defense: Two Knights Variation (black) | "3…Nf6 heads for normal French play" | `e4 e6 Nf3 d5 Nc3` | Nf6 is sound | Nf6 +0.17, within 0.20 of best | ✅ |
+| French Defense: Two Knights Variation (black) | "if 4.e5, …Nfd7" | `e4 e6 Nf3 d5 Nc3 Nf6 e5` | Nfd7 is sound | Nfd7 +0.09, within 0.00 of best | ✅ |
+| French Defense: Two Knights Variation (black) | "3…d4 grabs space and gains time on the c3 knight" | `e4 e6 Nf3 d5 Nc3` | d4 is sound | d4 +0.06, within 0.00 of best | ✅ |
+| Caro-Kann Defense (white) | "Build a centre with d4" | `e4 c6` | d4 is sound | d4 +0.28, within 0.00 of best | ✅ |
+| Caro-Kann Defense (white) | "e5 (Advance) for space" | `e4 c6 d4 d5` | e5 is sound | e5 +0.30, within 0.00 of best | ✅ |
+| Caro-Kann Defense (white) | "Nc3 or Nd2 for quick development" | `e4 c6 d4 d5` | Nc3 is sound | Nc3 +0.38, within 0.00 of best | ✅ |
+| Caro-Kann Defense (white) | "Nc3 or Nd2 for quick development" | `e4 c6 d4 d5` | Nd2 is sound | Nd2 +0.45, within 0.00 of best | ✅ |
+| Caro-Kann Defense (white) | "or exd5 for a calmer structure" | `e4 c6 d4 d5` | exd5 is sound | exd5 +0.20, within 0.09 of best | ✅ |
+| Caro-Kann Defense: Accelerated Panov Attack (black) | "2…d5 3.exd5 cxd5 4.cxd5 Nf6 regains the pawn" | `e4 c6 c4` | d5 is sound | d5 +0.19, within 0.00 of best | ✅ |
+| Caro-Kann Defense: Accelerated Panov Attack (black) | "2…d5 3.exd5 cxd5 4.cxd5 Nf6 regains the pawn" | `e4 c6 c4 d5 exd5 cxd5 cxd5` | Nf6 is sound | Nf6 +0.06, within 0.00 of best | ✅ |
+| Caro-Kann Defense: Accelerated Panov Attack (black) | "2…e5 is a playable alternative" | `e4 c6 c4` | e5 is playable | e5 loses 0.31 (+0.57; best d5 +0.26) | ✅ |
+| Caro-Kann Defense: Advance Variation (black) | "…Bf5, …e6, then …c5 against d4" | `e4 c6 d4 d5 e5` | Bf5 is sound | Bf5 +0.49, within 0.04 of best | ✅ |
+| Caro-Kann Defense: Advance Variation (black) | "…Bf5, …e6, then …c5 against d4" | `e4 c6 d4 d5 e5 Bf5 Nf3 e6 Be2` | c5 is sound | c5 +0.42, within 0.00 of best | ✅ |
+| Caro-Kann Defense: Advance Variation (white) | "Calmly with Nf3, Be2, 0-0 and c3" | `e4 c6 d4 d5 e5 Bf5` | Nf3 is sound | Nf3 +0.40, within 0.00 of best | ✅ |
+| Caro-Kann Defense: Advance Variation (white) | "aggressively with Nc3 and g4 or h4" | `e4 c6 d4 d5 e5 Bf5` | Nc3 is playable | Nc3 loses 0.33 (+0.09; best Nf3 +0.42) | ✅ |
+| Caro-Kann Defense: Advance Variation (white) | "aggressively with Nc3 and g4 or h4" | `e4 c6 d4 d5 e5 Bf5` | h4 is sound | h4 +0.32, within 0.10 of best | ✅ |
+| Caro-Kann Defense: Breyer Variation (black) | "Take the centre with …d5 and …e5" | `e4 c6 d3` | d5 is sound | d5 +0.28, within 0.00 of best | ✅ |
+| Caro-Kann Defense: Endgame Offer (black) | "…dxe4 dxe4 Qxd1+ Kxd1 gives a safe, level endgame" | `e4 c6 Nf3 d5 d3` | dxe4 is sound | dxe4 +0.12, within 0.00 of best | ✅ |
+| Caro-Kann Defense: Endgame Offer (black) | "…dxe4 dxe4 Qxd1+ Kxd1 gives a safe, level endgame" | `e4 c6 Nf3 d5 d3 dxe4 dxe4 Qxd1+ Kxd1` | level | +0.20 (Nf6 Nbd2 Nbd7 Ne1) | ✅ |
+| Caro-Kann Defense: Endgame Offer (white) | "White accepts that …dxe4 and a queen trade leads to a level endgame." | `e4 c6 Nf3 d5 d3 dxe4 dxe4 Qxd1+ Kxd1` | level | +0.20 (Nf6 Nbd2 Nbd7 Ne1) | ✅ |
+| Caro-Kann Defense: Endgame Offer (black) | "Or keep queens on with …Bg4" | `e4 c6 Nf3 d5 d3` | Bg4 is sound | Bg4 +0.37, within 0.15 of best | ✅ |
+| Caro-Kann Defense: Exchange Variation (white) | "Bd3, c3, Bf4" | `e4 c6 d4 d5 exd5 cxd5` | Bd3 is sound | Bd3 +0.15, within 0.00 of best | ✅ |
+| Caro-Kann Defense: Exchange Variation (black) | "…Nc6, …Nf6, …Bg4 and …e6" | `e4 c6 d4 d5 exd5 cxd5 Bd3` | Nc6 is sound | Nc6 +0.16, within 0.00 of best | ✅ |
+| Caro-Kann Defense: Hillbilly Attack (black) | "2…d5 gains time on the bishop" | `e4 c6 Bc4` | d5 is sound | d5 -0.16, within 0.00 of best | ✅ |
+| Caro-Kann Defense: Hillbilly Attack (white) | "exchange with 3.exd5 cxd5" | `e4 c6 Bc4 d5` | exd5 is sound | exd5 -0.29, within 0.00 of best | ✅ |
+| Caro-Kann Defense: Hillbilly Attack (white) | "then retreat the bishop or check on b5" | `e4 c6 Bc4 d5 exd5 cxd5` | Bb3 is sound | Bb3 -0.25, within 0.00 of best | ✅ |
+| Caro-Kann Defense: Hillbilly Attack (white) | "then retreat the bishop or check on b5" | `e4 c6 Bc4 d5 exd5 cxd5` | Bb5+ is sound | Bb5+ -0.30, within 0.07 of best | ✅ |
+| Caro-Kann Defense: Hillbilly Attack (white) | "Retreating 3.Bb3 at once lets …dxe4 give Black the better game." | `e4 c6 Bc4 d5` | Bb3 is dubious | Bb3 loses 0.55 (-0.80; best exd5 -0.25) | ✅ |
+| Caro-Kann Defense: Hillbilly Attack (white) | "Retreating 3.Bb3 at once lets …dxe4 give Black the better game." | `e4 c6 Bc4 d5 Bb3` | dxe4 is sound | dxe4 -0.81, within 0.00 of best | ✅ |
+| Caro-Kann Defense: Maróczy Variation (black) | "3…e6 followed by …c5 attacks d4" | `e4 c6 d4 d5 f3` | e6 is sound | e6 +0.33, within 0.00 of best | ✅ |
+| Caro-Kann Defense: Maróczy Variation (black) | "or …g6 and …Bg7 aims at d4" | `e4 c6 d4 d5 f3` | g6 is sound | g6 +0.38, within 0.15 of best | ✅ |
+| Caro-Kann Defense: Maróczy Variation (white) | "If …dxe4 fxe4, use the half-open f-file" | `e4 c6 d4 d5 f3 dxe4` | fxe4 is sound | fxe4 +0.33, within 0.00 of best | ✅ |
+| Caro-Kann Defense: Modern Variation (idea) | "usually leads to 3…dxe4 4.Nxe4" | `e4 c6 d4 d5 Nd2` | dxe4 is sound | dxe4 +0.42, within 0.00 of best | ✅ |
+| Caro-Kann Defense: Modern Variation (idea) | "Black chooses …Bf5, …Nd7 or …Nf6" | `e4 c6 d4 d5 Nd2 dxe4 Nxe4` | Bf5 is sound | Bf5 +0.36, within 0.06 of best | ✅ |
+| Caro-Kann Defense: Modern Variation (idea) | "Black chooses …Bf5, …Nd7 or …Nf6" | `e4 c6 d4 d5 Nd2 dxe4 Nxe4` | Nd7 is sound | Nd7 +0.48, within 0.18 of best | ✅ |
+| Caro-Kann Defense: Modern Variation (idea) | "Black chooses …Bf5, …Nd7 or …Nf6" | `e4 c6 d4 d5 Nd2 dxe4 Nxe4` | Nf6 is sound | Nf6 +0.28, within 0.00 of best | ✅ |
+| Caro-Kann Defense: Modern Variation (white) | "Against …Bf5, chase the bishop with Ng3" | `e4 c6 d4 d5 Nd2 dxe4 Nxe4 Bf5` | Ng3 is sound | Ng3 +0.28, within 0.00 of best | ✅ |
+| Caro-Kann Defense: Modern Variation (white) | "chase the bishop with Ng3, h4 and h5" | `e4 c6 d4 d5 Nd2 dxe4 Nxe4 Bf5 Ng3 Bg6` | h4 is sound | h4 +0.24, within 0.00 of best | ✅ |
+| Caro-Kann Defense: Modern Variation (white) | "Against …Nd7, develop quickly with Bc4 or Nf3" | `e4 c6 d4 d5 Nd2 dxe4 Nxe4 Nd7` | Bc4 is sound | Bc4 +0.27, within 0.10 of best | ✅ |
+| Caro-Kann Defense: Modern Variation (white) | "Against …Nd7, develop quickly with Bc4 or Nf3" | `e4 c6 d4 d5 Nd2 dxe4 Nxe4 Nd7` | Nf3 is sound | Nf3 +0.32, within 0.05 of best | ✅ |
+| Caro-Kann Defense: Modern Variation (black) | "…Nd7 first prepares …Ngf6 without doubled pawns after a knight swap." | `e4 c6 d4 d5 Nd2 dxe4 Nxe4 Nd7 Nf3` | Ngf6 is sound | Ngf6 +0.38, within 0.00 of best | ✅ |
+| Caro-Kann Defense: Two Knights Attack (idea) | "The usual answer is …Bg4" | `e4 c6 Nf3 d5 Nc3` | Bg4 is sound | Bg4 +0.36, within 0.07 of best | ✅ |
+| Caro-Kann Defense: Two Knights Attack (white) | "h3 to ask the g4 bishop to decide" | `e4 c6 Nf3 d5 Nc3 Bg4` | h3 is sound | h3 +0.25, within 0.00 of best | ✅ |
+| Caro-Kann Defense: Two Knights Attack (idea) | "after h3 Black often gives up the bishop for the knight" | `e4 c6 Nf3 d5 Nc3 Bg4 h3` | Bxf3 is sound | Bxf3 +0.34, within 0.00 of best | ✅ |
+| Caro-Kann Defense: Two Knights Attack (white) | "After …Bxf3, recapture with the queen" | `e4 c6 Nf3 d5 Nc3 Bg4 h3 Bxf3` | Qxf3 is sound | Qxf3 +0.22, within 0.00 of best | ✅ |
+| Caro-Kann Defense: Two Knights Attack (black) | "3…Bg4 4.h3 Bxf3 5.Qxf3 e6" | `e4 c6 Nf3 d5 Nc3 Bg4 h3 Bxf3 Qxf3` | e6 is sound | e6 +0.27, within 0.00 of best | ✅ |
+| Scandinavian Defense (white) | "2.exd5, then Nc3 to gain time on the queen" | `e4 d5` | exd5 is sound | exd5 +0.62, within 0.00 of best | ✅ |
+| Scandinavian Defense (white) | "2.exd5, then Nc3 to gain time on the queen" | `e4 d5 exd5 Qxd5` | Nc3 is sound | Nc3 +0.66, within 0.00 of best | ✅ |
+| Scandinavian Defense (idea) | "Black recaptures with the queen (…Qxd5) or the knight (…Nf6)" | `e4 d5 exd5` | Qxd5 is sound | Qxd5 +0.68, within 0.00 of best | ✅ |
+| Scandinavian Defense (idea) | "Black recaptures with the queen (…Qxd5) or the knight (…Nf6)" | `e4 d5 exd5` | Nf6 is sound | Nf6 +0.70, within 0.00 of best | ✅ |
+| Scandinavian Defense (black) | "Get the queen to safety (a5, d6 or d8)" | `e4 d5 exd5 Qxd5 Nc3` | Qa5 is sound | Qa5 +0.66, within 0.00 of best | ✅ |
+| Scandinavian Defense (black) | "Get the queen to safety (a5, d6 or d8)" | `e4 d5 exd5 Qxd5 Nc3` | Qd6 is sound | Qd6 +0.71, within 0.00 of best | ✅ |
+| Scandinavian Defense (black) | "Get the queen to safety (a5, d6 or d8)" | `e4 d5 exd5 Qxd5 Nc3` | Qd8 is sound | Qd8 +0.72, within 0.00 of best | ✅ |
+| Scandinavian Defense: Blackburne-Kloosterboer Gambit (idea) | "It is dubious" | `e4 d5 exd5 c6` | White clearly better | +0.79 (dxc6 Nxc6 Nc3 a6) | ✅ |
+| Scandinavian Defense: Blackburne-Kloosterboer Gambit (white) | "3.dxc6 Nxc6, then Nf3" | `e4 d5 exd5 c6` | dxc6 is sound | dxc6 +0.84, within 0.00 of best | ✅ |
+| Scandinavian Defense: Blackburne-Kloosterboer Gambit (white) | "3.dxc6 Nxc6, then Nf3" | `e4 d5 exd5 c6 dxc6 Nxc6` | Nf3 is sound | Nf3 +0.89, within 0.00 of best | ✅ |
+| Scandinavian Defense: Blackburne-Kloosterboer Gambit (black) | "After 3.dxc6 Nxc6, develop fast with …e5" | `e4 d5 exd5 c6 dxc6 Nxc6 Nf3` | e5 is sound | e5 +0.86, within 0.00 of best | ✅ |
+| Scandinavian Defense: Gubinsky-Melts Defense (white) | "d4, Nf3, and develop" | `e4 d5 exd5 Qxd5 Nc3 Qd6` | d4 is sound | d4 +0.64, within 0.00 of best | ✅ |
+| Scandinavian Defense: Gubinsky-Melts Defense (black) | "…Nf6, then …a6 (to stop Nb5) or …c6" | `e4 d5 exd5 Qxd5 Nc3 Qd6 d4` | Nf6 is sound | Nf6 +0.63, within 0.00 of best | ✅ |
+| Scandinavian Defense: Gubinsky-Melts Defense (black) | "…Nf6, then …a6 (to stop Nb5) or …c6" | `e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3` | a6 is playable | a6 loses 0.42 (+1.12; best c6 +0.70) | ✅ |
+| Scandinavian Defense: Gubinsky-Melts Defense (black) | "…Nf6, then …a6 (to stop Nb5) or …c6" | `e4 d5 exd5 Qxd5 Nc3 Qd6 d4 Nf6 Nf3` | c6 is sound | c6 +0.64, within 0.00 of best | ✅ |
+| Scandinavian Defense: Main Line (white) | "d4, Nf3, Bc4 and Bd2" | `e4 d5 exd5 Qxd5 Nc3 Qa5` | d4 is sound | d4 +0.71, within 0.00 of best | ✅ |
+| Scandinavian Defense: Main Line (black) | "…Nf6, …c6 (giving the queen the c7 retreat)" | `e4 d5 exd5 Qxd5 Nc3 Qa5 d4` | Nf6 is sound | Nf6 +0.69, within 0.00 of best | ✅ |
+| Scandinavian Defense: Main Line (black) | "…Nf6, …c6 (giving the queen the c7 retreat)" | `e4 d5 exd5 Qxd5 Nc3 Qa5 d4 Nf6 Nf3` | c6 is sound | c6 +0.64, within 0.03 of best | ✅ |
+| Scandinavian Defense: Mieses-Kotrč Variation (white) | "3.Nc3 hits the queen" | `e4 d5 exd5 Qxd5` | Nc3 is sound | Nc3 +0.66, within 0.00 of best | ✅ |
+| Scandinavian Defense: Mieses-Kotrč Variation (white) | "3.d4 or 3.Nf3 are calmer alternatives" | `e4 d5 exd5 Qxd5` | d4 is playable | d4 loses 0.36 (+0.21; best Nc3 +0.57) | ✅ |
+| Scandinavian Defense: Mieses-Kotrč Variation (white) | "3.d4 or 3.Nf3 are calmer alternatives" | `e4 d5 exd5 Qxd5` | Nf3 is playable | Nf3 +0.33, within 0.24 of best | ✅ |
+| Scandinavian Defense: Mieses-Kotrč Variation (black) | "After 3.Nc3, retreat to a5, d6 or d8" | `e4 d5 exd5 Qxd5 Nc3` | Qa5 is sound | Qa5 +0.66, within 0.00 of best | ✅ |
+| Scandinavian Defense: Mieses-Kotrč Variation (black) | "After 3.Nc3, retreat to a5, d6 or d8" | `e4 d5 exd5 Qxd5 Nc3` | Qd6 is sound | Qd6 +0.71, within 0.00 of best | ✅ |
+| Scandinavian Defense: Mieses-Kotrč Variation (black) | "After 3.Nc3, retreat to a5, d6 or d8" | `e4 d5 exd5 Qxd5 Nc3` | Qd8 is sound | Qd8 +0.72, within 0.00 of best | ✅ |
+| Scandinavian Defense: Modern Variation (white) | "3.d4 Nxd5 4.c4 kicks the knight" | `e4 d5 exd5 Nf6` | d4 is sound | d4 +0.62, within 0.00 of best | ✅ |
+| Scandinavian Defense: Modern Variation (white) | "3.d4 Nxd5 4.c4 kicks the knight" | `e4 d5 exd5 Nf6 d4 Nxd5` | c4 is sound | c4 +0.53, within 0.16 of best | ✅ |
+| Scandinavian Defense: Modern Variation (white) | "Holding the pawn with 3.c4 lets Black open lines with …c6 or …e6" | `e4 d5 exd5 Nf6 c4` | c6 is sound | c6 +0.04, within 0.00 of best | ✅ |
+| Scandinavian Defense: Modern Variation (white) | "Holding the pawn with 3.c4 lets Black open lines with …c6 or …e6" | `e4 d5 exd5 Nf6 c4` | e6 is sound | e6 +0.33, within 0.28 of best | ✅ |
+| Scandinavian Defense: Modern Variation (black) | "Regain the pawn with …Nxd5" | `e4 d5 exd5 Nf6 d4` | Nxd5 is sound | Nxd5 +0.59, within 0.00 of best | ✅ |
+| Scandinavian Defense: Modern Variation (black) | "…Bg4 first is also possible after 3.d4" | `e4 d5 exd5 Nf6 d4` | Bg4 is sound | Bg4 +0.70, within 0.05 of best | ✅ |
+| Scandinavian Defense: Valencian Variation (white) | "d4, Nf3, Bc4 or Bd3, and castle" | `e4 d5 exd5 Qxd5 Nc3 Qd8` | d4 is sound | d4 +0.76, within 0.00 of best | ✅ |
+| Pirc Defense (white) | "d4 and Nc3, then choose" | `e4 d6` | d4 is sound | d4 +0.55, within 0.00 of best | ✅ |
+| Pirc Defense (white) | "d4 and Nc3, then choose" | `e4 d6 d4 Nf6` | Nc3 is sound | Nc3 +0.50, within 0.00 of best | ✅ |
+| Pirc Defense (white) | "f4 and e5 (Austrian Attack)" | `e4 d6 d4 Nf6 Nc3 g6` | f4 is sound | f4 +0.47, within 0.18 of best | ✅ |
+| Pirc Defense (white) | "Be3, Qd2 and Bh6 with h4–h5 (150 Attack)" | `e4 d6 d4 Nf6 Nc3 g6` | Be3 is sound | Be3 +0.70, within 0.00 of best | ✅ |
+| Pirc Defense (white) | "Nf3, Be2 and 0-0 (Classical)" | `e4 d6 d4 Nf6 Nc3 g6` | Nf3 is sound | Nf3 +0.54, within 0.11 of best | ✅ |
+| Modern Defense (white) | "A big centre with d4 and Nc3" | `e4 g6` | d4 is sound | d4 +0.58, within 0.00 of best | ✅ |
+| Modern Defense (black) | "…Bg7 and …d6, then hit d4" | `e4 g6 d4` | Bg7 is sound | Bg7 +0.51, within 0.00 of best | ✅ |
+| Rat Defense: Antal Defense (black) | "…e5, …Ngf6, …Be7, …c6 and …0-0" | `e4 d6 d4 Nd7 Nf3` | e5 is sound | e5 +0.63, within 0.00 of best | ✅ |
+| Rat Defense: Harmonist (black) | "Hit e4 with …Nf6" | `e4 d6 f4` | Nf6 is sound | Nf6 +0.07, within 0.00 of best | ✅ |
+| Rat Defense: Small Center Defense (white) | "Use the extra space: Nf3, Nc3 and Bd3" | `e4 e6 d4 d6` | Nf3 is sound | Nf3 +0.79, within 0.00 of best | ✅ |
+| Rat Defense: Small Center Defense (white) | "Use the extra space: Nf3, Nc3 and Bd3" | `e4 e6 d4 d6` | Bd3 is sound | Bd3 +0.78, within 0.06 of best | ✅ |
+| Rat Defense: Small Center Defense (white) | "(c4 is also playable)" | `e4 e6 d4 d6` | c4 is playable | c4 loses 0.47 (+0.37; best Nf3 +0.84) | ✅ |
+| Nimzowitsch Defense (white) | "Build a centre with d4" | `e4 Nc6` | d4 is sound | d4 +0.54, within 0.00 of best | ✅ |
+| Nimzowitsch Defense (black) | "Challenge the centre with …d5 or …e5 right away" | `e4 Nc6 d4` | d5 is sound | d5 +0.43, within 0.00 of best | ✅ |
+| Nimzowitsch Defense (black) | "Challenge the centre with …d5 or …e5 right away" | `e4 Nc6 d4` | e5 is playable | e5 loses 0.40 (+0.78; best d5 +0.38) | ✅ |
+| Nimzowitsch Defense (white) | "Against …d5, e5 or Nc3" | `e4 Nc6 d4 d5` | e5 is sound | e5 +0.39, within 0.00 of best | ✅ |
+| Nimzowitsch Defense (white) | "Against …d5, e5 or Nc3" | `e4 Nc6 d4 d5` | Nc3 is sound | Nc3 +0.21, within 0.20 of best | ✅ |
+| Nimzowitsch Defense (white) | "Against …e5, 3.d5 or 3.dxe5 is stronger than 3.Nf3" | `e4 Nc6 d4 e5` | d5 is sound | d5 +0.79, within 0.00 of best | ✅ |
+| Nimzowitsch Defense (white) | "Against …e5, 3.d5 or 3.dxe5 is stronger than 3.Nf3" | `e4 Nc6 d4 e5` | dxe5 is sound | dxe5 +0.58, within 0.23 of best | ✅ |
+| Nimzowitsch Defense (white) | "Against …e5, 3.d5 or 3.dxe5 is stronger than 3.Nf3" | `e4 Nc6 d4 e5` | Nf3 is dubious | Nf3 loses 0.73 (+0.08; best d5 +0.81) | ✅ |
+| Nimzowitsch Defense (white) | "which only transposes to a level Scotch" | `e4 Nc6 d4 e5 Nf3 exd4 Nxd4` | level | -0.26 (Nf6 Nxc6 bxc6 Nc3) | ✅ |
+| Nimzowitsch Defense: Kennedy Variation (white) | "3.dxe5 Nxe5 4.f4 or Nf3 gains time on the knight" | `e4 e5 d4 Nc6` | dxe5 is sound | dxe5 +0.58, within 0.23 of best | ✅ |
+| Nimzowitsch Defense: Kennedy Variation (white) | "3.dxe5 Nxe5 4.f4 or Nf3 gains time on the knight" | `e4 e5 d4 Nc6 dxe5 Nxe5` | f4 is sound | f4 +0.82, within 0.00 of best | ✅ |
+| Nimzowitsch Defense: Kennedy Variation (white) | "3.dxe5 Nxe5 4.f4 or Nf3 gains time on the knight" | `e4 e5 d4 Nc6 dxe5 Nxe5` | Nf3 is playable | Nf3 +0.59, within 0.15 of best | ✅ |
+| Nimzowitsch Defense: Kennedy Variation (white) | "3.d5 Nce7 gains space" | `e4 e5 d4 Nc6` | d5 is sound | d5 +0.79, within 0.00 of best | ✅ |
+| Nimzowitsch Defense: Kennedy Variation (white) | "3.Nf3 exd4 4.Nxd4 is only a level Scotch." | `e4 e5 d4 Nc6` | Nf3 is dubious | Nf3 loses 0.73 (+0.08; best d5 +0.81) | ✅ |
+| Nimzowitsch Defense: Kennedy Variation (white) | "3.Nf3 exd4 4.Nxd4 is only a level Scotch." | `e4 e5 d4 Nc6 Nf3 exd4 Nxd4` | level | -0.26 (Nf6 Nxc6 bxc6 Nc3) | ✅ |
+| Nimzowitsch Defense: Kennedy Variation (black) | "After d5 …Nce7" | `e4 e5 d4 Nc6 d5` | Nce7 is sound | Nce7 +0.72, within 0.00 of best | ✅ |
+| Nimzowitsch Defense: Kennedy Variation (black) | "keep the knight active (it can drop to g6)" | `e4 e5 d4 Nc6 dxe5 Nxe5 f4` | Ng6 is sound | Ng6 +0.67, within 0.03 of best | ✅ |
+| Sicilian Defense: Bowdler Attack (black) | "If White already has Nc3 in, prepare …d5" | `e4 c5 Bc4 e6 Nc3` | d5 is dubious | d5 loses 2.08 (+1.93; best a6 -0.15) | ✅ |
+| French Defense: Advance Variation (black) | "so …Nxd4 just drops a piece" | `e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Bd3 cxd4 cxd4` | Nxd4 is a blunder | Nxd4 loses 5.49 (+5.49; best Bd7 +0.00) | ✅ |
+| Queen's Pawn Game (black) | "Either meet it head-on with 1…d5" | `d4` | d5 is sound | d5 +0.23, within 0.00 of best | ✅ |
+| Queen's Pawn Game (black) | "or play 1…Nf6" | `d4` | Nf6 is sound | Nf6 +0.27, within 0.00 of best | ✅ |
+| Queen's Pawn Game: Zukertort Variation (black) | "…Nf6 and a quick …c5 or …Bf5/…Bg4 develop easily" | `d4 d5 Nf3` | Nf6 is sound | Nf6 +0.26, within 0.00 of best | ✅ |
+| Queen's Pawn Game: Symmetrical Variation (black) | "Get the light-squared bishop out with …Bf5 or …Bg4 before …e6" | `d4 d5 Nf3 Nf6 e3` | Bf5 is sound | Bf5 +0.24, within 0.13 of best | ✅ |
+| Queen's Pawn Game: Symmetrical Variation (black) | "Get the light-squared bishop out with …Bf5 or …Bg4 before …e6" | `d4 d5 Nf3 Nf6 e3` | Bg4 is sound | Bg4 +0.29, within 0.18 of best | ✅ |
+| Queen's Pawn Game: Symmetrical Variation (black) | "Against the Colle, meet e4 with …dxe4" | `d4 d5 Nf3 Nf6 e3 Bg4 c3 e6 Nbd2 Nbd7 Bd3 Bd6 O-O O-O e4` | dxe4 is sound | dxe4 +0.00, within 0.13 of best | ✅ |
+| Queen's Pawn Game: Anti-Torre (white) | "Hit the bishop with Ne5" | `d4 d5 Nf3 Bg4` | Ne5 is sound | Ne5 +0.76, within 0.00 of best | ✅ |
+| Queen's Pawn Game: Anti-Torre (white) | "play c4 and Qb3 to attack b7 and d5" | `d4 d5 Nf3 Bg4` | c4 is sound | c4 +0.68, within 0.00 of best | ✅ |
+| Queen's Pawn Game: Anti-Torre (white) | "play c4 and Qb3 to attack b7 and d5" | `d4 d5 Nf3 Bg4 c4 e6` | Qb3 is playable | Qb3 loses 0.32 (+0.82; best Ne5 +1.14) | ✅ |
+| Queen's Pawn Game: Anti-Torre (white) | "A quieter option is e3, Be2 and h3" | `d4 d5 Nf3 Bg4` | e3 is playable | e3 loses 0.40 (+0.28; best Ne5 +0.68) | ✅ |
+| Queen's Pawn Game: Krause Variation (white) | "3.c4 gives a sharp, open Queen's Gambit" | `d4 d5 Nf3 c5` | c4 is sound | c4 +0.30, within 0.00 of best | ✅ |
+| Queen's Pawn Game: Krause Variation (white) | "3.dxc5 is also fine" | `d4 d5 Nf3 c5` | dxc5 is sound | dxc5 +0.22, within 0.10 of best | ✅ |
+| Queen's Pawn Game: Krause Variation (white) | "3.e3 keeps a calm Colle set-up" | `d4 d5 Nf3 c5` | e3 is sound | e3 +0.16, within 0.16 of best | ✅ |
+| Queen's Pawn Game: Krause Variation (black) | "After dxc5, play …e6 and …Bxc5" | `d4 d5 Nf3 c5 dxc5` | e6 is sound | e6 +0.19, within 0.00 of best | ✅ |
+| Queen's Pawn Game: Krause Variation (black) | "(or …Qa5+)" | `d4 d5 Nf3 c5 dxc5` | Qa5+ is sound | Qa5+ +0.49, within 0.27 of best | ✅ |
+| Queen's Pawn Game: Krause Variation (black) | "Otherwise …Nc6 and …Nf6 keep pressure on d4" | `d4 d5 Nf3 c5 e3` | Nc6 is sound | Nc6 +0.16, within 0.10 of best | ✅ |
+| Queen's Pawn Game: Chigorin Variation (black) | "Stop e4 with …Nf6 and …Bf5" | `d4 d5 Nc3` | Nf6 is sound | Nf6 -0.03, within 0.00 of best | ✅ |
+| Queen's Pawn Game: Chigorin Variation (black) | "or counter with …c5" | `d4 d5 Nc3` | c5 is sound | c5 +0.20, within 0.17 of best | ✅ |
+| Queen's Pawn Game: Accelerated London System (black) | "Strike with …c5 and …Qb6 at b2" | `d4 d5 Bf4` | c5 is sound | c5 +0.06, within 0.00 of best | ✅ |
+| Queen's Pawn Game: Accelerated London System (black) | "Strike with …c5 and …Qb6 at b2" | `d4 d5 Bf4 c5 e3 Nc6 c3` | Qb6 is sound | Qb6 +0.04, within 0.01 of best | ✅ |
+| Queen's Pawn Game: Accelerated London System, Steinitz Countergambit (white) | "e3 and c3 to hold d4" | `d4 d5 Bf4 c5` | e3 is sound | e3 +0.05, within 0.00 of best | ✅ |
+| Queen's Pawn Game: Accelerated London System, Steinitz Countergambit (white) | "Meet …Qb6 by covering b2 with Qb3 or Qc1" | `d4 d5 Bf4 c5 e3 Nc6 c3 Qb6` | Qb3 is sound | Qb3 -0.17, within 0.26 of best | ✅ |
+| Queen's Pawn Game: Accelerated London System, Steinitz Countergambit (white) | "Meet …Qb6 by covering b2 with Qb3 or Qc1" | `d4 d5 Bf4 c5 e3 Nc6 c3 Qb6` | Qc1 is sound | Qc1 -0.13, within 0.22 of best | ✅ |
+| Queen's Pawn Game: Accelerated London System, Steinitz Countergambit (black) | "…Nc6 and …Qb6 against b2 and d4" | `d4 d5 Bf4 c5 e3` | Nc6 is sound | Nc6 +0.06, within 0.02 of best | ✅ |
+| Queen's Pawn Game: Accelerated London System, Steinitz Countergambit (black) | "If White takes on c5, regain with …e6 and …Bxc5" | `d4 d5 Bf4 c5 dxc5` | e6 is sound | e6 +0.00, within 0.00 of best | ✅ |
+| Queen's Pawn Game: Modern Defense (white) | "Take the centre with c4 and e4 (or e4 alone)" | `d4 g6` | e4 is sound | e4 +0.65, within 0.00 of best | ✅ |
+| Queen's Pawn Game: Modern Defense (white) | "Take the centre with c4 and e4 (or e4 alone)" | `d4 g6` | c4 is sound | c4 +0.31, within 0.21 of best | ✅ |
+| Blackmar-Diemer Gambit (black) | "Accept and develop safely" | `d4 d5 e4 dxe4 Nc3 Nf6 f3` | exf3 is sound | exf3 -0.70, within 0.00 of best | ✅ |
+| Blackmar-Diemer Gambit (black) | "…c6, …g6 or …e6, then castle" | `d4 d5 e4 dxe4 Nc3 Nf6 f3 exf3 Nxf3` | c6 is sound | c6 -0.63, within 0.00 of best | ✅ |
+| Blackmar-Diemer Gambit (black) | "…c6, …g6 or …e6, then castle" | `d4 d5 e4 dxe4 Nc3 Nf6 f3 exf3 Nxf3` | e6 is playable | e6 loses 0.36 (-0.29; best c6 -0.65) | ✅ |
+| Blackmar-Diemer Gambit (black) | "…c6, …g6 or …e6, then castle" | `d4 d5 e4 dxe4 Nc3 Nf6 f3 exf3 Nxf3` | g6 is sound | g6 -0.51, within 0.14 of best | ✅ |
+| Blackmar-Diemer Gambit (black) | "Declining with 4…Bf5 is fine too" | `d4 d5 e4 dxe4 Nc3 Nf6 f3` | Bf5 is sound | Bf5 -0.45, within 0.17 of best | ✅ |
+| Queen's Gambit (white) | "play e4 for the ideal centre (or the quieter e3)" | `d4 d5 c4 dxc4` | e3 is sound | e3 +0.29, within 0.05 of best | ✅ |
+| Queen's Gambit (white) | "play e4 for the ideal centre (or the quieter e3)" | `d4 d5 c4 dxc4` | e4 is sound | e4 +0.30, within 0.00 of best | ✅ |
+| Queen's Gambit (black) | "hold d5 with …e6 (Declined)" | `d4 d5 c4` | e6 is sound | e6 +0.24, within 0.00 of best | ✅ |
+| Queen's Gambit (black) | "or …c6 (Slav)" | `d4 d5 c4` | c6 is sound | c6 +0.25, within 0.00 of best | ✅ |
+| Queen's Gambit (black) | "or take with …dxc4 (Accepted)" | `d4 d5 c4` | dxc4 is sound | dxc4 +0.28, within 0.01 of best | ✅ |
+| Queen's Gambit (black) | "Don't try to hang on to the c4 pawn" | `d4 d5 c4 dxc4 e3` | b5 is dubious | b5 loses 0.68 (+0.91; best c5 +0.23) | ✅ |
+| Queen's Gambit Accepted (white) | "e3 or e4, then Bxc4 and Nf3" | `d4 d5 c4 dxc4` | e3 is sound | e3 +0.29, within 0.05 of best | ✅ |
+| Queen's Gambit Accepted (white) | "e3 or e4, then Bxc4 and Nf3" | `d4 d5 c4 dxc4` | e4 is sound | e4 +0.30, within 0.00 of best | ✅ |
+| Queen's Gambit Accepted (white) | "3.e3 b5?!" | `d4 d5 c4 dxc4 e3` | b5 is dubious | b5 loses 0.68 (+0.91; best c5 +0.23) | ✅ |
+| Queen's Gambit Accepted (white) | "5.axb5 cxb5??" | `d4 d5 c4 dxc4 e3 b5 a4 c6 axb5` | cxb5 is a blunder | cxb5 loses 4.04 (+5.90; best e6 +1.86) | ✅ |
+| Queen's Gambit Accepted (white) | "6.Qf3 wins material" | `d4 d5 c4 dxc4 e3 b5 a4 c6 axb5 cxb5 Qf3` | White winning | +5.88 (Nc6 Qxc6+ Bd7 Qa6) | ✅ |
+| Queen's Gambit Declined: Queen's Knight Variation (white) | "Bg5 to pin a knight on f6" | `d4 d5 c4 e6 Nc3 Nf6` | Bg5 is sound | Bg5 +0.21, within 0.13 of best | ✅ |
+| Queen's Gambit Declined: Queen's Knight Variation (white) | "Or cxd5 exd5" | `d4 d5 c4 e6 Nc3 Nf6` | cxd5 is sound | cxd5 +0.23, within 0.11 of best | ✅ |
+| Queen's Gambit Declined: Queen's Knight Variation (black) | "…Nf6 and …Be7 is the classical way" | `d4 d5 c4 e6 Nc3` | Nf6 is sound | Nf6 +0.22, within 0.00 of best | ✅ |
+| Queen's Gambit Declined: Queen's Knight Variation (black) | "…c6 aims for the Semi-Slav" | `d4 d5 c4 e6 Nc3` | c6 is playable | c6 loses 0.32 (+0.54; best Bb4 +0.22) | ✅ |
+| Queen's Gambit Declined: Queen's Knight Variation (black) | "…Bb4 pins the knight" | `d4 d5 c4 e6 Nc3` | Bb4 is sound | Bb4 +0.34, within 0.00 of best | ✅ |
+| Queen's Gambit Declined: Albin Countergambit (idea) | "Sharp and objectively dubious" | `d4 d5 c4` | e5 is dubious | e5 loses 0.47 (+0.74; best e6 +0.27) | ✅ |
+| Queen's Gambit Declined: Albin Countergambit (white) | "Nf3, g3, Bg2, O-O and Nbd2" | `d4 d5 c4 e5 dxe5 d4` | Nf3 is sound | Nf3 +0.80, within 0.00 of best | ✅ |
+| Queen's Gambit Declined: Albin Countergambit (white) | "Avoid 4.e3?" | `d4 d5 c4 e5 dxe5 d4` | e3 is a mistake | e3 loses 0.89 (-0.05; best Nf3 +0.84) | ✅ |
+| Queen's Gambit Declined: Albin Countergambit (white) | "6.Bxb4?? exf2+, winning" | `d4 d5 c4 e5 dxe5 d4 e3 Bb4+ Bd2 dxe3` | Bxb4 is a blunder | Bxb4 loses 8.10 (-8.10; best fxe3 +0.00) | ✅ |
+| Queen's Gambit Declined: Albin Countergambit (white) | "6.Bxb4?? exf2+, winning" | `d4 d5 c4 e5 dxe5 d4 e3 Bb4+ Bd2 dxe3 Bxb4 exf2+` | Black winning | -8.10 (Ke2 fxg1=N+ Ke1 Qh4+) | ✅ |
+| Queen's Gambit Declined: Albin Countergambit (black) | "…Nc6, …Be6 or …Bg4, …Qd7 and long castling" | `d4 d5 c4 e5 dxe5 d4 Nf3` | Nc6 is sound | Nc6 +0.71, within 0.00 of best | ✅ |
+| Queen's Gambit Declined: Baltic Defense (white) | "cxd5 and Qb3, or Nc3 and Qb3" | `d4 d5 c4 Bf5` | cxd5 is sound | cxd5 +0.88, within 0.00 of best | ✅ |
+| Queen's Gambit Declined: Baltic Defense (white) | "cxd5 and Qb3, or Nc3 and Qb3" | `d4 d5 c4 Bf5` | Nc3 is playable | Nc3 loses 0.55 (+0.41; best cxd5 +0.96) | ✅ |
+| Queen's Gambit Declined: Baltic Defense (white) | "cxd5 and Qb3, or Nc3 and Qb3" | `d4 d5 c4 Bf5 Nc3 e6` | Qb3 is sound | Qb3 +0.17, within 0.24 of best | ✅ |
+| Queen's Gambit Declined: Chigorin Defense (white) | "Nc3 and Nf3" | `d4 d5 c4 Nc6` | Nc3 is sound | Nc3 +0.49, within 0.00 of best | ✅ |
+| Queen's Gambit Declined: Chigorin Defense (white) | "Nc3 and Nf3" | `d4 d5 c4 Nc6` | Nf3 is sound | Nf3 +0.50, within 0.01 of best | ✅ |
+| Queen's Gambit Declined: Chigorin Defense (white) | "or cxd5 Qxd5" | `d4 d5 c4 Nc6` | cxd5 is sound | cxd5 +0.44, within 0.07 of best | ✅ |
+| Queen's Gambit Declined: Chigorin Defense (white) | "cxd5 Qxd5 4.e3 to guard d4" | `d4 d5 c4 Nc6 cxd5 Qxd5` | e3 is sound | e3 +0.52, within 0.00 of best | ✅ |
+| Queen's Gambit Declined: Chigorin Defense (white) | "then Nc3 gains time on the queen" | `d4 d5 c4 Nc6 cxd5 Qxd5 e3 e5` | Nc3 is sound | Nc3 +0.50, within 0.00 of best | ✅ |
+| Queen's Gambit Declined: Chigorin Defense (white) | "(4.Nc3? Qxd4)" | `d4 d5 c4 Nc6 cxd5 Qxd5` | Nc3 is a mistake | Nc3 loses 1.42 (-0.95; best e3 +0.47) | ✅ |
+| Queen's Gambit Declined: Chigorin Defense (black) | "…Bg4 and …Bxf3" | `d4 d5 c4 Nc6 Nf3` | Bg4 is sound | Bg4 +0.86, within 0.30 of best | ✅ |
+| Queen's Gambit Declined: Marshall Defense (idea) | "so it's considered dubious" | `d4 d5 c4` | Nf6 is dubious | Nf6 loses 0.31 (+0.58; best e6 +0.27) | ✅ |
+| Queen's Gambit Declined: Marshall Defense (white) | "3.cxd5 Nxd5 4.e4" | `d4 d5 c4 Nf6` | cxd5 is sound | cxd5 +0.60, within 0.00 of best | ✅ |
+| Queen's Gambit Declined: Marshall Defense (white) | "3.cxd5 Nxd5 4.e4" | `d4 d5 c4 Nf6 cxd5 Nxd5` | e4 is sound | e4 +0.79, within 0.15 of best | ✅ |
+| Queen's Gambit Declined: Marshall Defense (black) | "If allowed, recapture …Nxd5" | `d4 d5 c4 Nf6 cxd5` | Nxd5 is sound | Nxd5 +0.87, within 0.30 of best | ✅ |
+| Queen's Gambit Declined: Marshall Defense (black) | "Better to transpose to normal lines with …e6 or …c6" | `d4 d5 c4 Nf6 Nc3` | e6 is sound | e6 +0.20, within 0.03 of best | ✅ |
+| Queen's Gambit Declined: Marshall Defense (black) | "Better to transpose to normal lines with …e6 or …c6" | `d4 d5 c4 Nf6 Nc3` | c6 is sound | c6 +0.27, within 0.10 of best | ✅ |
+| Slav Defense (white) | "a4 if Black takes on c4, stopping …b5" | `d4 d5 c4 c6 Nf3 Nf6 Nc3 dxc4` | a4 is sound | a4 +0.26, within 0.00 of best | ✅ |
+| Slav Defense (white) | "target b7 with Qb3 once the bishop leaves c8" | `d4 d5 c4 c6 Nf3 Nf6 e3 Bf5` | Qb3 is sound | Qb3 +0.12, within 0.13 of best | ✅ |
+| Slav Defense (black) | "…Nf6, then …Bf5 or …Bg4 before …e6" | `d4 d5 c4 c6 Nf3 Nf6 e3` | Bf5 is sound | Bf5 +0.19, within 0.00 of best | ✅ |
+| Slav Defense (black) | "…Nf6, then …Bf5 or …Bg4 before …e6" | `d4 d5 c4 c6 Nf3 Nf6 e3` | Bg4 is sound | Bg4 +0.28, within 0.04 of best | ✅ |
+| Slav Defense (black) | "…dxc4 with …b5 or …Bf5 is the main line" | `d4 d5 c4 c6 Nf3 Nf6 Nc3` | dxc4 is sound | dxc4 +0.27, within 0.00 of best | ✅ |
+| Slav Defense (black) | "…dxc4 with …b5 or …Bf5 is the main line" | `d4 d5 c4 c6 Nf3 Nf6 Nc3 dxc4 a4` | Bf5 is sound | Bf5 +0.45, within 0.19 of best | ✅ |
+| Slav Defense (black) | "…dxc4 with …b5 or …Bf5 is the main line" | `d4 d5 c4 c6 Nf3 Nf6 Nc3 dxc4 e3` | b5 is sound | b5 -0.07, within 0.00 of best | ✅ |
+| Slav Defense: Exchange Variation (idea) | "White is a tempo up and plays for small, risk-free pressure" | `d4 d5 c4 c6 cxd5 cxd5` | White slightly better | +0.17 (Nc3 Nf6 Bf4 Nc6) | ✅ |
+| Slav Defense: Exchange Variation (white) | "Ne5 can be awkward for Black if they copy White move for move" | `d4 d5 c4 c6 cxd5 cxd5 Nc3 Nc6 Nf3 Nf6 Bf4 Bf5 e3 e6` | Ne5 is sound | Ne5 +0.24, within 0.00 of best | ✅ |
+| Slav Defense: Exchange Variation (white) | "8.Ne5 Ne4? 9.g4 hits the f5 bishop" | `d4 d5 c4 c6 cxd5 cxd5 Nc3 Nc6 Nf3 Nf6 Bf4 Bf5 e3 e6 Ne5` | Ne4 is a mistake | Ne4 loses 0.85 (+1.05; best Bb4 +0.20) | ✅ |
+| Slav Defense: Exchange Variation (white) | "8.Ne5 Ne4? 9.g4 hits the f5 bishop" | `d4 d5 c4 c6 cxd5 cxd5 Nc3 Nc6 Nf3 Nf6 Bf4 Bf5 e3 e6 Ne5 Ne4` | g4 is sound | g4 +1.38, within 0.00 of best | ✅ |
+| Slav Defense: Exchange Variation (black) | "check White's Ne5 and Qb3 ideas" | `d4 d5 c4 c6 cxd5 cxd5 Nc3 Nc6 Nf3 Nf6 Bf4 Bf5 e3 e6` | Qb3 is sound | Qb3 +0.06, within 0.00 of best | ✅ |
+| Slav Defense: Modern Line (white) | "Nc3 next for the main line" | `d4 d5 c4 c6 Nf3 Nf6` | Nc3 is sound | Nc3 +0.29, within 0.00 of best | ✅ |
+| Slav Defense: Modern Line (white) | "or e3 and Qb3 if Black plays …Bf5 early, hitting b7" | `d4 d5 c4 c6 Nf3 Nf6 e3 Bf5` | Qb3 is sound | Qb3 +0.12, within 0.13 of best | ✅ |
+| Slav Defense: Modern Line (white) | "After …dxc4, a4 stops …b5" | `d4 d5 c4 c6 Nf3 Nf6 Nc3 dxc4` | a4 is sound | a4 +0.26, within 0.00 of best | ✅ |
+| Slav Defense: Modern Line (white) | "and e3 (or Ne5) regains the pawn" | `d4 d5 c4 c6 Nf3 Nf6 Nc3 dxc4 a4 Bf5` | e3 is sound | e3 +0.40, within 0.00 of best | ✅ |
+| Slav Defense: Modern Line (black) | "then …dxc4 and …Bf5 (main line)" | `d4 d5 c4 c6 Nf3 Nf6 Nc3` | dxc4 is sound | dxc4 +0.27, within 0.00 of best | ✅ |
+| Slav Defense: Modern Line (black) | "then …dxc4 and …Bf5 (main line)" | `d4 d5 c4 c6 Nf3 Nf6 Nc3 dxc4 a4` | Bf5 is sound | Bf5 +0.45, within 0.19 of best | ✅ |
+| Slav Defense: Modern Line (black) | "…e6 for the Semi-Slav" | `d4 d5 c4 c6 Nf3 Nf6 Nc3` | e6 is sound | e6 +0.27, within 0.00 of best | ✅ |
+| Slav Defense: Modern Line (black) | "or …a6 with …b5" | `d4 d5 c4 c6 Nf3 Nf6 Nc3` | a6 is sound | a6 +0.31, within 0.03 of best | ✅ |
+| Catalan Opening (white) | "then Qc2 or Qa4 to regain c4 if taken" | `d4 Nf6 c4 e6 g3 d5 Bg2 dxc4 Nf3 Be7 O-O O-O` | Qc2 is sound | Qc2 +0.13, within 0.00 of best | ✅ |
+| Catalan Opening (white) | "then Qc2 or Qa4 to regain c4 if taken" | `d4 Nf6 c4 e6 g3 d5 Bg2 dxc4 Nf3 Be7 O-O O-O` | Qa4 is sound | Qa4 +0.09, within 0.10 of best | ✅ |
+| Catalan Opening (black) | "Take on c4" | `d4 Nf6 c4 e6 g3 d5 Bg2` | dxc4 is sound | dxc4 +0.27, within 0.19 of best | ✅ |
+| Catalan Opening (black) | "or stay solid with …Be7" | `d4 Nf6 c4 e6 g3 d5 Bg2` | Be7 is sound | Be7 +0.12, within 0.00 of best | ✅ |
+| Indian Defense (white) | "c4 and Nc3 to fight for e4" | `d4 Nf6` | c4 is sound | c4 +0.20, within 0.00 of best | ✅ |
+| Indian Defense (white) | "(London, Torre, Trompowsky)" | `d4 Nf6` | Bg5 is sound | Bg5 +0.09, within 0.08 of best | ✅ |
+| Indian Defense: Normal Variation (black) | "…e6 (Nimzo or Queen's Indian)" | `d4 Nf6 c4` | e6 is sound | e6 +0.20, within 0.00 of best | ✅ |
+| Indian Defense: Normal Variation (black) | "…g6 (King's Indian or Grünfeld)" | `d4 Nf6 c4` | g6 is sound | g6 +0.29, within 0.13 of best | ✅ |
+| Indian Defense: Normal Variation (black) | "…c5 (Benoni)" | `d4 Nf6 c4` | c5 is playable | c5 loses 0.43 (+0.59; best e6 +0.16) | ✅ |
+| Indian Defense: Normal Variation (black) | "the dubious but tricky …e5 (Budapest)" | `d4 Nf6 c4` | e5 is dubious | e5 loses 0.62 (+0.78; best e6 +0.16) | ✅ |
+| Indian Defense: Knights Variation (black) | "…g6, …e6, …d5 or …c5 all work" | `d4 Nf6 Nf3` | g6 is sound | g6 +0.24, within 0.11 of best | ✅ |
+| Indian Defense: Knights Variation (black) | "…g6, …e6, …d5 or …c5 all work" | `d4 Nf6 Nf3` | e6 is sound | e6 +0.19, within 0.06 of best | ✅ |
+| Indian Defense: Knights Variation (black) | "…g6, …e6, …d5 or …c5 all work" | `d4 Nf6 Nf3` | d5 is sound | d5 +0.18, within 0.00 of best | ✅ |
+| Indian Defense: Knights Variation (black) | "…g6, …e6, …d5 or …c5 all work" | `d4 Nf6 Nf3` | c5 is sound | c5 +0.35, within 0.22 of best | ✅ |
+| Indian Defense: Knights Variation (black) | "an early …c5 and …Qb6 at b2 is a good way to test White" | `d4 Nf6 Nf3 e6 Bf4` | c5 is sound | c5 +0.15, within 0.00 of best | ✅ |
+| Indian Defense: Knights Variation (black) | "an early …c5 and …Qb6 at b2 is a good way to test White" | `d4 Nf6 Nf3 e6 Bf4 c5 e3` | Qb6 is sound | Qb6 +0.39, within 0.25 of best | ✅ |
+| Indian Defense: Accelerated London System (black) | "…c5 and …Qb6 targets b2" | `d4 Nf6 Bf4` | c5 is sound | c5 +0.23, within 0.13 of best | ✅ |
+| Indian Defense: Accelerated London System (black) | "…c5 and …Qb6 targets b2" | `d4 Nf6 Bf4 c5 e3` | Qb6 is sound | Qb6 +0.17, within 0.05 of best | ✅ |
+| Indian Defense: Accelerated London System (black) | "…d5 with …e6 and …Bd6 to challenge the bishop is also good" | `d4 Nf6 Bf4 d5 e3 e6 Nf3` | Bd6 is sound | Bd6 +0.18, within 0.02 of best | ✅ |
+| Indian Defense: Accelerated London System (black) | "…d5 with …e6 and …Bd6 to challenge the bishop is also good" | `d4 Nf6 Bf4` | d5 is sound | d5 +0.16, within 0.06 of best | ✅ |
+| Indian Defense: Anti-Nimzo-Indian (black) | "…b6 and …Bb7 or …Ba6 (Queen's Indian)" | `d4 Nf6 c4 e6 Nf3` | b6 is sound | b6 +0.23, within 0.00 of best | ✅ |
+| Indian Defense: Anti-Nimzo-Indian (black) | "…Bb4+ (Bogo-Indian)" | `d4 Nf6 c4 e6 Nf3` | Bb4+ is sound | Bb4+ +0.40, within 0.12 of best | ✅ |
+| Indian Defense: Anti-Nimzo-Indian (black) | "or …d5 for a Queen's Gambit Declined" | `d4 Nf6 c4 e6 Nf3` | d5 is sound | d5 +0.25, within 0.00 of best | ✅ |
+| Indian Defense: Anti-Nimzo-Indian (white) | "g3 and Bg2 against …b6" | `d4 Nf6 c4 e6 Nf3 b6` | g3 is sound | g3 +0.32, within 0.00 of best | ✅ |
+| Indian Defense: Budapest Gambit (white) | "Bf4, Nf3, e3" | `d4 Nf6 c4 e5 dxe5 Ng4` | Bf4 is sound | Bf4 +0.56, within 0.21 of best | ✅ |
+| Indian Defense: Budapest Gambit (white) | "with e2 pinned, …Nd3 can be mate" | `d4 Nf6 c4 e5 dxe5 Ng4 Bf4 Nc6 Nf3 Bb4+ Nbd2 Qe7 a3 Ngxe5` | axb4 is a blunder | axb4 loses 1000.35 (#-1; best Nxe5 +0.36) | ✅ |
+| Indian Defense: Budapest Gambit (black) | "…Nc6, …Bb4+, …Qe7 and …Ngxe5 to regain the pawn" | `d4 Nf6 c4 e5 dxe5 Ng4 Bf4` | Nc6 is sound | Nc6 +0.47, within 0.00 of best | ✅ |
+| Indian Defense: Seirawan Attack (black) | "Ask the bishop with …h6" | `d4 Nf6 c4 e6 Bg5` | h6 is sound | h6 -0.07, within 0.00 of best | ✅ |
+| Indian Defense: Seirawan Attack (black) | "hit d4 with …c5" | `d4 Nf6 c4 e6 Bg5` | c5 is sound | c5 +0.00, within 0.03 of best | ✅ |
+| Indian Defense: Seirawan Attack (black) | "or play …Bb4+" | `d4 Nf6 c4 e6 Bg5` | Bb4+ is sound | Bb4+ +0.04, within 0.07 of best | ✅ |
+| Indian Defense: Seirawan Attack (black) | "Normal development with …Be7 and …d5 is solid too" | `d4 Nf6 c4 e6 Bg5` | Be7 is sound | Be7 +0.01, within 0.04 of best | ✅ |
+| Indian Defense: Seirawan Attack (black) | "Normal development with …Be7 and …d5 is solid too" | `d4 Nf6 c4 e6 Bg5` | d5 is sound | d5 +0.25, within 0.28 of best | ✅ |
+| Indian Defense: Spielmann-Indian (white) | "3.d5 grabs space" | `d4 Nf6 Nf3 c5` | d5 is sound | d5 +0.50, within 0.00 of best | ✅ |
+| Indian Defense: Spielmann-Indian (white) | "3.c3 or 3.e3 to hold d4" | `d4 Nf6 Nf3 c5` | c3 is playable | c3 loses 0.50 (+0.02; best d5 +0.52) | ✅ |
+| Indian Defense: Spielmann-Indian (white) | "3.c3 or 3.e3 to hold d4" | `d4 Nf6 Nf3 c5` | e3 is playable | e3 loses 0.52 (+0.00; best d5 +0.52) | ✅ |
+| Indian Defense: Spielmann-Indian (black) | "If d5, undermine it with …e6, or play …b5 for queenside space, or …g6 and …d6" | `d4 Nf6 Nf3 c5 d5` | e6 is sound | e6 +0.61, within 0.07 of best | ✅ |
+| Indian Defense: Spielmann-Indian (black) | "If d5, undermine it with …e6, or play …b5 for queenside space, or …g6 and …d6" | `d4 Nf6 Nf3 c5 d5` | b5 is sound | b5 +0.52, within 0.00 of best | ✅ |
+| Indian Defense: Spielmann-Indian (black) | "If d5, undermine it with …e6, or play …b5 for queenside space, or …g6 and …d6" | `d4 Nf6 Nf3 c5 d5` | g6 is sound | g6 +0.66, within 0.12 of best | ✅ |
+| Indian Defense: Spielmann-Indian (black) | "Otherwise …cxd4, …e6 or …d5 give easy development" | `d4 Nf6 Nf3 c5 e3` | cxd4 is sound | cxd4 +0.17, within 0.11 of best | ✅ |
+| Indian Defense: Spielmann-Indian (black) | "Otherwise …cxd4, …e6 or …d5 give easy development" | `d4 Nf6 Nf3 c5 e3` | e6 is sound | e6 +0.27, within 0.21 of best | ✅ |
+| Indian Defense: Spielmann-Indian (black) | "Otherwise …cxd4, …e6 or …d5 give easy development" | `d4 Nf6 Nf3 c5 e3` | d5 is sound | d5 +0.12, within 0.00 of best | ✅ |
+| Indian Defense: Wade-Tartakower Defense (white) | "c4 transposes to Old or King's Indian lines" | `d4 Nf6 Nf3 d6` | c4 is sound | c4 +0.47, within 0.00 of best | ✅ |
+| Indian Defense: Wade-Tartakower Defense (white) | "g3 or Bg5 set-ups are solid" | `d4 Nf6 Nf3 d6` | g3 is sound | g3 +0.41, within 0.15 of best | ✅ |
+| Indian Defense: Wade-Tartakower Defense (white) | "g3 or Bg5 set-ups are solid" | `d4 Nf6 Nf3 d6` | Bg5 is playable | Bg5 loses 0.42 (+0.14; best c4 +0.56) | ✅ |
+| Indian Defense: Wade-Tartakower Defense (black) | "…Bg4 against the f3 knight" | `d4 Nf6 Nf3 d6 g3` | Bg4 is sound | Bg4 +0.56, within 0.14 of best | ✅ |
+| Indian Defense: West Indian Defense (white) | "Nc3 and e4 for a big centre" | `d4 Nf6 c4 g6` | Nc3 is sound | Nc3 +0.24, within 0.04 of best | ✅ |
+| Indian Defense: West Indian Defense (white) | "Against …d5, cxd5 and e4" | `d4 Nf6 c4 g6 Nc3 d5` | cxd5 is sound | cxd5 +0.20, within 0.00 of best | ✅ |
+| Indian Defense: West Indian Defense (white) | "Against …d5, cxd5 and e4" | `d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5` | e4 is sound | e4 +0.20, within 0.00 of best | ✅ |
+| Indian Defense: West Indian Defense (black) | "King's Indian: …Bg7" | `d4 Nf6 c4 g6 Nc3` | Bg7 is sound | Bg7 +0.49, within 0.23 of best | ✅ |
+| Indian Defense: West Indian Defense (black) | "Grünfeld: …d5" | `d4 Nf6 c4 g6 Nc3` | d5 is sound | d5 +0.23, within 0.00 of best | ✅ |
+| East Indian Defense (white) | "c4 transposes to main lines" | `d4 Nf6 Nf3 g6` | c4 is sound | c4 +0.25, within 0.00 of best | ✅ |
+| East Indian Defense (white) | "Otherwise Bf4 or Bg5 with e3, or g3 and Bg2" | `d4 Nf6 Nf3 g6` | Bf4 is sound | Bf4 +0.16, within 0.12 of best | ✅ |
+| East Indian Defense (white) | "Otherwise Bf4 or Bg5 with e3, or g3 and Bg2" | `d4 Nf6 Nf3 g6` | Bg5 is sound | Bg5 +0.06, within 0.22 of best | ✅ |
+| East Indian Defense (white) | "Otherwise Bf4 or Bg5 with e3, or g3 and Bg2" | `d4 Nf6 Nf3 g6` | g3 is sound | g3 +0.22, within 0.06 of best | ✅ |
+| East Indian Defense (black) | "an early …c5 is often the best test" | `d4 Nf6 Nf3 g6 Bf4 Bg7 e3` | c5 is sound | c5 +0.16, within 0.09 of best | ✅ |
+| Old Indian Defense (white) | "Nc3, e4, Nf3" | `d4 Nf6 c4 d6` | Nc3 is sound | Nc3 +0.61, within 0.00 of best | ✅ |
+| Old Indian Defense (black) | "…Nbd7, …e5" | `d4 Nf6 c4 d6 Nc3` | Nbd7 is sound | Nbd7 +0.65, within 0.07 of best | ✅ |
+| Old Indian Defense (black) | "…Nbd7, …e5" | `d4 Nf6 c4 d6 Nc3` | e5 is sound | e5 +0.68, within 0.10 of best | ✅ |
+| Pseudo Queen's Indian Defense (white) | "g3 and Bg2 to oppose the b7 bishop" | `d4 Nf6 Nf3 b6` | g3 is sound | g3 +0.32, within 0.00 of best | ✅ |
+| Pseudo Queen's Indian Defense (white) | "or e3, Bd3, O-O and c4/e4" | `d4 Nf6 Nf3 b6` | e3 is sound | e3 +0.08, within 0.22 of best | ✅ |
+| Trompowsky Attack (white) | "Take on f6 to damage Black's structure" | `d4 Nf6 Bg5 d5` | Bxf6 is sound | Bxf6 +0.00, within 0.04 of best | ✅ |
+| Trompowsky Attack (white) | "Or meet …Ne4 with Bf4 or h4" | `d4 Nf6 Bg5 Ne4` | Bf4 is sound | Bf4 +0.22, within 0.00 of best | ✅ |
+| Trompowsky Attack (white) | "Or meet …Ne4 with Bf4 or h4" | `d4 Nf6 Bg5 Ne4` | h4 is sound | h4 +0.02, within 0.24 of best | ✅ |
+| Trompowsky Attack (black) | "…Ne4 to chase the bishop" | `d4 Nf6 Bg5` | Ne4 is sound | Ne4 +0.29, within 0.29 of best | ✅ |
+| Trompowsky Attack (black) | "and then …c5 and …Qb6 hitting b2" | `d4 Nf6 Bg5 Ne4 Bf4` | c5 is sound | c5 +0.39, within 0.20 of best | ✅ |
+| Trompowsky Attack (black) | "and then …c5 and …Qb6 hitting b2" | `d4 Nf6 Bg5 Ne4 Bf4 c5 d5` | Qb6 is sound | Qb6 +0.25, within 0.00 of best | ✅ |
+| Trompowsky Attack (black) | "…e6 (so the queen can recapture on f6) or …d5 is also solid" | `d4 Nf6 Bg5` | e6 is sound | e6 +0.14, within 0.14 of best | ✅ |
+| Trompowsky Attack (black) | "…e6 (so the queen can recapture on f6) or …d5 is also solid" | `d4 Nf6 Bg5` | d5 is sound | d5 +0.00, within 0.00 of best | ✅ |
+| Benoni Defense (black) | "…e6, …exd5" | `d4 Nf6 c4 c5 d5` | e6 is sound | e6 +0.79, within 0.23 of best | ✅ |
+| Benoni Defense (black) | "…e6, …exd5" | `d4 Nf6 c4 c5 d5 e6 Nc3` | exd5 is sound | exd5 +0.93, within 0.27 of best | ✅ |
+| Benoni Defense: Old Benoni (white) | "2.d5 for space" | `d4 c5` | d5 is sound | d5 +0.63, within 0.00 of best | ✅ |
+| Benoni Defense: Old Benoni (black) | "…Nf6, …d6, …g6 and …Bg7" | `d4 c5 d5` | Nf6 is sound | Nf6 +0.73, within 0.00 of best | ✅ |
+| Benoni Defense: Old Benoni (black) | "…Nf6, …d6, …g6 and …Bg7" | `d4 c5 d5` | d6 is sound | d6 +0.70, within 0.02 of best | ✅ |
+| Benoni Defense: Old Benoni (black) | "or …e6 to hit d5" | `d4 c5 d5` | e6 is sound | e6 +0.67, within 0.00 of best | ✅ |
+| Benoni Defense: Old Benoni (black) | "Blocking with …e5 (and …f5 later) is passive" | `d4 c5 d5` | e5 is dubious | e5 loses 0.65 (+1.33; best Nf6 +0.68) | ✅ |
+| Benoni Defense: Benoni Gambit Accepted (black) | "…e6 and …Bxc5" | `d4 c5 dxc5` | e6 is sound | e6 +0.15, within 0.00 of best | ✅ |
+| Benoni Defense: Benoni Gambit Accepted (black) | "or …Qa5+ to take back at once" | `d4 c5 dxc5` | Qa5+ is playable | Qa5+ loses 0.51 (+0.57; best e6 +0.06) | ✅ |
+| Englund Gambit (idea) | "It's dubious" | `d4` | e5 is dubious | e5 loses 0.93 (+1.23; best Nf6 +0.30) | ✅ |
+| Englund Gambit (white) | "6.Bc3?? is a trap" | `d4 e5 dxe5 Nc6 Nf3 Qe7 Bf4 Qb4+ Bd2 Qxb2` | Bc3 is a blunder | Bc3 loses 10.44 (-7.06; best Nc3 +3.38) | ✅ |
+| Englund Gambit (white) | "…Bb4 and …Qc1 mate" | `d4 e5 dxe5 Nc6 Nf3 Qe7 Bf4 Qb4+ Bd2 Qxb2 Bc3 Bb4` | Black winning | -7.13 (Bxb4 Nxb4 Na3 Qc3+) | ✅ |
+| Englund Gambit (white) | "Play 6.Nc3 instead" | `d4 e5 dxe5 Nc6 Nf3 Qe7 Bf4 Qb4+ Bd2 Qxb2` | Nc3 is sound | Nc3 +3.59, within 0.00 of best | ✅ |
+| Englund Gambit (white) | "or keep it simple with 4.Nc3" | `d4 e5 dxe5 Nc6 Nf3 Qe7` | Nc3 is sound | Nc3 +1.51, within 0.27 of best | ✅ |
+| Englund Gambit (black) | "…Qb4+ hitting b2" | `d4 e5 dxe5 Nc6 Nf3 Qe7 Bf4` | Qb4+ is playable | Qb4+ loses 0.40 (+2.27; best d6 +1.87) | ✅ |
+| Englund Gambit Declined: Reversed Alekhine (white) | "After 2…e4, Nfd2 or Ne5" | `d4 e5 Nf3 e4` | Nfd2 is sound | Nfd2 -0.20, within 0.00 of best | ✅ |
+| Englund Gambit Declined: Reversed Alekhine (white) | "After 2…e4, Nfd2 or Ne5" | `d4 e5 Nf3 e4` | Ne5 is playable | Ne5 loses 0.42 (-0.71; best Nfd2 -0.29) | ✅ |
+| Englund Gambit Declined: Reversed Alekhine (black) | "Push …e4" | `d4 e5 Nf3` | e4 is sound | e4 -0.21, within 0.00 of best | ✅ |
+| Englund Gambit Declined: Reversed Alekhine (black) | "or play …exd4" | `d4 e5 Nf3` | exd4 is sound | exd4 +0.02, within 0.21 of best | ✅ |
+| Englund Gambit Declined: Reversed Alekhine (black) | "support it with …d5 or …f5" | `d4 e5 Nf3 e4 Nfd2` | d5 is sound | d5 -0.25, within 0.00 of best | ✅ |
+| Englund Gambit Declined: Reversed Alekhine (black) | "support it with …d5 or …f5" | `d4 e5 Nf3 e4 Nfd2` | f5 is sound | f5 -0.18, within 0.10 of best | ✅ |
+| Englund Gambit Declined: Reversed French (white) | "Recapture exd4" | `d4 e5 e3 exd4` | exd4 is sound | exd4 +0.19, within 0.00 of best | ✅ |
+| Englund Gambit Declined: Reversed French (black) | "…exd4 and …d5" | `d4 e5 e3` | exd4 is sound | exd4 +0.18, within 0.00 of best | ✅ |
+| Englund Gambit Declined: Reversed French (black) | "…exd4 and …d5" | `d4 e5 e3 exd4 exd4` | d5 is sound | d5 +0.20, within 0.00 of best | ✅ |
+| Englund Gambit Declined: Reversed French (black) | "or …Nc6 and …Nf6" | `d4 e5 e3` | Nc6 is sound | Nc6 +0.44, within 0.23 of best | ✅ |
+| Englund Gambit Declined: Reversed French (black) | "Black has an equal but calm game" | `d4 e5 e3 exd4 exd4 d5` | level | +0.21 (Nf3 Nf6 Bd3 c5) | ✅ |
+| Horwitz Defense (white) | "2.c4 or 2.Nf3 heads for d4 lines" | `d4 e6` | c4 is sound | c4 +0.22, within 0.19 of best | ✅ |
+| Horwitz Defense (white) | "2.c4 or 2.Nf3 heads for d4 lines" | `d4 e6` | Nf3 is sound | Nf3 +0.25, within 0.16 of best | ✅ |
+| Horwitz Defense (white) | "2.e4 invites a French" | `d4 e6` | e4 is sound | e4 +0.41, within 0.00 of best | ✅ |
+| Horwitz Defense (black) | "2.c4 Bb4+ is also possible" | `d4 e6 c4` | Bb4+ is sound | Bb4+ +0.36, within 0.08 of best | ✅ |
+| English Opening (black) | "…e5 (reversed Sicilian), …c5 (Symmetrical), …Nf6, or …e6 with …d5" | `c4` | e5 is sound | e5 +0.09, within 0.00 of best | ✅ |
+| English Opening (black) | "…e5 (reversed Sicilian), …c5 (Symmetrical), …Nf6, or …e6 with …d5" | `c4` | c5 is sound | c5 +0.32, within 0.20 of best | ✅ |
+| English Opening (black) | "…e5 (reversed Sicilian), …c5 (Symmetrical), …Nf6, or …e6 with …d5" | `c4` | Nf6 is sound | Nf6 +0.23, within 0.11 of best | ✅ |
+| English Opening (black) | "…e5 (reversed Sicilian), …c5 (Symmetrical), …Nf6, or …e6 with …d5" | `c4` | e6 is sound | e6 +0.25, within 0.13 of best | ✅ |
+| English Opening: King's English Variation, Reversed Sicilian (white) | "g3, Bg2 and Nf3" | `c4 e5 Nc3 Nf6` | g3 is sound | g3 +0.11, within 0.00 of best | ✅ |
+| English Opening: King's English Variation, Reversed Sicilian (black) | "…Nf6, …Nc6 and …Bb4 to pin" | `c4 e5 Nc3 Nf6 Nf3 Nc6 g3` | Bb4 is sound | Bb4 +0.17, within 0.00 of best | ✅ |
+| English Opening: King's English Variation, Reversed Sicilian (black) | "or …d5 for an open reversed Dragon" | `c4 e5 Nc3 Nf6 g3` | d5 is sound | d5 +0.16, within 0.09 of best | ✅ |
+| English Opening: King's English Variation, Nimzowitsch Variation (white) | "If …e4, Nd4" | `c4 e5 Nf3 e4` | Nd4 is sound | Nd4 +0.00, within 0.00 of best | ✅ |
+| English Opening: King's English Variation, Nimzowitsch Variation (white) | "then hit the e4 pawn with Nc3 or d3" | `c4 e5 Nf3 e4 Nd4 Nc6 e3 Nf6` | Nc3 is sound | Nc3 +0.00, within 0.00 of best | ✅ |
+| English Opening: King's English Variation, Nimzowitsch Variation (white) | "then hit the e4 pawn with Nc3 or d3" | `c4 e5 Nf3 e4 Nd4 Nc6 e3 Nf6` | d3 is sound | d3 -0.02, within 0.02 of best | ✅ |
+| English Opening: King's English Variation, Nimzowitsch Variation (white) | "then hit the e4 pawn with Nc3 or d3" | `c4 e5 Nf3 e4 Nd4 Nc6 Nxc6 dxc6` | Nc3 is sound | Nc3 -0.26, within 0.00 of best | ✅ |
+| English Opening: King's English Variation, Nimzowitsch Variation (white) | "then hit the e4 pawn with Nc3 or d3" | `c4 e5 Nf3 e4 Nd4 Nc6 Nxc6 dxc6` | d3 is sound | d3 -0.44, within 0.25 of best | ✅ |
+| English Opening: King's English Variation, Nimzowitsch Variation (white) | "Against …Nc6, Nc3 leads to normal English structures" | `c4 e5 Nf3 Nc6` | Nc3 is sound | Nc3 +0.10, within 0.05 of best | ✅ |
+| English Opening: King's English Variation, Nimzowitsch Variation (black) | "…Nc6 is solid" | `c4 e5 Nf3` | Nc6 is sound | Nc6 +0.17, within 0.17 of best | ✅ |
+| English Opening: King's English Variation, Nimzowitsch Variation (black) | "…e4 gains space and kicks the knight" | `c4 e5 Nf3` | e4 is sound | e4 +0.00, within 0.00 of best | ✅ |
+| English Opening: Anglo-Indian Defense (white) | "Nc3 and g3, or Nf3, or d4 to transpose" | `c4 Nf6` | Nc3 is sound | Nc3 +0.11, within 0.12 of best | ✅ |
+| English Opening: Anglo-Indian Defense (white) | "Nc3 and g3, or Nf3, or d4 to transpose" | `c4 Nf6` | Nf3 is sound | Nf3 +0.31, within 0.00 of best | ✅ |
+| English Opening: Anglo-Indian Defense (white) | "Nc3 and g3, or Nf3, or d4 to transpose" | `c4 Nf6` | d4 is sound | d4 +0.32, within 0.00 of best | ✅ |
+| English Opening: Anglo-Indian Defense (white) | "Nc3 with e4 is a direct try against …e6" | `c4 Nf6 Nc3 e6` | e4 is sound | e4 +0.27, within 0.00 of best | ✅ |
+| English Opening: Anglo-Indian Defense (black) | "…e5, …g6, …e6 or …c5 all work" | `c4 Nf6 Nc3` | e5 is sound | e5 +0.11, within 0.00 of best | ✅ |
+| English Opening: Anglo-Indian Defense (black) | "…e5, …g6, …e6 or …c5 all work" | `c4 Nf6 Nc3` | g6 is playable | g6 loses 0.38 (+0.47; best e5 +0.09) | ✅ |
+| English Opening: Anglo-Indian Defense (black) | "…e5, …g6, …e6 or …c5 all work" | `c4 Nf6 Nc3` | e6 is sound | e6 +0.29, within 0.20 of best | ✅ |
+| English Opening: Anglo-Indian Defense (black) | "…e5, …g6, …e6 or …c5 all work" | `c4 Nf6 Nc3` | c5 is sound | c5 +0.31, within 0.22 of best | ✅ |
+| English Opening: Agincourt Defense (white) | "Nc3 and e4 for a big centre if Black delays …d5" | `c4 e6 Nc3 Nf6` | e4 is sound | e4 +0.27, within 0.00 of best | ✅ |
+| English Opening: Agincourt Defense (black) | "…d5 and …Nf6" | `c4 e6 Nf3` | d5 is sound | d5 +0.22, within 0.00 of best | ✅ |
+| English Opening: Agincourt Defense (black) | "…Bb4 against Nc3" | `c4 e6 Nc3` | Bb4 is sound | Bb4 +0.32, within 0.12 of best | ✅ |
+| English Opening: Anglo-Scandinavian Defense (white) | "2.cxd5, then Nc3 or Nf3 to gain time on the recapturing piece" | `c4 d5` | cxd5 is sound | cxd5 +0.63, within 0.00 of best | ✅ |
+| English Opening: Anglo-Scandinavian Defense (white) | "2.cxd5, then Nc3 or Nf3 to gain time on the recapturing piece" | `c4 d5 cxd5 Qxd5` | Nc3 is sound | Nc3 +0.65, within 0.00 of best | ✅ |
+| English Opening: Anglo-Scandinavian Defense (black) | "…Nf6 and …Nxd5" | `c4 d5 cxd5` | Nf6 is sound | Nf6 +0.64, within 0.05 of best | ✅ |
+| English Opening: Anglo-Scandinavian Defense (black) | "or …Qxd5 and move the queen to a5 or d8" | `c4 d5 cxd5` | Qxd5 is sound | Qxd5 +0.63, within 0.00 of best | ✅ |
+| English Opening: Anglo-Scandinavian Defense (black) | "or …Qxd5 and move the queen to a5 or d8" | `c4 d5 cxd5 Qxd5 Nc3` | Qa5 is sound | Qa5 +0.79, within 0.09 of best | ✅ |
+| English Opening: Anglo-Scandinavian Defense (black) | "or …Qxd5 and move the queen to a5 or d8" | `c4 d5 cxd5 Qxd5 Nc3` | Qd8 is sound | Qd8 +0.97, within 0.27 of best | ✅ |
+| English Opening: Caro-Kann Defensive System (white) | "Nf3, g3 or b3 and a fianchetto" | `c4 c6` | Nf3 is sound | Nf3 +0.28, within 0.00 of best | ✅ |
+| English Opening: Caro-Kann Defensive System (white) | "or e4 for Caro-Kann positions" | `c4 c6` | e4 is sound | e4 +0.22, within 0.06 of best | ✅ |
+| English Opening: Caro-Kann Defensive System (white) | "or d4 to transpose to the Slav" | `c4 c6` | d4 is sound | d4 +0.28, within 0.00 of best | ✅ |
+| English Opening: Caro-Kann Defensive System (black) | "…d5, then …Bf5 or …Bg4 before …e6, as in the Slav" | `c4 c6 Nf3` | d5 is sound | d5 +0.28, within 0.00 of best | ✅ |
+| English Opening: Caro-Kann Defensive System (black) | "…d5, then …Bf5 or …Bg4 before …e6, as in the Slav" | `c4 c6 Nf3 d5 g3` | Bf5 is sound | Bf5 +0.33, within 0.11 of best | ✅ |
+| English Opening: Caro-Kann Defensive System (black) | "…d5, then …Bf5 or …Bg4 before …e6, as in the Slav" | `c4 c6 Nf3 d5 g3` | Bg4 is sound | Bg4 +0.29, within 0.07 of best | ✅ |
+| English Opening: Great Snake Variation (white) | "Nc3 and g3, or e4 and d4" | `c4 g6` | Nc3 is sound | Nc3 +0.19, within 0.06 of best | ✅ |
+| English Opening: Great Snake Variation (white) | "Nc3 and g3, or e4 and d4" | `c4 g6` | e4 is sound | e4 +0.30, within 0.00 of best | ✅ |
+| Zukertort Opening (black) | "…d5, …Nf6, …c5 or …g6" | `Nf3` | d5 is sound | d5 +0.13, within 0.00 of best | ✅ |
+| Zukertort Opening (black) | "…d5, …Nf6, …c5 or …g6" | `Nf3` | Nf6 is sound | Nf6 +0.25, within 0.07 of best | ✅ |
+| Zukertort Opening (black) | "…d5, …Nf6, …c5 or …g6" | `Nf3` | c5 is sound | c5 +0.28, within 0.10 of best | ✅ |
+| Zukertort Opening (black) | "…d5, …Nf6, …c5 or …g6" | `Nf3` | g6 is sound | g6 +0.41, within 0.23 of best | ✅ |
+| Zukertort Opening: Black Mustang Defense (white) | "2.d4 stops …e5" | `Nf3 Nc6` | d4 is sound | d4 +0.52, within 0.00 of best | ✅ |
+| Zukertort Opening: Black Mustang Defense (white) | "2.e4 heads for the open games you know" | `Nf3 Nc6` | e4 is sound | e4 +0.29, within 0.21 of best | ✅ |
+| Zukertort Opening: Black Mustang Defense (black) | "…e5 if allowed" | `Nf3 Nc6 e4` | e5 is sound | e5 +0.17, within 0.00 of best | ✅ |
+| Zukertort Opening: Black Mustang Defense (black) | "otherwise …d5 and …Bg4 to put pressure on d4" | `Nf3 Nc6 d4` | d5 is sound | d5 +0.55, within 0.00 of best | ✅ |
+| Zukertort Opening: Black Mustang Defense (black) | "otherwise …d5 and …Bg4 to put pressure on d4" | `Nf3 Nc6 d4 d5 c4` | Bg4 is sound | Bg4 +0.86, within 0.30 of best | ✅ |
+| Zukertort Opening: Kingside Fianchetto (white) | "d4 and c4 or e4 for a big centre, or g3 to mirror Black" | `Nf3 g6` | d4 is playable | d4 loses 0.34 (+0.21; best e4 +0.55) | ✅ |
+| Zukertort Opening: Kingside Fianchetto (white) | "d4 and c4 or e4 for a big centre, or g3 to mirror Black" | `Nf3 g6` | e4 is sound | e4 +0.49, within 0.00 of best | ✅ |
+| Zukertort Opening: Kingside Fianchetto (white) | "d4 and c4 or e4 for a big centre, or g3 to mirror Black" | `Nf3 g6` | g3 is playable | g3 loses 0.38 (+0.17; best e4 +0.55) | ✅ |
+| Zukertort Opening: Old Indian Attack (black) | "…Nf6, …c5" | `Nf3 d5 d3` | Nf6 is sound | Nf6 -0.08, within 0.00 of best | ✅ |
+| Zukertort Opening: Old Indian Attack (black) | "…Nf6, …c5" | `Nf3 d5 d3` | c5 is sound | c5 +0.13, within 0.23 of best | ✅ |
+| Zukertort Opening: Old Indian Attack (black) | "or take the centre with …Nc6 and …e5" | `Nf3 d5 d3` | Nc6 is sound | Nc6 +0.02, within 0.12 of best | ✅ |
+| Zukertort Opening: Old Indian Attack (black) | "or take the centre with …Nc6 and …e5" | `Nf3 d5 d3 Nc6 g3` | e5 is sound | e5 -0.05, within 0.00 of best | ✅ |
+| Zukertort Opening: Old Indian Attack (black) | "not …e5 at once: Nxe5" | `Nf3 d5 d3` | e5 is a mistake | e5 loses 1.10 (+1.00; best Nf6 -0.10) | ✅ |
+| Zukertort Opening: Pirc Invitation (white) | "2.e4 for a Pirc" | `Nf3 d6` | e4 is sound | e4 +0.38, within 0.24 of best | ✅ |
+| Zukertort Opening: Pirc Invitation (white) | "or d4 and c4" | `Nf3 d6` | d4 is sound | d4 +0.54, within 0.00 of best | ✅ |
+| Zukertort Opening: Pirc Invitation (black) | "…Nf6, …g6 and …Bg7, or …e5" | `Nf3 d6 e4` | Nf6 is sound | Nf6 +0.25, within 0.00 of best | ✅ |
+| Zukertort Opening: Pirc Invitation (black) | "…Nf6, …g6 and …Bg7, or …e5" | `Nf3 d6 e4` | e5 is playable | e5 loses 0.31 (+0.65; best c5 +0.34) | ✅ |
+| Zukertort Opening: Pirc Invitation (black) | "…Bg4 hits the knight if White is slow" | `Nf3 d6 g3` | Bg4 is playable | Bg4 loses 0.31 (+0.53; best e5 +0.22) | ✅ |
+| Zukertort Opening: Queen's Gambit Invitation (white) | "d4 and c4 for a QGD" | `Nf3 e6` | d4 is sound | d4 +0.23, within 0.00 of best | ✅ |
+| Zukertort Opening: Queen's Gambit Invitation (white) | "g3 for a Catalan" | `Nf3 e6` | g3 is sound | g3 +0.21, within 0.00 of best | ✅ |
+| Zukertort Opening: Queen's Gambit Invitation (white) | "or e4 heading for French-like play" | `Nf3 e6` | e4 is sound | e4 +0.23, within 0.00 of best | ✅ |
+| Zukertort Opening: Queen's Gambit Invitation (black) | "…d5 and …Nf6, or …f5 for a Dutch" | `Nf3 e6 d4` | d5 is sound | d5 +0.14, within 0.00 of best | ✅ |
+| Zukertort Opening: Queen's Gambit Invitation (black) | "…d5 and …Nf6, or …f5 for a Dutch" | `Nf3 e6 d4` | Nf6 is sound | Nf6 +0.23, within 0.03 of best | ✅ |
+| Zukertort Opening: Queen's Gambit Invitation (black) | "…d5 and …Nf6, or …f5 for a Dutch" | `Nf3 e6 d4` | f5 is playable | f5 loses 0.33 (+0.53; best d5 +0.20) | ✅ |
+| Zukertort Opening: Sicilian Invitation (white) | "2.e4 for a Sicilian, 2.c4 for the Symmetrical English, or 2.g3 for a quieter game" | `Nf3 c5` | e4 is sound | e4 +0.32, within 0.00 of best | ✅ |
+| Zukertort Opening: Sicilian Invitation (white) | "2.e4 for a Sicilian, 2.c4 for the Symmetrical English, or 2.g3 for a quieter game" | `Nf3 c5` | c4 is sound | c4 +0.26, within 0.01 of best | ✅ |
+| Zukertort Opening: Sicilian Invitation (white) | "2.e4 for a Sicilian, 2.c4 for the Symmetrical English, or 2.g3 for a quieter game" | `Nf3 c5` | g3 is sound | g3 +0.07, within 0.20 of best | ✅ |
+| Zukertort Opening: Slav Invitation (white) | "d4 and c4 for a Slav, e4 for a Caro-Kann, or a fianchetto with g3 or b3" | `Nf3 c6` | d4 is sound | d4 +0.31, within 0.00 of best | ✅ |
+| Zukertort Opening: Slav Invitation (white) | "d4 and c4 for a Slav, e4 for a Caro-Kann, or a fianchetto with g3 or b3" | `Nf3 c6` | e4 is sound | e4 +0.29, within 0.00 of best | ✅ |
+| Zukertort Opening: Slav Invitation (white) | "d4 and c4 for a Slav, e4 for a Caro-Kann, or a fianchetto with g3 or b3" | `Nf3 c6` | g3 is sound | g3 +0.29, within 0.00 of best | ✅ |
+| Zukertort Opening: Slav Invitation (black) | "…d5, then …Bf5 or …Bg4 before …e6" | `Nf3 c6 g3` | d5 is sound | d5 +0.21, within 0.00 of best | ✅ |
+| Zukertort Opening: Slav Invitation (black) | "…d5, then …Bf5 or …Bg4 before …e6" | `Nf3 c6 g3 d5 Bg2` | Bf5 is sound | Bf5 +0.28, within 0.12 of best | ✅ |
+| Zukertort Opening: Slav Invitation (black) | "…d5, then …Bf5 or …Bg4 before …e6" | `Nf3 c6 g3 d5 Bg2` | Bg4 is sound | Bg4 +0.17, within 0.00 of best | ✅ |
+| Zukertort Opening: Tennison Gambit (idea) | "Considered dubious" | `e4 d5` | Nf3 is dubious | Nf3 loses 1.83 (-1.17; best exd5 +0.66) | ✅ |
+| Zukertort Opening: Tennison Gambit (black) | "Take and develop carefully" | `e4 d5 Nf3` | dxe4 is sound | dxe4 -1.14, within 0.00 of best | ✅ |
+| Zukertort Opening: Tennison Gambit (white) | "After …dxe4, Ng5" | `e4 d5 Nf3 dxe4` | Ng5 is sound | Ng5 -1.29, within 0.00 of best | ✅ |
+| Zukertort Opening: Tennison Gambit (white) | "5.Bxd3 h6??" | `e4 d5 Nf3 dxe4 Ng5 Nf6 d3 exd3 Bxd3` | h6 is a blunder | h6 loses 5.52 (+4.53; best Nc6 -0.99) | ✅ |
+| Zukertort Opening: Tennison Gambit (white) | "6.Nxf7 Kxf7 7.Bg6+ wins the queen" | `e4 d5 Nf3 dxe4 Ng5 Nf6 d3 exd3 Bxd3 h6 Nxf7 Kxf7 Bg6+` | White winning | +4.46 (Kxg6 Qxd8 Nc6 Qd1) | ✅ |
+| Réti Opening (black) | "…c6 with …Bf5 or …Bg4 (Slav style), …e6 (QGD style), or …d4 to grab space" | `Nf3 d5 c4` | c6 is sound | c6 +0.25, within 0.13 of best | ✅ |
+| Réti Opening (black) | "…c6 with …Bf5 or …Bg4 (Slav style), …e6 (QGD style), or …d4 to grab space" | `Nf3 d5 c4` | e6 is sound | e6 +0.25, within 0.13 of best | ✅ |
+| Réti Opening (black) | "…c6 with …Bf5 or …Bg4 (Slav style), …e6 (QGD style), or …d4 to grab space" | `Nf3 d5 c4` | d4 is sound | d4 -0.02, within 0.00 of best | ✅ |
+| Nimzo-Larsen Attack (black) | "Build a central pawn presence with …e5 or …d5" | `b3` | e5 is sound | e5 -0.03, within 0.00 of best | ✅ |
+| Nimzo-Larsen Attack (black) | "Build a central pawn presence with …e5 or …d5" | `b3` | d5 is sound | d5 +0.03, within 0.01 of best | ✅ |
+| Nimzo-Larsen Attack: Classical Variation (black) | "…Nf6, …c5" | `Nf3 d5 b3` | Nf6 is sound | Nf6 +0.12, within 0.08 of best | ✅ |
+| Nimzo-Larsen Attack: Classical Variation (black) | "or …Bg4 or …Bf5" | `Nf3 d5 b3` | Bg4 is sound | Bg4 +0.05, within 0.01 of best | ✅ |
+| Nimzo-Larsen Attack: Classical Variation (black) | "or …Bg4 or …Bf5" | `Nf3 d5 b3` | Bf5 is sound | Bf5 +0.00, within 0.00 of best | ✅ |
+| English Opening: King's English Variation, Nimzowitsch Variation (white) | "against 3…Nc6 play e3" | `c4 e5 Nf3 e4 Nd4 Nc6` | e3 is sound | e3 +0.00, within 0.00 of best | ✅ |
+| English Opening: King's English Variation, Nimzowitsch Variation (white) | "(or swap with Nxc6)" | `c4 e5 Nf3 e4 Nd4 Nc6` | Nxc6 is playable | Nxc6 loses 0.34 (-0.31; best e3 +0.03) | ✅ |
+| Slav Defense: Modern Line (white) | "and e3 (or Ne5) regains the pawn" | `d4 d5 c4 c6 Nf3 Nf6 Nc3 dxc4 a4 Bf5` | Ne5 is sound | Ne5 +0.42, within 0.00 of best | ✅ |

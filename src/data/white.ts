@@ -349,7 +349,7 @@ export const spanishRepertoire: Repertoire = {
           avoid: [
             {
               san: 'Nxe5',
-              why: 'Greedy. 5.Nxe5? Qe7! hits the knight and e4. After 6.f4 Nxb5 7.Nxb5 d6 8.Nf3 Qxe4+ your king is stuck in the centre and Black is clearly better (Stockfish about −0.5).',
+              why: 'Greedy. 5.Nxe5?! Qe7! hits the knight and e4. After 6.f4 Nxb5 7.Nxb5 d6 8.Nf3 Qxe4+ your king is stuck in the centre and Black has the better game (Stockfish about −0.4).',
             },
           ],
         },

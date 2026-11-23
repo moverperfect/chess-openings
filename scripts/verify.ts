@@ -1,9 +1,11 @@
 /**
- * Checks every move in the repertoires against Stockfish and the Lichess opening explorer,
+ * Checks every move in the repertoires against Stockfish and the Lichess opening explorer, and
+ * every concrete claim in the strategy notes (src/data/strategies/*.claims.ts) against Stockfish,
  * and writes docs/verification-report.md.
  *
  *   npm run verify                 # Stockfish + Lichess (needs LICHESS_TOKEN in .env.local)
  *   npm run verify -- --depth 26   # deeper search
+ *   npm run verify -- --strategies # only the strategy claims, written to docs/strategy-claims.md (git-ignored)
  *
  * Results are cached in scripts/.cache so re-runs only analyse new or changed positions.
  */
@@ -15,6 +17,7 @@ import { ALL_REPERTOIRES } from '../src/data';
 import { buildRepertoire, formatMove, positionKey, type BuiltRepertoire, type Edge } from '../src/lib/repertoire';
 import { Engine, type EngineLine } from './engine';
 import { explore, total, type ExplorerDb, type ExplorerResult } from './explorer';
+import { BAND_SLACK, BANDS, CLAIMS, MOVE_KINDS, describeCheck, evalHolds, moveHolds, type Claim } from '../src/data/strategies/claims';
 
 // ───────── config
 const args = process.argv.slice(2);
@@ -32,6 +35,7 @@ const WARN_CP = 30;
 const BAD_CP = 80;
 /** An opponent reply this common (share of club games) that isn't in the repertoire is a gap. */
 const GAP_SHARE = 0.08;
+const STRATEGIES_ONLY = args.includes('--strategies');
 
 function loadEnv() {
   if (!existsSync('.env.local')) return;
@@ -55,10 +59,10 @@ const saveCache = () => {
 
 const engine = new Engine(STOCKFISH, { Threads: 8, Hash: 512 });
 
-async function analyse(fen: string, searchmoves?: string[]): Promise<EngineLine[]> {
-  const k = `${positionKey(fen)}|d${DEPTH}|${searchmoves?.join(',') ?? `m${MULTIPV}`}`;
+async function analyse(fen: string, searchmoves?: string[], multipv = MULTIPV): Promise<EngineLine[]> {
+  const k = `${positionKey(fen)}|d${DEPTH}|${searchmoves?.join(',') ?? `m${multipv}`}`;
   if (!cache.engine[k]) {
-    cache.engine[k] = await engine.analyse(fen, { depth: DEPTH, multipv: searchmoves ? 1 : MULTIPV, searchmoves });
+    cache.engine[k] = await engine.analyse(fen, { depth: DEPTH, multipv: searchmoves ? 1 : multipv, searchmoves });
     saveCache();
   }
   return cache.engine[k];
@@ -237,8 +241,93 @@ function pathLabel(plies: Edge[], upTo: Edge) {
   return out.join(' ');
 }
 
+// ───────── strategy-note claims
+interface ClaimResult {
+  claim: Claim;
+  ok: boolean;
+  /** What Stockfish says, e.g. "+0.43 (Nf3 Nc6 Bb5 a6)" or "Nxd4 loses 5.49 (+5.49; best Bd7 +0.00)". */
+  found: string;
+}
+
+/** Stockfish's best line: from a cached multi-line search if there is one, else a faster single-line search. */
+async function bestLine(fen: string): Promise<EngineLine | undefined> {
+  const multi = cache.engine[`${positionKey(fen)}|d${DEPTH}|m${MULTIPV}`];
+  return multi?.[0] ?? (await analyse(fen, undefined, 1))[0];
+}
+
+/** White-POV pawns from a side-to-move engine line, with mates as ±100. */
+function whitePawns(line: EngineLine, fen: string): number {
+  const sign = whiteToMove(fen) ? 1 : -1;
+  return (sign * (line.mate !== undefined ? Math.sign(line.mate) * 10000 : line.cp)) / 100;
+}
+
+async function checkClaim(claim: Claim): Promise<ClaimResult> {
+  const chess = new Chess();
+  for (const san of claim.moves.split(/\s+/).filter(Boolean)) chess.move(san);
+  const fen = chess.fen();
+  const check = claim.check;
+  const best = await bestLine(fen);
+  if (!best) return { claim, ok: false, found: 'no legal moves in this position' };
+  if (check.kind === 'eval') {
+    return { claim, ok: evalHolds(check, whitePawns(best, fen)), found: `${evalText(best, fen)} (${pvSan(fen, best.pv, 4)})` };
+  }
+  const mv = new Chess(fen).move(check.san);
+  // The claimed move gets its own search: a multi-line search can miss its refutation (5…Nxe4 6.Qg4 in the Krause).
+  const [line] = await analyse(fen, [mv.from + mv.to + (mv.promotion ?? '')]);
+  // Separate searches can disagree slightly: when the claimed move is Stockfish's own choice, it loses nothing.
+  const loss = line.uci === best.uci ? 0 : Math.max(0, best.cp - line.cp) / 100;
+  const found =
+    loss <= MOVE_KINDS.good.maxLoss!
+      ? `${check.san} ${evalText(line, fen)}, within ${loss.toFixed(2)} of best`
+      : `${check.san} loses ${loss.toFixed(2)} (${evalText(line, fen)}; best ${sanOf(fen, best.uci)} ${evalText(best, fen)})`;
+  return { claim, ok: moveHolds(check.kind, loss), found };
+}
+
+const pawns = (x: number) => x.toFixed(2);
+
+async function strategySection(summary: string[]): Promise<string[]> {
+  const out = ['## Strategy notes', ''];
+  const bands = Object.values(BANDS)
+    .map((b) => (b.to === Infinity ? `${b.words} ${pawns(b.from)} and up` : `${b.words} ${pawns(b.from)}–${pawns(b.to)}`))
+    .join(', ');
+  const moves = Object.values(MOVE_KINDS)
+    .map((k) => (k.maxLoss !== undefined ? `"${k.words}" within ${pawns(k.maxLoss)} of best` : `"${k.words}" more than ${pawns(k.minLoss!)} worse`))
+    .join(', ');
+  out.push(
+    `Concrete claims in the opening strategy notes (\`src/data/strategies/*.claims.ts\`), checked at depth ${DEPTH}. ` +
+      `Bands in pawns: ${bands}, with ${pawns(BAND_SLACK)} slack at each edge. Moves: ${moves}.`,
+    '',
+  );
+  const results: ClaimResult[] = [];
+  for (const [i, claim] of CLAIMS.entries()) {
+    process.stdout.write(`  claim ${i + 1}/${CLAIMS.length}        \r`);
+    results.push(await checkClaim(claim));
+  }
+  const failed = results.filter((r) => !r.ok);
+  out.push(`**${results.length - failed.length} of ${results.length} claims hold.**`, '');
+  for (const r of failed) summary.push(`- 📝 Strategy claim fails — ${r.claim.opening} (${r.claim.field}): "${r.claim.quote}" → ${r.found}`);
+  out.push('| Opening | Claim | Position | Expected | Stockfish | |', '|---|---|---|---|---|---|');
+  for (const r of results) {
+    out.push(
+      `| ${r.claim.opening} (${r.claim.field}) | "${r.claim.quote}" | \`${r.claim.moves}\` | ${describeCheck(r.claim.check)} | ${r.found} | ${r.ok ? '✅' : '❌'} |`,
+    );
+  }
+  out.push('');
+  return out;
+}
+
 // ───────── report
 async function main() {
+  if (STRATEGIES_ONLY) {
+    const summary: string[] = [];
+    const section = await strategySection(summary);
+    mkdirSync('docs', { recursive: true });
+    writeFileSync('docs/strategy-claims.md', ['# Strategy claims (partial run)', '', ...summary, '', ...section].join('\n'));
+    console.log(`\n\nWrote docs/strategy-claims.md (${summary.length} failing claims)`);
+    engine.quit();
+    return;
+  }
+
   const reps = ALL_REPERTOIRES.map(buildRepertoire);
   const out: string[] = [];
   const summary: string[] = [];
@@ -310,6 +399,9 @@ async function main() {
     }
     out.push(...repOut);
   }
+
+  console.log('\nStrategy notes');
+  out.push(...(await strategySection(summary)));
 
   const report = [
     ...out.slice(0, 6),

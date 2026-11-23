@@ -20,12 +20,12 @@ export const STRATEGIES_E4E5: Record<string, Strategy> = {
   "Petrov's Defense": {
     idea: "2…Nf6 counterattacks e4 instead of defending e5. It is solid and symmetrical, and Black aims to equalise without weaknesses.",
     white: "3.Nxe5 is the main line, but after 3…d6 the knight retreats and play is level. 3.Nc3 steers back to a Four Knights if Black plays …Nc6.",
-    black: "Against 3.Nxe5 play 3…d6 first, then …Nxe4. Never 3…Nxe4? at once: 4.Qe2 wins material, as …Nf6?? loses the queen to Nc6+.",
+    black: "Against 3.Nxe5 play 3…d6 first, then …Nxe4. 3…Nxe4 at once is riskier: 4.Qe2 forces …Qe7, as …Nf6?? loses the queen to Nc6+, and White keeps a small edge.",
   },
   "Petrov's Defense: Italian Variation": {
     idea: "3.Bc4 ignores the attack on e4 and develops toward f7, offering the e-pawn for quick development.",
     white: "If Black takes on e4, Nc3 gives you fast development and pressure on f7 for the pawn. If Black plays …Nc6, you are in a Two Knights.",
-    black: "…Nxe4 is fine: after Nc3 Nxc3 dxc3, hold e5 with …f6 and develop with …d6 and …Be7. 3…Nc6 is the quiet choice.",
+    black: "…Nxe4 is best: after Nc3 Nxc3 dxc3, hold e5 with …f6 and develop with …d6 and …Be7. 3…Nc6, a Two Knights, is a quieter, level alternative.",
   },
   "Petrov's Defense: Modern Attack": {
     idea: "3.d4 hits e5 and opens the centre at once, rather than taking on e5 with the knight.",
@@ -44,13 +44,13 @@ export const STRATEGIES_E4E5: Record<string, Strategy> = {
   },
   "Elephant Gambit": {
     idea: "2…d5 hits back in the centre at once, leaving e5 hanging. It is a dubious gambit: White has two good ways to win a pawn.",
-    white: "3.exd5 is cleanest: against …e4, Qe2 pins the pawn and d3 breaks it up; against …Bd6, d4 hits e5. 3.Nxe5 is also good.",
+    white: "3.exd5 is cleanest: against …e4, Qe2 pins the pawn and d3 breaks it up; against …Bd6, d4 hits e5. 3.Nxe5 is also playable.",
     black: "If you play it, rely on fast development: …Bd6, …Nf6 and …O-O, and hope White grabs too much. Objectively 2…Nc6 is better.",
   },
   "King's Pawn Game: Busch-Gass Gambit": {
-    idea: "2…Bc5 develops the bishop but leaves e5 undefended, offering a pawn. It is dubious.",
+    idea: "2…Bc5 develops the bishop but leaves e5 undefended, offering a pawn. It is unsound.",
     white: "Take it: 3.Nxe5, and d4 next gains time on the c5 bishop. Watch f2: Black's only play is …Qh4 hitting f2 and e4, and …Bxf2+ tricks.",
-    black: "If you meet the pawn grab, go for activity: …Qh4 or …Qe7 against the e5 knight and e4, then develop fast. 2…Nc6 is the sound move.",
+    black: "After 3.Nxe5 you are a pawn down and White is much better. Don't lash out with …Qh4?: d4 hits the bishop and the attack fizzles. Develop with …Nc6 or …d6. 2…Nc6 is the sound move.",
   },
   "King's Pawn Game: Maróczy Defense": {
     idea: "2.d4 d6 defends e5 with a pawn, Philidor-style, before White has played Nf3.",
@@ -89,7 +89,7 @@ export const STRATEGIES_E4E5: Record<string, Strategy> = {
   "Bishop's Opening: Philidor Counterattack": {
     idea: "2…c6 prepares …d5, hitting the c4 bishop and taking the centre.",
     white: "3.d4 is the sharp answer: after …d5 exd5 cxd5 Bb5+, Black can be left with an isolated d-pawn. Nf3 and d4 is also good.",
-    black: "Play …d5 as soon as possible; …Nf6 first is also fine. Once …d5 is in, you have a free game and the c4 bishop is blunted.",
+    black: "Play …d5 as soon as possible: …Nf6 first lets White win e5 or take over the centre. Once …d5 is in, you have a free game and the c4 bishop is blunted.",
   },
 
   // ─────────────────────────────── Vienna
@@ -118,12 +118,12 @@ export const STRATEGIES_E4E5: Record<string, Strategy> = {
   "King's Gambit": {
     idea: "2.f4 offers a pawn to deflect e5, open the f-file and build a big centre with d4.",
     white: "Nf3 stops …Qh4+, then Bc4, d4 and O-O to attack along the f-file. Once f2 has moved, …Qh4+ is a recurring danger.",
-    black: "Accept with …exf4 and develop fast, or decline with …Bc5 or …d5. Hitting back in the centre with …d5 is the key idea in most lines.",
+    black: "Accepting with …exf4 is objectively best: develop fast. Declining with …Bc5 or …d5 gives a level game. Hitting back in the centre with …d5 is the key idea in most lines.",
   },
   "King's Gambit Accepted": {
     idea: "2…exf4 takes the pawn. White gets the centre and the f-file; Black must decide whether to hold f4 or give it back.",
     white: "Nf3 (or Bc4), then d4 and Bxf4 to win the pawn back with a big centre. Aim everything at f7.",
-    black: "Either hold f4 with …g5 (sharp and double-edged) or give it back with …d5 or …Nf6 and develop. 3…d5 is a sound modern choice.",
+    black: "Either hold f4 with …g5 (sharp and double-edged) or give it back with …d5 or …Nf6 and develop. 3…d5 is a solid, simpler choice.",
   },
   "King's Gambit Declined": {
     idea: "Black refuses the f4 pawn and develops instead, avoiding the sharpest lines.",
@@ -136,9 +136,9 @@ export const STRATEGIES_E4E5: Record<string, Strategy> = {
     black: "Develop with …d6, …Nf6 and …Nc6, keeping the bishop on the a7–g1 diagonal. …exf4 at a good moment opens lines toward White's king.",
   },
   "King's Gambit Declined: Falkbeer Countergambit": {
-    idea: "2…d5 strikes back in the centre. After 3.exd5, Black can push …e4 to cramp White.",
+    idea: "2…d5 strikes back in the centre. After 3.exd5, 3…exf4 is the modern choice; the old push …e4?!, to cramp White, is less accurate.",
     white: "After 3.exd5 e4, d3 breaks up the e4 wedge, then Nf3 and dxe4. Keep the d5 pawn if it is safe, but don't fall behind in development.",
-    black: "…e4 and …Nf6, then win the d5 pawn back later. …Bc5 aims at g1 and makes White's king uncomfortable.",
+    black: "3…exf4 is simplest: develop with …Nf6 and win the d5 pawn back. After …e4, play …Nf6 and regain d5 later. …Bc5 aims at g1 and makes White's king uncomfortable.",
   },
   "King's Gambit Declined: Petrov's Defense": {
     idea: "2…Nf6 counterattacks e4 instead of taking on f4.",
@@ -147,8 +147,8 @@ export const STRATEGIES_E4E5: Record<string, Strategy> = {
   },
   "King's Gambit Declined: Queen's Knight Defense": {
     idea: "2…Nc6 develops and waits, asking White to commit before Black decides about f4.",
-    white: "Nf3 and Bc4 (or Nc3), then d4 or O-O with the f-file in mind. An early fxe5 opens the e1–h4 diagonal for …Qh4+.",
-    black: "Take on f4 once White has committed, or develop with …Nf6 and …Bc5. Watch e5: after fxe5 Nxe5, d4 kicks the knight.",
+    white: "Nf3 and Bc4 (or Nc3), then d4 or O-O with the f-file in mind. Don't play an early fxe5: …Qh4+ g3 Qxe4+ forks the king and the h1 rook.",
+    black: "Take on f4 once White has committed, or develop with …Nf6 and …Bc5. If White plays an early fxe5, don't recapture: …Qh4+ and …Qxe4+ win the h1 rook.",
   },
 
   // ─────────────────────────────── Scotch, Ponziani
@@ -170,7 +170,7 @@ export const STRATEGIES_E4E5: Record<string, Strategy> = {
   "Ponziani Opening": {
     idea: "3.c3 prepares d4 to build a full pawn centre, but it takes the c3 square from the b1 knight.",
     white: "Play d4 next. Against …Nf6, d4 keeps the initiative; against …d5, Qa4 pins the c6 knight and puts pressure on e4.",
-    black: "Strike at once: …Nf6 hits e4, which c3 no longer guards, and …d5 opens the centre before White is ready.",
+    black: "Strike at once: …Nf6 hits e4, which the b1 knight can no longer guard from c3, and …d5 opens the centre before White is ready.",
   },
   "Ponziani Opening: Neumann Gambit": {
     idea: "In the Two Knights, 4.c3 prepares d4 but leaves e4 unprotected, offering the pawn.",
@@ -191,7 +191,7 @@ export const STRATEGIES_E4E5: Record<string, Strategy> = {
   },
   "Italian Game: Blackburne-Kostić Gambit": {
     idea: "3…Nd4 sets a trap: 4.Nxe5? Qg5! and 5.Nxf7? Qxg2 6.Rf1 Qxe4+ 7.Be2 Nf3 is mate. Objectively it just wastes time.",
-    white: "Don't take e5. 4.Nxd4 exd4 and O-O, or 4.c3 to kick the knight, leaves you a little better.",
+    white: "Don't take e5. 4.Nxd4 exd4 and O-O leaves you clearly better; 4.c3 is weaker, as …Nxf3+ lets Black off lightly.",
     black: "Mostly a trap. After 4.Nxd4 exd4, play …Bc5, …Ne7 or …Nf6, and …d5 to free the game.",
   },
   "Italian Game: Giuoco Piano": {
@@ -215,7 +215,7 @@ export const STRATEGIES_E4E5: Record<string, Strategy> = {
     black: "Mirror it: …Nf6, …d6, …O-O, …a6 and …Ba7. …h6 and …Be6 are useful, and …d5 is the break when White is slow.",
   },
   "Italian Game: Giuoco Pianissimo, Italian Four Knights Variation": {
-    idea: "With Nc3 in, it is the Italian Four Knights. White plays the quiet d3 setup rather than allow the fork trick.",
+    idea: "With Nc3 in, it is the Italian Four Knights. White plays the quiet d3 setup for a slow manoeuvring game.",
     white: "Castle, h3, then a3 so …Na5 can be met by Ba2. Re1 and Be3 trade off the c5 bishop; Ne2–g3 or Nd5 activate your knights.",
     black: "Develop with …d6, …O-O and …h6 or …a6. …Na5 swaps the c4 bishop; …Bg4 pins if White delays h3.",
   },
@@ -232,17 +232,17 @@ export const STRATEGIES_E4E5: Record<string, Strategy> = {
   "Italian Game: Paris Defense": {
     idea: "3…d6 holds e5 with a pawn but shuts in the f8 bishop and leaves f7 short of defenders.",
     white: "Take the centre with c3 and d4 (or d4 at once). Once Black plays …Nf6, Ng5 against f7 becomes a real threat.",
-    black: "Develop with …Be7 and …Nf6, or …Be6 to trade off White's bishop. Guard f7 before playing …Nf6.",
+    black: "Develop with …Be7, then …Nf6 and castle quickly so Ng5 hits nothing on f7; or …Be6 to trade off White's bishop.",
   },
   "Italian Game: Rosentreter Gambit": {
     idea: "4.d4 offers the d-pawn straight away to open lines against the c5 bishop and f7.",
     white: "After …exd4, play c3 or O-O for Scotch Gambit-type play with fast development and pressure on f7.",
-    black: "Either capture is fine. Take, develop with …Nf6 and …d6, and give the pawn back rather than fall behind in development.",
+    black: "…Nxd4, …exd4 and …Bxd4 are all playable. Take, develop with …Nf6 and …d6, and give the pawn back rather than fall behind in development.",
   },
   "Italian Game: Rousseau Gambit": {
     idea: "3…f5 is a dubious counter-gambit: it opens Black's king on the a2–g8 diagonal, where White's bishop already sits.",
     white: "4.d4 hits e5 and opens lines while Black's king is exposed. Look for Qh5+ checks once the f-pawn has gone.",
-    black: "Play …fxe4 and …Nf6 and get castled fast. It is objectively bad; 3…Nf6 or 3…Bc5 are sound.",
+    black: "Take with …exd4 (…fxe4 is also playable) and get castled fast. It is objectively bad; 3…Nf6 or 3…Bc5 are sound.",
   },
   "Italian Game: Two Knights Defense": {
     idea: "3…Nf6 counterattacks e4 and invites White to attack f7 with Ng5.",
@@ -294,7 +294,7 @@ export const STRATEGIES_E4E5: Record<string, Strategy> = {
   "Ruy Lopez: Morphy Defense": {
     idea: "3…a6 asks the bishop to decide. It is the main line: Black can later break the pin with …b5.",
     white: "Ba4, O-O, Re1, c3, h3 and d4: the Closed Spanish, slow and rich. 4.Bxc6 (the Exchange) gives a simpler endgame-style game.",
-    black: "…Nf6, …Be7, …b5, …d6 and …O-O. …Na5 swaps the light bishop; …c5 and …Bb7 add queenside space.",
+    black: "…Nf6, …Be7, …b5, …d6 and …O-O. …Na5 and …c5 gain queenside space; …Bb7 adds pressure on e4.",
   },
   "Ruy Lopez: Morphy Defense, Tarrasch Variation": {
     idea: "A Spanish where White has developed with Nc3 instead of c3, so the d4 break isn't supported by a pawn.",
@@ -321,7 +321,7 @@ export const STRATEGIES_E4E5: Record<string, Strategy> = {
   "Three Knights Opening": {
     idea: "3.Nc3 develops and guards e4. If Black plays …Nf6, it is the Four Knights.",
     white: "Against …Nf6 play your Four Knights. Against …Bc5, the fork trick Nxe5 and d4 gives you the bishop pair and a big centre.",
-    black: "…Nf6 is simplest, reaching the Four Knights. …Bb4 or …g6 avoid it. Don't play …Bc5 without …d6: the fork trick works.",
+    black: "…Nf6 is simplest, reaching the Four Knights. …Bb4 avoids it and is playable; …g6 is dubious, as d4 gives White a strong centre. Don't play …Bc5 without …d6: the fork trick works.",
   },
 
   // ─────────────────────────────── Four Knights
@@ -337,7 +337,7 @@ export const STRATEGIES_E4E5: Record<string, Strategy> = {
   },
   "Four Knights Game: Spanish Variation, Classical Variation": {
     idea: "4…Bc5 puts the bishop on its most active square, but it allows the fork trick: Nxe5, and d4 forks bishop and knight.",
-    white: "Castle, then Nxe5: after …Nxe5 d4, chase with f4, e5 and d5 for a big space advantage. If Black plays …d6, hit the centre with d4.",
+    white: "Castle, then Nxe5: after …Nxe5 d4, chase with f4, e5 and d5 to gain space, though best play stays level. If Black plays …d6, hit the centre with d4.",
     black: "Castle and know the fork trick lines, or play 5…d6 to stop it, though d4 then gains time. 6…Nd4 (the Marshall Variation) gives a pawn instead.",
   },
   "Four Knights Game: Spanish Variation, Bardeleben Variation": {
@@ -347,7 +347,7 @@ export const STRATEGIES_E4E5: Record<string, Strategy> = {
   },
   "Four Knights Game: Spanish Variation, Rubinstein Variation, Marshall Variation": {
     idea: "After 6.Nxe5, Black doesn't take back: 6…Nd4 gives the e5 pawn, as in the Rubinstein, for active pieces aimed at White's king.",
-    white: "You are a pawn up. Keep the bishop (Ba4), bring the e5 knight back to cover the kingside (Nf3 or Nd3), and don't grab more.",
+    white: "You are a pawn up. Drop the bishop to c4, not a4: against …d6 and …Bg4, Be2 breaks the pin. Bring the e5 knight back to f3, and don't grab more.",
     black: "Activity for the pawn: …d6 to open lines, …Re8, and queen moves toward the kingside. The c5 bishop, aimed at f2, is the key attacker.",
   },
   "Four Knights Game: Spanish Variation, Double Spanish": {
@@ -363,7 +363,7 @@ export const STRATEGIES_E4E5: Record<string, Strategy> = {
   "Four Knights Game: Spanish Variation, Symmetrical Variation": {
     idea: "Both sides castle and play d3/…d6. The symmetry breaks with 7.Bg5, pinning the f6 knight.",
     white: "Bg5 pins, and Nd5 hits the pinned knight. Bxf6 …gxf6 wrecks Black's king cover; if …Bxc3, bxc3 gives you the bishop pair and d4.",
-    black: "Deal with the pin: …Bxc3 and …Qe7 (the Metger Unpin), …Ne7 to reroute toward g6, or …Be6. Don't copy White blindly.",
+    black: "Deal with the pin: …Bxc3 and …Qe7 (the Metger Unpin), or …Ne7 to reroute toward g6. Avoid …Be6?!, which lets Nd5 add to the pressure. Don't copy White blindly.",
   },
   "Four Knights Game: Spanish Variation, Symmetrical Variation, Metger Unpin": {
     idea: "Black gives up the bishop for the c3 knight, then unpins with …Qe7 so …Nd8–e6 can kick the g5 bishop.",
@@ -382,11 +382,11 @@ export const STRATEGIES_E4E5: Record<string, Strategy> = {
   },
   "Four Knights Game: Spanish Variation, Rubinstein Variation": {
     idea: "4…Nd4 jumps forward, hitting the b5 bishop and the f3 knight and offering the e5 pawn for activity. The most testing reply to 4.Bb5.",
-    white: "5.Nxd4 is safe and leads to a level ending; 5.Ba4, 5.Bc4 and 5.O-O are alternatives. Avoid 5.Nxe5? Qe7!, which leaves Black clearly better.",
-    black: "Against 5.Nxe5? play …Qe7, hitting the knight and e4. Against 5.Ba4, …Bc5 and castle; against 5.O-O, …Nxb5 for the bishop pair.",
+    white: "5.Nxd4 is safe and leads to a level ending; 5.Ba4, 5.Bc4 and 5.O-O are alternatives. Avoid 5.Nxe5?! Qe7!, which gives Black the better game.",
+    black: "Against 5.Nxe5?! play …Qe7, hitting the knight and e4. Against 5.Ba4, …Bc5 and castle; against 5.O-O, …Nxb5 for the bishop pair.",
   },
   "Four Knights Game: Spanish Variation, Rubinstein Variation Accepted": {
-    idea: "5.Nxd4 exd4 6.e5 dxc3 7.exf6 Qxf6 8.dxc3 Qe5+ 9.Qe2: a burst of captures leads to a level, queenless position.",
+    idea: "5.Nxd4 exd4 6.e5 dxc3 7.exf6 Qxf6 8.dxc3 Qe5+ 9.Qe2 Qxe2+ 10.Kxe2: a burst of captures leads to a level, queenless position.",
     white: "Trade queens and recapture with the king. Then Be3 or Bf4, Rhe1 and Rad1 on the open files. Safe and low-theory, not a winning try.",
     black: "Trade queens and play …c6, …d5, …Bd6 and castle. Don't play 7…cxd2+?: Bxd2 gives White a big lead in development.",
   },
@@ -409,11 +409,11 @@ export const STRATEGIES_E4E5: Record<string, Strategy> = {
   "Four Knights Game: Scotch Variation Accepted": {
     idea: "4…exd4 gives up the centre. White chooses between 5.Nxd4 (the main line) and 5.Nd5 (the Belgrade Gambit).",
     white: "5.Nxd4, then Nxc6 against …Bb4 or …Bc5. If Black swaps on d4, Qxd4 is strong; against a slow move, e5 kicks the f6 knight.",
-    black: "5…Bb4 is the main line: …bxc6 and …d5 give you a solid c6–d5 centre. After 5…Nxd4 6.Qxd4 you must play …d6, or e5 is crushing.",
+    black: "5…Bb4 is the main line: …bxc6 and …d5 give you a solid c6–d5 centre. 5…Nxd4? 6.Qxd4 leaves White clearly better: you must play …d6, or e5 is crushing.",
   },
   "Four Knights Game: Scotch Variation Accepted, Main Line": {
     idea: "After 7…d5 8.exd5, Black castles before recapturing. Both sides castle and Black takes back with …cxd5.",
-    white: "Castle, then Bg5 and Qf3 after …cxd5 and …c6. Rook to e1, and target the c6 and d5 pawns. Don't play 9.dxc6?: …Re8+ catches your king.",
+    white: "Castle, then Bg5 and Qf3 after …cxd5 and …c6. Rook to e1, and target the c6 and d5 pawns. 9.dxc6 is greedy: after …Re8+ your king is stuck in the centre and Black is fine.",
     black: "Recapture …cxd5, then …c6, …Bd6, …h6 to question the pin, …Rb8 on the half-open b-file, and …Re8. Watch Nxd5 tactics.",
   },
   "Four Knights Game: Scotch Variation, Belgrade Gambit": {
@@ -439,7 +439,7 @@ export const STRATEGIES_E4E5: Record<string, Strategy> = {
   },
   "Four Knights Game: Italian Variation, Noa Gambit": {
     idea: "After 4…Nxe4, 5.Bxf7+ Kxf7 6.Nxe4 wins the knight back: material is level, but Black's king has lost castling.",
-    white: "Hope to use the exposed king with a knight check on g5 and a quick d4. In practice White has nothing for the bishop pair.",
+    white: "Hope to use the exposed king with a knight check on g5 and a quick d4, but objectively Black is much better: the bishop pair and big centre count for more.",
     black: "Take with the king, then …d5 builds a big centre. Tuck the king away with …h6 and …Kg8, connect the rooks and use your bishops.",
   },
   "Four Knights Game: Glek System": {
@@ -453,7 +453,7 @@ export const STRATEGIES_E4E5: Record<string, Strategy> = {
     black: "As against every slow move, hit the centre with …d5. Avoid …Bc5 unless you have prepared …d6, because of the fork trick.",
   },
   "Four Knights Game: Halloween Gambit": {
-    idea: "4.Nxe5 gives a whole knight for a pawn to chase Black's knights with a pawn storm. It is dubious.",
+    idea: "4.Nxe5 gives a whole knight for a pawn to chase Black's knights with a pawn storm. It is unsound.",
     white: "d4, e5 (and often d5 and f4) drive the knights back, then fast development and attack. You need a quick initiative, as you are a piece down.",
     black: "Take, retreat to g6 and g8, then …d6, …Be7, …Nh6 or …Ne7 and castle. Give back a pawn if needed: a piece for two pawns still wins.",
   },

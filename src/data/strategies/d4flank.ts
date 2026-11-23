@@ -18,8 +18,8 @@ export const STRATEGIES_D4FLANK: Record<string, Strategy> = {
     black: "Get the light-squared bishop out with …Bf5 or …Bg4 before …e6, and challenge d4 with …c5. Against the Colle, meet e4 with …dxe4 and …c5.",
   },
   "Queen's Pawn Game: Anti-Torre": {
-    idea: "2…Bg4 pins the f3 knight and develops the bishop before …e6 can shut it in, but it leaves b7 less protected.",
-    white: "Hit the bishop with Ne5, or play c4 and Qb3 to attack b7 and d5. e3, Be2 and h3 to ask the bishop its intentions are also good.",
+    idea: "2…Bg4 eyes the f3 knight and develops the bishop before …e6 can shut it in, but it leaves b7 less protected.",
+    white: "Hit the bishop with Ne5, or play c4 and Qb3 to attack b7 and d5. A quieter option is e3, Be2 and h3 to ask the bishop its intentions.",
     black: "Follow with …Nd7, …e6, …c6 and …Nf6. Be ready to give up the bishop with …Bxf3 to keep the position simple.",
   },
   "Queen's Pawn Game: Krause Variation": {
@@ -50,16 +50,16 @@ export const STRATEGIES_D4FLANK: Record<string, Strategy> = {
   "Blackmar-Diemer Gambit": {
     idea: "2.e4 dxe4 3.Nc3 Nf6 4.f3 gives a pawn for quick development and an open f-file aimed at Black's king. Risky but dangerous at club level.",
     white: "After 4…exf3 5.Nxf3: Bd3, O-O, Qe1–h4 and Ne5 or Ng5, attacking f7 and h7. Play fast; if the attack fails, the pawn is simply lost.",
-    black: "Accept and develop safely: …Bg4, …e6 or …g6, then castle. Give a pawn back if it kills the attack. Declining with 4…e5 or 4…Bf5 is fine too.",
+    black: "Accept and develop safely: …c6, …g6 or …e6, then castle. Give a pawn back if it kills the attack. Declining with 4…Bf5 is fine too.",
   },
   "Queen's Gambit": {
     idea: "2.c4 offers a wing pawn to lure Black's d5 pawn from the centre. It's not a real gambit: White can usually win the pawn back.",
-    white: "Develop Nc3 and Nf3 to pressure d5. If Black takes on c4, play e3 or e4 and recapture with Bxc4, getting the ideal centre.",
+    white: "Develop Nc3 and Nf3 to pressure d5. If Black takes on c4, play e4 for the ideal centre (or the quieter e3) and recapture with Bxc4.",
     black: "Choose: hold d5 with …e6 (Declined) or …c6 (Slav), or take with …dxc4 (Accepted) and hit back with …c5. Don't try to hang on to the c4 pawn.",
   },
   "Queen's Gambit Accepted": {
     idea: "2…dxc4 gives up the centre for a while to get free development and hit back with …c5. Black doesn't try to keep the pawn.",
-    white: "e3 or e4, then Bxc4 and Nf3. Aim for d4–d5 or an isolated d-pawn with active pieces. Trap: 3.e3 b5? 4.a4 c6 5.axb5 cxb5 6.Qf3 wins material.",
+    white: "e3 or e4, then Bxc4 and Nf3. Aim for d4–d5 or an isolated d-pawn with active pieces. Trap: 3.e3 b5?! 4.a4 c6 5.axb5 cxb5?? 6.Qf3 wins material.",
     black: "…Nf6, …e6, …c5 and …a6 with …b5 to gain queenside space. Swap on d4 to leave White an isolated pawn, then blockade d5.",
   },
   "Queen's Gambit Declined": {
@@ -84,7 +84,7 @@ export const STRATEGIES_D4FLANK: Record<string, Strategy> = {
   },
   "Queen's Gambit Declined: Chigorin Defense": {
     idea: "2…Nc6 blocks the c-pawn and fights with pieces: Black often trades …Bg4xf3 and hits d4 with …e5 rather than holding d5 with pawns.",
-    white: "Nc3 and Nf3, or cxd5 Qxd5 and e3/e4 gaining time on the queen. Take the bishop pair and open the position for it.",
+    white: "Nc3 and Nf3, or cxd5 Qxd5 4.e3 to guard d4, then Nc3 gains time on the queen (4.Nc3? Qxd4). Take the bishop pair and open the position for it.",
     black: "…Bg4 and …Bxf3, …e5 to attack d4, …Nf6 and quick queenside castling. Piece play and central pressure, not pawn structure.",
   },
   "Queen's Gambit Declined: Marshall Defense": {
@@ -99,12 +99,12 @@ export const STRATEGIES_D4FLANK: Record<string, Strategy> = {
   },
   "Slav Defense: Exchange Variation": {
     idea: "3.cxd5 cxd5 makes a symmetrical structure with an open c-file. White is a tempo up and plays for small, risk-free pressure.",
-    white: "Nc3, Nf3, Bf4, e3 and Rc1 to use the c-file. Nb5 or Ne5 jumps can be awkward for Black if they copy White move for move.",
-    black: "Develop …Nc6, …Nf6, …Bf5 (or …Bg4) and …e6, then contest the c-file with …Rc8. Don't copy blindly: check White's Nb5 and Qb3 ideas.",
+    white: "Nc3, Nf3, Bf4, e3 and Rc1 to use the c-file. Ne5 can be awkward for Black if they copy White move for move: 8.Ne5 Ne4? 9.g4 hits the f5 bishop.",
+    black: "Develop …Nc6, …Nf6, …Bf5 (or …Bg4) and …e6, then contest the c-file with …Rc8. Don't copy blindly: check White's Ne5 and Qb3 ideas.",
   },
   "Slav Defense: Modern Line": {
     idea: "3.Nf3 develops before Nc3, keeping e3 options and avoiding some sharp lines. Most main-line Slavs go through here.",
-    white: "Nc3 next for the main line, or e3 and Qb3 if Black plays …Bf5 early, hitting b7. After …dxc4, a4 stops …b5 and e3/e4 regains the pawn.",
+    white: "Nc3 next for the main line, or e3 and Qb3 if Black plays …Bf5 early, hitting b7. After …dxc4, a4 stops …b5 and e3 (or Ne5) regains the pawn.",
     black: "…Nf6, then …dxc4 and …Bf5 (main line), …e6 for the Semi-Slav, or …a6 with …b5. Keep b7 covered when the bishop leaves c8.",
   },
   "Catalan Opening": {
@@ -121,7 +121,7 @@ export const STRATEGIES_D4FLANK: Record<string, Strategy> = {
   "Indian Defense: Normal Variation": {
     idea: "2.c4 is the main line: White grabs queenside space and prepares Nc3 and e4. Black now decides which Indian defence to play.",
     white: "Nc3 with e4 if Black allows it, or Nf3 and g3. Aim to build a big centre with c4, d4 and e4.",
-    black: "…e6 (Nimzo or Queen's Indian), …g6 (King's Indian or Grünfeld), …c5 (Benoni) or …e5 (Budapest). Each challenges the centre differently.",
+    black: "…e6 (Nimzo or Queen's Indian), …g6 (King's Indian or Grünfeld), …c5 (Benoni), or the dubious but tricky …e5 (Budapest). Each challenges the centre differently.",
   },
   "Indian Defense: Knights Variation": {
     idea: "2.Nf3 develops without committing to c4, keeping the London, Torre and Colle all possible.",
@@ -131,7 +131,7 @@ export const STRATEGIES_D4FLANK: Record<string, Strategy> = {
   "Indian Defense: Accelerated London System": {
     idea: "2.Bf4 gets the bishop out before e3, heading for the London set-up while dodging some …d5 lines.",
     white: "e3, Nf3, c3, h3 (so the bishop can drop to h2), Bd3 and Nbd2. Aim for Ne5 and a kingside attack.",
-    black: "…c5 and …Qb6 targets b2, which the bishop has left unguarded. …Nh5 to win the bishop pair and …d5 with …e6 are also good.",
+    black: "…c5 and …Qb6 targets b2, which the bishop has left unguarded. …d5 with …e6 and …Bd6 to challenge the bishop is also good.",
   },
   "Indian Defense: Anti-Nimzo-Indian": {
     idea: "3.Nf3 avoids the Nimzo-Indian pin (…Bb4 after Nc3). Black usually answers with …b6, …Bb4+ or …d5.",
@@ -151,12 +151,12 @@ export const STRATEGIES_D4FLANK: Record<string, Strategy> = {
   "Indian Defense: Spielmann-Indian": {
     idea: "2…c5 attacks d4 before White has played c4, offering Benoni-style play.",
     white: "3.d5 grabs space (then e4 or c4), or keep a calm set-up with 3.c3 or 3.e3 to hold d4.",
-    black: "If d5, undermine it with …e6, …b5 or …g6 and …d6. Otherwise …cxd4 or …Qb6 keeps the pressure on d4 and b2.",
+    black: "If d5, undermine it with …e6, or play …b5 for queenside space, or …g6 and …d6. Otherwise …cxd4, …e6 or …d5 give easy development.",
   },
   "Indian Defense: Wade-Tartakower Defense": {
     idea: "2…d6 prepares …Bg4 or …Nbd7 and …e5, heading for Old Indian or King's Indian structures.",
     white: "c4 transposes to Old or King's Indian lines. Without c4, g3 or Bg5 set-ups are solid; e4 if Black allows it.",
-    black: "…Bg4 pinning the f3 knight, then …Nbd7 and …e5 to fight for the centre. A …g6 fianchetto is also possible.",
+    black: "…Bg4 against the f3 knight, then …Nbd7 and …e5 to fight for the centre. A …g6 fianchetto is also possible.",
   },
   "Indian Defense: West Indian Defense": {
     idea: "2…g6 fianchettoes, leading to the King's Indian (…d6 and …e5) or the Grünfeld (…d5).",
@@ -181,7 +181,7 @@ export const STRATEGIES_D4FLANK: Record<string, Strategy> = {
   "Trompowsky Attack": {
     idea: "2.Bg5 threatens Bxf6, doubling Black's pawns, and avoids main-line theory.",
     white: "Take on f6 to damage Black's structure, then e3 and c4 to fight the bishop pair. Or meet …Ne4 with Bf4 or h4.",
-    black: "…Ne4 to chase the bishop and then …c5 and …Qb6 hitting b2. …e6 or …d5 to keep f6 protected is also solid.",
+    black: "…Ne4 to chase the bishop and then …c5 and …Qb6 hitting b2. …e6 (so the queen can recapture on f6) or …d5 is also solid.",
   },
   "Benoni Defense": {
     idea: "2…c5 3.d5 gives White space and Black a queenside majority. After …e6 and …exd5 Black gets an unbalanced Modern Benoni.",
@@ -191,7 +191,7 @@ export const STRATEGIES_D4FLANK: Record<string, Strategy> = {
   "Benoni Defense: Old Benoni": {
     idea: "1…c5 before …Nf6 invites 2.d5 and a closed Benoni structure, or a Sicilian-style game.",
     white: "2.d5 for space, then e4, c4 and Nc3, aiming for queenside expansion. 2.dxc5 grabs a pawn Black usually regains.",
-    black: "…e5 to block the centre and prepare …f5 later, or …d6, …g6 and …Bg7.",
+    black: "…Nf6, …d6, …g6 and …Bg7, or …e6 to hit d5. Blocking with …e5 (and …f5 later) is passive and gives White an easy edge.",
   },
   "Benoni Defense: Benoni Gambit Accepted": {
     idea: "2.dxc5 takes the pawn, but Black regains it easily and gets fast development.",
@@ -204,7 +204,7 @@ export const STRATEGIES_D4FLANK: Record<string, Strategy> = {
     black: "…Nc6, …Qe7 and …Nxe5 to regain the pawn; …Qb4+ hitting b2. Traps aside, Black ends up a pawn down, so play it only for surprise.",
   },
   "Englund Gambit Declined": {
-    idea: "2.d5 refuses the pawn and gains space, giving a closed position like a reversed Old Benoni.",
+    idea: "2.d5 refuses the pawn and gains space, giving a closed position like a King's Indian, with d5 against …e5.",
     white: "e4, c4 and Nc3 for space. Later push c4–c5 to open the queenside.",
     black: "…d6, …Nf6, …Be7 or …g6, then …f5 to attack e4 as in a closed King's Indian.",
   },
@@ -214,7 +214,7 @@ export const STRATEGIES_D4FLANK: Record<string, Strategy> = {
     black: "Push …e4 and support it with …d5 or …f5, or play …exd4 and develop quickly. Make sure the e4 pawn doesn't drop.",
   },
   "Englund Gambit Declined: Reversed French": {
-    idea: "2.e3 holds d4 solidly instead of taking. After …exd4 exd4 the structure resembles a French Exchange with colours reversed.",
+    idea: "2.e3 holds d4 solidly instead of taking. After …exd4 exd4 the structure is the symmetrical one of a French Exchange.",
     white: "Recapture exd4, then Nf3, Bd3, O-O and c4 for an easy game.",
     black: "…exd4 and …d5, or …Nc6 and …Nf6 for normal development. Black has an equal but calm game.",
   },
@@ -241,7 +241,7 @@ export const STRATEGIES_D4FLANK: Record<string, Strategy> = {
   },
   "English Opening: King's English Variation, Nimzowitsch Variation": {
     idea: "2.Nf3 attacks e5 at once, asking Black to either defend it or push …e4 to kick the knight.",
-    white: "If …e4, Nd4 and then Nc3, d3 or Qc2 to attack the advanced pawn. Against …Nc6, Nc3 leads to normal English structures.",
+    white: "If …e4, Nd4; against 3…Nc6 play e3 (or swap with Nxc6), then hit the e4 pawn with Nc3 or d3. Against …Nc6, Nc3 leads to normal English structures.",
     black: "…Nc6 is solid. …e4 gains space and kicks the knight, but the pawn needs support from …Nf6, …d5 or …f5.",
   },
   "English Opening: The Whale": {
@@ -298,12 +298,12 @@ export const STRATEGIES_D4FLANK: Record<string, Strategy> = {
   "Zukertort Opening: Old Indian Attack": {
     idea: "2.d3 prepares e4, aiming for a King's Indian Attack-type set-up.",
     white: "Nbd2, e4, g3, Bg2 and O-O. Push e5 for space and attack on the kingside.",
-    black: "…Nf6, …c5, …Nc6 and …Bg4, or take the centre with …e5. Expand on the queenside with …b5.",
+    black: "…Nf6, …c5, …Nc6 and …Bg4, or take the centre with …Nc6 and …e5 (not …e5 at once: Nxe5). Expand on the queenside with …b5.",
   },
   "Zukertort Opening: Pirc Invitation": {
     idea: "1…d6 invites 2.e4, reaching a Pirc or Philidor. Black can also aim for …Bg4 or …e5.",
     white: "2.e4 for a Pirc, or d4 and c4 for Old Indian-style positions.",
-    black: "…Nf6, …g6 and …Bg7, or …e5. …Bg4 pins the knight if White is slow.",
+    black: "…Nf6, …g6 and …Bg7, or …e5. …Bg4 hits the knight if White is slow.",
   },
   "Zukertort Opening: Queen's Gambit Invitation": {
     idea: "1…e6 invites d4 and c4, reaching a Queen's Gambit Declined after …d5.",
@@ -343,6 +343,6 @@ export const STRATEGIES_D4FLANK: Record<string, Strategy> = {
   "Nimzo-Larsen Attack: Classical Variation": {
     idea: "1.Nf3 d5 2.b3 fianchettoes the queen's bishop and aims to control e5 with a hypermodern set-up.",
     white: "Bb2, e3, c4 and Be2 or Bd3, then O-O. Pressure d5 with c4 and use the b2 bishop on the long diagonal.",
-    black: "…Nf6, …c5, …Nc6 and …e6, or …Bg4 or …Bf5. Build a solid pawn centre and blunt the b2 bishop with …e6 and …d5.",
+    black: "…Nf6, …c5, …Nc6 and …e6, or …Bg4 or …Bf5. Build a solid pawn centre and blunt the b2 bishop later with …d4 or …e5.",
   },
 };

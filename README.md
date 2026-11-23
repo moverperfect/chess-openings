@@ -45,6 +45,7 @@ Positions are matched by FEN, so transpositions (e.g. 2…Nf6 3.Nc3 Nc6) join up
 - **Your moves** are flagged if they are more than 0.30 pawns worse than Stockfish's top choice.
 - **Gaps** are opponent replies that club players (Lichess, rated 1600–2200) play often but the repertoire doesn't cover. They're ranked by how many of every 100 Four Knights games would reach them.
 - **Final positions** get an evaluation, so the claims in each line's plan can be checked.
+- **Strategy notes:** every concrete claim in the opening strategy notes (a trap, "this loses", a recommended reply, "White is clearly better") is recorded in `src/data/strategies/*.claims.ts` with the moves that reach it, and checked against fixed bands (level under 0.30, slightly better to 0.60, clearly better to 1.50, then winning). Each claim quotes its note word for word, so `npm test` fails when a note changes without its claims. `npm run verify -- --strategies` checks only these.
 
 Setup:
 
